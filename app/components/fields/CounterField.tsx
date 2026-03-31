@@ -19,8 +19,8 @@ export default function CounterField({
   const handleIncrement = () => onChange(value + 1);
 
   return (
-    <div className="flex items-start sm:items-center justify-between border border-gray-200 rounded-lg p-4 gap-2">
-      <div className="flex items-start sm:items-center gap-3 flex-1 min-w-0">
+    <div className="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-4 gap-3">
+      <div className="flex flex-col items-center gap-3 text-center">
         {icon && (
           <div className="flex-shrink-0">
             <img
@@ -30,12 +30,12 @@ export default function CounterField({
             />
           </div>
         )}
-        <div className="min-w-0">
-          <h3 className="text-base sm:text-base text-gray-900 font-medium break-words">{label}</h3>
+        <div>
+          <h3 className="text-base sm:text-base text-gray-900 font-medium">{label}</h3>
           {time && <p className="text-sm sm:text-sm text-gray-500 mt-1">{time} min</p>}
         </div>
       </div>
-      <div className="flex items-center gap-2 flex-shrink-0">
+      <div className="flex items-center gap-2">
         <button
           onClick={handleDecrement}
           disabled={value === 0}
