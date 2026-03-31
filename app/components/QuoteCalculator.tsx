@@ -62,9 +62,9 @@ export default function QuoteCalculator() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Main Form */}
-      <div className="max-w-2xl mx-auto px-3 sm:px-4 py-6 sm:py-12">
+      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-6 pb-6 sm:pb-12">
         {/* Step Content */}
-        <div className="mt-6 sm:mt-12 mb-8 sm:mb-12">
+        <div className="mb-8 sm:mb-12">
           <h2 className="text-xl sm:text-3xl font-medium mb-3 sm:mb-2">{currentStepData.title}</h2>
           <FormStepRenderer
             step={currentStepData}
