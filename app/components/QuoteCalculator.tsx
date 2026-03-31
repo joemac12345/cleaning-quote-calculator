@@ -87,9 +87,100 @@ export default function QuoteCalculator() {
 
         {/* Quote Modal - Auto-shown after submission */}
         {(showQuoteModal || isSubmitted) && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 sm:p-4 z-50">
-            <div className="bg-white rounded-lg p-4 sm:p-8 max-w-md w-full">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg p-4 sm:p-8 max-w-2xl w-full my-8">
               <h3 className="text-lg sm:text-2xl font-bold mb-4 sm:mb-8 text-gray-900">Your Quote</h3>
+              
+              {/* Summary Section */}
+              <div className="bg-gray-50 rounded-lg p-4 mb-6 space-y-3 max-h-64 overflow-y-auto">
+                <h4 className="font-bold text-gray-900 mb-3">Your Selections:</h4>
+                
+                {formData.service_type && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Service Type:</span>
+                    <span className="font-semibold text-gray-900 ml-2 capitalize">{formData.service_type}</span>
+                  </div>
+                )}
+                
+                {formData.bedrooms > 0 && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Bedrooms:</span>
+                    <span className="font-semibold text-gray-900 ml-2">{formData.bedrooms}</span>
+                  </div>
+                )}
+                
+                {formData.floors > 0 && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Floors:</span>
+                    <span className="font-semibold text-gray-900 ml-2">{formData.floors}</span>
+                  </div>
+                )}
+                
+                {formData.bathrooms > 0 && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Bathrooms:</span>
+                    <span className="font-semibold text-gray-900 ml-2">{formData.bathrooms}</span>
+                  </div>
+                )}
+                
+                {formData.cloakroom > 0 && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Cloakrooms:</span>
+                    <span className="font-semibold text-gray-900 ml-2">{formData.cloakroom}</span>
+                  </div>
+                )}
+                
+                {formData.receptions > 0 && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Receptions:</span>
+                    <span className="font-semibold text-gray-900 ml-2">{formData.receptions}</span>
+                  </div>
+                )}
+                
+                {formData.utility > 0 && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Utility Rooms:</span>
+                    <span className="font-semibold text-gray-900 ml-2">{formData.utility}</span>
+                  </div>
+                )}
+                
+                {formData.box_room > 0 && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Box Rooms:</span>
+                    <span className="font-semibold text-gray-900 ml-2">{formData.box_room}</span>
+                  </div>
+                )}
+                
+                {formData.hall > 0 && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Halls:</span>
+                    <span className="font-semibold text-gray-900 ml-2">{formData.hall}</span>
+                  </div>
+                )}
+                
+                {formData.pet_friendly && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Pet Friendly Setup:</span>
+                    <span className="font-semibold text-gray-900 ml-2 capitalize">{formData.pet_friendly}</span>
+                  </div>
+                )}
+                
+                {formData.extras && Object.keys(formData.extras).some(key => formData.extras[key] > 0) && (
+                  <div className="text-sm">
+                    <span className="text-gray-600">Add-ons:</span>
+                    <div className="ml-2">
+                      {formData.extras.oven > 0 && <span className="font-semibold text-gray-900">Oven ({formData.extras.oven}), </span>}
+                      {formData.extras.fridge > 0 && <span className="font-semibold text-gray-900">Fridge ({formData.extras.fridge}), </span>}
+                      {formData.extras.windows > 0 && <span className="font-semibold text-gray-900">Windows ({formData.extras.windows})</span>}
+                    </div>
+                  </div>
+                )}
+                
+                <div className="text-sm">
+                  <span className="text-gray-600">Frequency:</span>
+                  <span className="font-semibold text-gray-900 ml-2 capitalize">{formData.frequency}</span>
+                </div>
+              </div>
               
               {/* Cleaning Type */}
               <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
