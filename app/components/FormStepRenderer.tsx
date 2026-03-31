@@ -21,7 +21,7 @@ export default function FormStepRenderer({
   onFieldChange,
 }: FormStepProps) {
   return (
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-5 sm:space-y-6">
       {step.description && (
         <p className="text-gray-600 text-base sm:text-lg">{step.description}</p>
       )}
