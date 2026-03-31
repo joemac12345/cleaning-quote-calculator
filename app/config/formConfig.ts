@@ -50,11 +50,28 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 2: Rooms
+  // Step 2: Floors
   {
     id: 2,
-    title: 'Rooms',
-    description: 'How many rooms need cleaning?',
+    title: 'Floors',
+    description: 'How many floors need cleaning?',
+    fields: [
+      {
+        id: 'floors',
+        name: 'Floors',
+        type: 'counter',
+        time: 20,
+        icon: '/icons/GhWMo.jpg',
+        initialValue: 0,
+      },
+    ],
+  },
+
+  // Step 3: Bedrooms
+  {
+    id: 3,
+    title: 'Bedrooms',
+    description: 'How many bedrooms need cleaning?',
     fields: [
       {
         id: 'bedrooms',
@@ -64,6 +81,15 @@ export const formSteps: FormStep[] = [
         icon: '/icons/Nqbuh.jpg',
         initialValue: 0,
       },
+    ],
+  },
+
+  // Step 4: Bathrooms & Cloakroom
+  {
+    id: 4,
+    title: 'Bathrooms & Cloakroom',
+    description: 'How many bathrooms and cloakrooms?',
+    fields: [
       {
         id: 'bathrooms',
         name: 'Bathrooms',
@@ -73,6 +99,23 @@ export const formSteps: FormStep[] = [
         initialValue: 0,
       },
       {
+        id: 'cloakroom',
+        name: 'Cloakroom',
+        type: 'counter',
+        time: 20,
+        icon: '/icons/PEdH2.jpg',
+        initialValue: 0,
+      },
+    ],
+  },
+
+  // Step 5: Other Rooms
+  {
+    id: 5,
+    title: 'Other Rooms',
+    description: 'How many other rooms need cleaning?',
+    fields: [
+      {
         id: 'receptions',
         name: 'Receptions',
         type: 'counter',
@@ -81,27 +124,11 @@ export const formSteps: FormStep[] = [
         initialValue: 0,
       },
       {
-        id: 'floors',
-        name: 'Floors',
-        type: 'counter',
-        time: 20,
-        icon: '/icons/GhWMo.jpg',
-        initialValue: 0,
-      },
-      {
         id: 'utility',
         name: 'Utility Rooms',
         type: 'counter',
         time: 30,
         icon: '/icons/l7vLe.jpg',
-        initialValue: 0,
-      },
-      {
-        id: 'cloakroom',
-        name: 'Cloakroom',
-        type: 'counter',
-        time: 20,
-        icon: '/icons/PEdH2.jpg',
         initialValue: 0,
       },
       {
@@ -123,9 +150,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 3: Pet Friendly Setup
+  // Step 6: Pet Friendly Setup
   {
-    id: 3,
+    id: 6,
     title: 'Pet Friendly Setup',
     description: 'Do you have pets?',
     fields: [
@@ -144,9 +171,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 4: Add-ons
+  // Step 7: Add-ons
   {
-    id: 4,
+    id: 7,
     title: 'Add-ons',
     description: 'Any extra services?',
     fields: [
@@ -166,9 +193,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 5: Cleaning Frequency
+  // Step 8: Cleaning Frequency
   {
-    id: 5,
+    id: 8,
     title: 'Frequency',
     description: 'How often do you need cleaning?',
     fields: [
@@ -188,9 +215,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 6: Review & Contact
+  // Step 9: Review & Contact
   {
-    id: 6,
+    id: 9,
     title: 'Review',
     description: 'Confirm your quote and enter contact details',
     fields: [
