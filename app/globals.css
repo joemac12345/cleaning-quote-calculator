@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #48546A;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  @apply scroll-smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-white text-gray-900 font-sans antialiased;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+}
+
+/* Buttons and labels */
+button, label, [role="button"] {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+}
+
+/* Utility classes */
+.text-accent {
+  @apply text-blue-600;
+}
+
+.bg-accent {
+  @apply bg-blue-600;
+}
+
+.border-accent {
+  @apply border-blue-600;
+}
+
+.font-heading {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+}
+
+/* Smooth transitions */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Form elements */
+input[type="checkbox"],
+input[type="radio"] {
+  @apply cursor-pointer;
+}
+
