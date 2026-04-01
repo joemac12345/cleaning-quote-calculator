@@ -130,10 +130,10 @@ export default function QuoteCalculator() {
                   </div>
                 )}
                 
-                {formData.receptions > 0 && (
+                {formData.kitchen > 0 && (
                   <div className="text-sm">
-                    <span className="text-gray-600">Receptions:</span>
-                    <span className="font-semibold text-gray-900 ml-2">{formData.receptions}</span>
+                    <span className="text-gray-600">Kitchen:</span>
+                    <span className="font-semibold text-gray-900 ml-2">{formData.kitchen}</span>
                   </div>
                 )}
                 
@@ -141,13 +141,6 @@ export default function QuoteCalculator() {
                   <div className="text-sm">
                     <span className="text-gray-600">Utility Rooms:</span>
                     <span className="font-semibold text-gray-900 ml-2">{formData.utility}</span>
-                  </div>
-                )}
-                
-                {formData.box_room > 0 && (
-                  <div className="text-sm">
-                    <span className="text-gray-600">Box Rooms:</span>
-                    <span className="font-semibold text-gray-900 ml-2">{formData.box_room}</span>
                   </div>
                 )}
                 
