@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import Navigation from "./components/Navigation";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,6 +24,26 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Cleanwich - Cleaning Quote Calculator",
   description: "Get your instant cleaning quote with our fast calculator",
+  openGraph: {
+    title: "Cleanwich - Professional Cleaning Services",
+    description: "Get your instant cleaning quote today. Fast, easy, and transparent pricing for all your cleaning needs.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Cleanwich Cleaning Services",
+      },
+    ],
+    type: "website",
+    url: "https://toptobottomcleaning.netlify.app/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cleanwich - Professional Cleaning Services",
+    description: "Get your instant cleaning quote today. Fast, easy, and transparent pricing for all your cleaning needs.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -38,6 +59,7 @@ export default function RootLayout({
     >
       <body className="bg-white text-gray-900 font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <Navigation />
           {children}
         </ThemeProvider>
       </body>

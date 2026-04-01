@@ -39,11 +39,11 @@ export const formSteps: FormStep[] = [
         time: 0, // time is per-option
         initialValue: '',
         options: [
-          { label: 'Tenancy Cleaning', value: 'tenancy', time: 0, timeMultiplier: 0.1, icon: '/icons/lknSv.jpg' },
-          { label: 'Moving Cleaning', value: 'moving', time: 0, timeMultiplier: 0.15, icon: '/icons/UuLt0.jpg' },
-          { label: 'Deep Cleaning', value: 'deep', time: 0, timeMultiplier: 0.2, icon: '/icons/Q3AwX.jpg' },
-          { label: 'Spring Cleaning', value: 'spring', time: 0, timeMultiplier: 0.05, icon: '/icons/lknSv.jpg' },
-          { label: 'Builders Cleaning', value: 'builders', time: 0, timeMultiplier: 0.25, icon: '/icons/VL0l4.jpg' },
+          { label: 'Tenancy Cleaning', value: 'tenancy',  timeMultiplier: 0.1, icon: '/icons/lknSv.jpg' },
+          { label: 'Moving Cleaning', value: 'moving',  timeMultiplier: 0.15, icon: '/icons/UuLt0.jpg' },
+          { label: 'Deep Cleaning', value: 'deep',  timeMultiplier: 0.2, icon: '/icons/Q3AwX.jpg' },
+          { label: 'Spring Cleaning', value: 'spring',  timeMultiplier: 0.05, icon: '/icons/lknSv.jpg' },
+          { label: 'Builders Cleaning', value: 'builders',  timeMultiplier: 0.25, icon: '/icons/VL0l4.jpg' },
         ],
         required: true,
       },

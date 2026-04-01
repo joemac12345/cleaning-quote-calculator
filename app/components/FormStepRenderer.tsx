@@ -8,6 +8,7 @@
 import React from 'react';
 import { FormStep } from '@/app/config/formConfig';
 import FieldWrapper from './fields/FieldWrapper';
+import StepHeader from './StepHeader';
 
 interface FormStepProps {
   step: FormStep;
@@ -22,9 +23,7 @@ export default function FormStepRenderer({
 }: FormStepProps) {
   return (
     <div className="space-y-5 sm:space-y-6">
-      {step.description && (
-        <p className="text-gray-600 text-base sm:text-lg">{step.description}</p>
-      )}
+      <StepHeader title={step.title} description={step.description} />
 
       {step.fields.map((field) => (
         <FieldWrapper

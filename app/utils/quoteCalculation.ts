@@ -9,6 +9,10 @@ export interface QuoteStats {
   totalMinutes: number;
   hours: number;
   minutes: number;
+  firstCleanHours: number;
+  firstCleanMinutes: number;
+  maintenanceHours: number;
+  maintenanceMinutes: number;
   basePrice: number;
   maintenanceReduction: number;
   maintenanceDiscount: number;
@@ -78,9 +82,11 @@ function calculateTotalMinutes(formData: Record<string, any>, frequency: string 
     });
   });
 
-  // Apply maintenance clean reduction: 15% reduction for recurring cleanings
-  if (frequency !== 'one-off') {
-    totalMinutes *= 0.85; // 15% reduction for weekly/fortnightly/monthly
+  // Apply maintenance clean reduction: 50% reduction for weekly cleans, 50% for other recurring
+  if (frequency === 'weekly') {
+    totalMinutes *= 0.5; // 50% reduction for weekly
+  } else if (frequency !== 'one-off') {
+    totalMinutes *= 0.5; // 50% reduction for fortnightly/monthly
   }
 
   return totalMinutes;
@@ -104,10 +110,9 @@ function getServiceMultiplier(formData: Record<string, any>): number {
  * Convert total minutes to hours and remaining minutes
  */
 export function formatTime(totalMinutes: number): { hours: number; minutes: number } {
-  return {
-    hours: Math.floor(totalMinutes / 60),
-    minutes: totalMinutes % 60,
-  };
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = Math.round(totalMinutes % 60);
+  return { hours, minutes };
 }
 
 /**
@@ -145,10 +150,18 @@ export function calculateQuote(
   const maintenanceReduction = isRecurring ? -15 : 0;
   const saving = isRecurring ? maintenanceSaving : firstCleanSaving;
 
+  // Format times
+  const firstCleanFormatted = formatTime(firstCleanMinutes);
+  const maintenanceFormatted = formatTime(maintenanceMinutes);
+
   return {
     totalMinutes: maintenanceMinutes,
-    hours,
-    minutes,
+    hours: firstCleanFormatted.hours,
+    minutes: firstCleanFormatted.minutes,
+    firstCleanHours: firstCleanFormatted.hours,
+    firstCleanMinutes: firstCleanFormatted.minutes,
+    maintenanceHours: maintenanceFormatted.hours,
+    maintenanceMinutes: maintenanceFormatted.minutes,
     basePrice: Math.round(basePrice * 100) / 100,
     maintenanceReduction,
     maintenanceDiscount: Math.round(maintenanceDiscount * 100) / 100,
