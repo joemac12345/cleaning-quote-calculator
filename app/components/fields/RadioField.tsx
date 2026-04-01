@@ -49,7 +49,7 @@ export default function RadioField({
               {/* Text - below icon */}
               <div className="text-center">
                 <p className="text-base sm:text-base text-gray-900 font-medium">{option.label}</p>
-                {showTime && option.time && <p className="text-sm sm:text-sm text-gray-500 mt-1">{option.time} min</p>}
+                {showTime && option.time && option.time > 0 && <p className="text-sm sm:text-sm text-gray-500 mt-1">{option.time} min</p>}
               </div>
             </label>
           );

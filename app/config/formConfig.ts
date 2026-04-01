@@ -64,6 +64,14 @@ export const formSteps: FormStep[] = [
         icon: '/icons/GhWMo.jpg',
         initialValue: 0,
       },
+       {
+        id: 'hall',
+        name: 'Hall',
+        type: 'counter',
+        time: 10,
+        icon: '/icons/yYWnE.jpg',
+        initialValue: 0,
+      },
     ],
   },
 
@@ -116,10 +124,10 @@ export const formSteps: FormStep[] = [
     description: 'How many other rooms need cleaning?',
     fields: [
       {
-        id: 'receptions',
-        name: 'Receptions',
+        id: 'kitchen',
+        name: 'Kitchen',
         type: 'counter',
-        time: 20,
+        time: 1,
         icon: '/icons/mqGYd.jpg',
         initialValue: 0,
       },
@@ -131,34 +139,20 @@ export const formSteps: FormStep[] = [
         icon: '/icons/l7vLe.jpg',
         initialValue: 0,
       },
-      {
-        id: 'box_room',
-        name: 'Box Room',
-        type: 'counter',
-        time: 10,
-        icon: '/icons/qH6ca.jpg',
-        initialValue: 0,
-      },
-      {
-        id: 'hall',
-        name: 'Hall',
-        type: 'counter',
-        time: 10,
-        icon: '/icons/yYWnE.jpg',
-        initialValue: 0,
-      },
+     
+     
     ],
   },
 
   // Step 6: Pet Friendly Setup
   {
     id: 6,
-    title: 'Pet Friendly Setup',
+    title: 'Pet Friendly',
     description: 'Do you have pets?',
     fields: [
       {
         id: 'pet_friendly',
-        name: 'Pet Friendly Setup',
+        name: 'Pet Friendly',
         type: 'radio',
         time: 0,
         showTime: false,
