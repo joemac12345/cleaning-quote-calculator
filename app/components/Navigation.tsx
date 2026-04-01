@@ -16,7 +16,7 @@ export default function Navigation() {
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
+      <div className="max-w-2xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
@@ -72,7 +72,6 @@ export default function Navigation() {
                 strokeLinejoin="round"
                 strokeWidth={2}
                 d="M4 6h16M4 12h16M4 18h16"
-              />
               />
             </svg>
           </button>
