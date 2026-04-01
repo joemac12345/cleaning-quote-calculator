@@ -16,9 +16,9 @@ export default function QuoteModal({ isOpen, onClose, formData, quote }: QuoteMo
         {/* Logo Placeholder */}
         <div className="flex justify-start mb-1 -ml-4 sm:-ml-8">
           <img 
-            src="/icons/n1xn5.jpg" 
+            src="/icons/WW635.jpg" 
             alt="Company Logo" 
-            className="h-20 sm:h-32"
+            className="h-24 sm:h-40"
           />
         </div>
         

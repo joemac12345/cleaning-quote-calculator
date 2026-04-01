@@ -21,9 +21,9 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <img 
-              src="/icons/n1xn5.jpg" 
+              src="/icons/WW635.jpg" 
               alt="Company Logo" 
-              className="h-10 sm:h-12"
+              className="h-14 sm:h-16"
             />
           </Link>
 
@@ -62,7 +62,7 @@ export default function Navigation() {
             aria-label="Toggle menu"
           >
             <svg
-              className="w-6 h-6 text-[#48546A]"
+              className="w-8 h-8 text-[#48546A]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -71,7 +71,8 @@ export default function Navigation() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
               />
             </svg>
           </button>
