@@ -22,17 +22,17 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Cleanwich - Cleaning Quote Calculator",
+  title: "Top To Bottom Cleaning Services - Cleaning Quote Calculator",
   description: "Get your instant cleaning quote with our fast calculator",
   openGraph: {
-    title: "Cleanwich - Professional Cleaning Services",
+    title: "Top To Bottom Cleaning Services - Professional Cleaning",
     description: "Get your instant cleaning quote today. Fast, easy, and transparent pricing for all your cleaning needs.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Cleanwich Cleaning Services",
+        alt: "Top To Bottom Cleaning Services",
       },
     ],
     type: "website",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cleanwich - Professional Cleaning Services",
+    title: "Top To Bottom Cleaning Services - Professional Cleaning",
     description: "Get your instant cleaning quote today. Fast, easy, and transparent pricing for all your cleaning needs.",
     images: ["/og-image.png"],
   },
