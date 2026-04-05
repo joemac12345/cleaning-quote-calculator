@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { FormStep } from '@/app/config/formConfig';
-import FieldWrapper from './fields/FieldWrapper';
+import FieldWrapper from './FieldWrapper';
 import StepHeader from './StepHeader';
 
 interface FormStepProps {

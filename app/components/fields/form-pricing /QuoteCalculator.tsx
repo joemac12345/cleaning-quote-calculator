@@ -3,9 +3,9 @@
 import { useState, useMemo, useEffect } from 'react';
 import { formSteps } from '@/app/config/formConfig';
 import { calculateQuote } from '@/app/utils/quoteCalculation';
-import FormStepRenderer from './FormStepRenderer';
-import FormNavigation from './FormNavigation';
-import QuoteModal from './fields/End -page/QuoteModal';
+import FormStepRenderer from '../FormStepRenderer';
+import FormNavigation from '../FormNavigation';
+import QuoteModal from '../End -page/QuoteModal';
 
 export default function QuoteCalculator() {
   const [currentStep, setCurrentStep] = useState(1);

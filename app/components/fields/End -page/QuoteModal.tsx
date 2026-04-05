@@ -1,18 +1,40 @@
+/**
+ * Quote Page (formerly QuoteModal)
+ * 
+ * Purpose:
+ * - Displays the calculated cleaning quote to users after form submission
+ * - Shows detailed pricing and time estimates for both first clean and ongoing maintenance
+ * - Provides actions: "Book Now" button or "Edit Quote" to modify answers
+ * 
+ * When Rendered:
+ * - Rendered by QuoteCalculator when isSubmitted state is true
+ * - Shows full-page layout (not a modal overlay)
+ * - Displays after all 8 form steps are completed
+ * 
+ * Data Displayed:
+ * - Cleaning type/frequency (one-off, weekly, fortnightly, monthly)
+ * - First clean price and estimated hours
+ * - Maintenance price (if recurring cleaning)
+ * - Company logo at top
+ * 
+ * User Actions:
+ * - "Book Now": Navigates to /booking page
+ * - "Edit Quote": Calls onEdit() to return to form for modifications
+ */
+
 'use client';
 
-interface QuoteModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+interface QuotePageProps {
   formData: Record<string, any>;
   quote: any;
+  onEdit: () => void;
 }
 
-export default function QuoteModal({ isOpen, onClose, formData, quote }: QuoteModalProps) {
-  if (!isOpen) return null;
+export default function QuotePage({ formData, quote, onEdit }: QuotePageProps) {
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
-      <div className="bg-white rounded-lg p-4 sm:p-8 max-w-2xl w-full my-8">
+    <div className="min-h-screen bg-white text-gray-900">
+      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-6 pb-6 sm:pb-12">
         {/* Logo Placeholder */}
         <div className="flex justify-start mb-1 -ml-4 sm:-ml-8">
           <img 
@@ -87,10 +109,10 @@ export default function QuoteModal({ isOpen, onClose, formData, quote }: QuoteMo
             Book Now
           </a>
           <button
-            onClick={onClose}
+            onClick={onEdit}
             className="flex-1 px-4 py-3 bg-gray-200 text-[#48546A] rounded-lg hover:bg-gray-300 font-medium transition"
           >
-            Close
+            Edit Quote
           </button>
         </div>
       </div>

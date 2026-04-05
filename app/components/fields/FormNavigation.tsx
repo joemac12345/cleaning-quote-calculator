@@ -1,4 +1,4 @@
-import Button from './fields/Button';
+import Button from './Button';
 
 interface FormNavigationProps {
   currentStep: number;

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import Navigation from "./components/Navigation";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -70,7 +69,6 @@ export default function RootLayout({
     >
       <body className="bg-white text-gray-900 font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <Navigation />
           <div className="max-w-2xl mx-auto">
             {children}
           </div>
