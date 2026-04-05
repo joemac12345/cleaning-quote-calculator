@@ -61,9 +61,9 @@ export default function QuoteCalculator() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="h-screen overflow-hidden bg-white text-gray-900 flex flex-col">
       {/* Main Form */}
-      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-6 pb-6 sm:pb-12">
+      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-6 pb-6 sm:pb-12 flex-1 overflow-y-auto">
         {/* Step Content */}
         <div className="mb-8 sm:mb-12">
           <FormStepRenderer

@@ -31,10 +31,10 @@ export default function Services() {
                 )}
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl text-[#48546A] mb-1" style={{ fontWeight: 600 }}>
+                <h3 className="text-base sm:text-lg text-[#48546A] mb-1 font-normal">
                   {service.title}
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 font-normal">
+                <p className="text-base sm:text-lg text-gray-600 font-normal">
                   {service.description}
                 </p>
               </div>
