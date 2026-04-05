@@ -24,6 +24,13 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Top To Bottom Cleaning Services - Cleaning Quote Calculator",
   description: "Get your instant cleaning quote with our fast calculator",
+  manifest: "/manifest.json",
+  themeColor: "#48546A",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Top To Bottom",
+  },
   openGraph: {
     title: "Top To Bottom Cleaning Services - Professional Cleaning",
     description: "Get your instant cleaning quote today. Fast, easy, and transparent pricing for all your cleaning needs.",
@@ -43,6 +50,10 @@ export const metadata: Metadata = {
     title: "Top To Bottom Cleaning Services - Professional Cleaning",
     description: "Get your instant cleaning quote today. Fast, easy, and transparent pricing for all your cleaning needs.",
     images: ["/og-image.png"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 

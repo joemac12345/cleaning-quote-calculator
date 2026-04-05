@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { formSteps } from '@/app/config/formConfig';
 import { calculateQuote } from '@/app/utils/quoteCalculation';
 import FormStepRenderer from './FormStepRenderer';
@@ -11,6 +11,16 @@ export default function QuoteCalculator() {
   const [currentStep, setCurrentStep] = useState(1);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Disable body scroll on mount, re-enable on unmount
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
 
   // Initialize form data with all field initial values
   const [formData, setFormData] = useState<Record<string, any>>(() => {
@@ -61,9 +71,9 @@ export default function QuoteCalculator() {
   }
 
   return (
-    <div className="h-screen overflow-hidden bg-white text-gray-900 flex flex-col">
+    <div className="min-h-screen bg-white text-gray-900">
       {/* Main Form */}
-      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-6 pb-6 sm:pb-12 flex-1 overflow-y-auto">
+      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-6 pb-6 sm:pb-12">
         {/* Step Content */}
         <div className="mb-8 sm:mb-12">
           <FormStepRenderer
