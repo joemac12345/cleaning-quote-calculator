@@ -3,8 +3,8 @@
 import { useState, useMemo, useEffect } from 'react';
 import { formSteps } from '@/app/config/formConfig';
 import { calculateQuote } from '@/app/utils/quoteCalculation';
-import FormStepRenderer from './FormStepRenderer';
-import FormNavigation from './FormNavigation';
+import FormStepRenderer from './fields/FormStepRenderer';
+import FormNavigation from './fields/FormNavigation';
 import QuoteModal from './fields/End -page/QuoteModal';
 
 export default function QuoteCalculator() {
