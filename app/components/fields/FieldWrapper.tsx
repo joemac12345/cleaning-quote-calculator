@@ -32,6 +32,7 @@ export default function FieldWrapper({ field, value, onChange }: FieldWrapperPro
           value={value as number}
           onChange={onChange}
           time={field.time}
+          helpText={field.helpText}
         />
       );
 

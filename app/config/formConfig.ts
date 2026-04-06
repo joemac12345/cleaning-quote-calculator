@@ -12,6 +12,7 @@ export interface FormField {
   type: FieldType;
   time: number; // minutes
   icon?: string; // icon name (e.g., 'bed', 'bath')
+  helpText?: string; // optional help text for counter/text fields
   showTime?: boolean; // whether to display time on radio/checkbox options
   initialValue: string | number | boolean | string[] | Record<string, number>;
   options?: Array<{ label: string; value: string | number; time?: number; icon?: string; price?: number; timeMultiplier?: number }>;
@@ -62,6 +63,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 20,
         icon: '/icons/GhWMo.jpg',
+        helpText: 'Select how many floors need cleaning',
         initialValue: 0,
       },
        {
@@ -70,6 +72,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 10,
         icon: '/icons/yYWnE.jpg',
+        helpText: 'Select how many hallways need cleaning',
         initialValue: 0,
       },
     ],
@@ -87,6 +90,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 15, // minutes per room
         icon: '/icons/Nqbuh.jpg',
+        helpText: 'Select the number of bedrooms that need cleaning',
         initialValue: 0,
       },
     ],
@@ -104,6 +108,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 45,
         icon: '/icons/HKsqc.jpg',
+        helpText: 'Select the number of bathrooms that need cleaning',
         initialValue: 0,
       },
       {
@@ -112,6 +117,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 20,
         icon: '/icons/PEdH2.jpg',
+        helpText: 'Select the number of cloakrooms that need cleaning',
         initialValue: 0,
       },
     ],
@@ -129,6 +135,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 1,
         icon: '/icons/mqGYd.jpg',
+        helpText: 'Select the number of kitchens that need cleaning',
         initialValue: 0,
       },
       {
@@ -137,6 +144,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 30,
         icon: '/icons/l7vLe.jpg',
+        helpText: 'Select the number of utility rooms that need cleaning',
         initialValue: 0,
       },
      
