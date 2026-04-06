@@ -4,7 +4,7 @@
  * Each field can be reused with different configurations.
  */
 
-export type FieldType = 'counter' | 'checkbox' | 'radio' | 'select' | 'text' | 'email';
+export type FieldType = 'counter' | 'checkbox' | 'radio' | 'select' | 'text' | 'email' | 'tel';
 
 export interface FormField {
   id: string;
@@ -226,7 +226,7 @@ export const formSteps: FormStep[] = [
       {
         id: 'telephone',
         name: 'Telephone Number',
-        type: 'text',
+        type: 'tel',
         time: 0,
         initialValue: '',
         required: true,

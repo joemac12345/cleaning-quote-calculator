@@ -1,23 +1,35 @@
+/**
+ * Phone Field Component
+ * 
+ * Purpose:
+ * - Specialized input field for phone numbers
+ * - Auto-shows numeric keypad on mobile devices
+ * - HTML validation through type="tel"
+ * 
+ * Usage:
+ * - Use this component for phone number inputs in forms
+ * - Always provides phone-specific UX on mobile devices
+ */
+
 'use client';
 
-interface TextFieldProps {
+interface PhoneFieldProps {
   label: string;
-
   value: string;
   onChange: (value: string) => void;
   required?: boolean;
 }
 
-export default function TextField({
+export default function PhoneField({
   label,
   value,
   onChange,
   required,
-}: TextFieldProps) {
+}: PhoneFieldProps) {
   return (
     <div>
       <input
-        type="text"
+        type="tel"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}

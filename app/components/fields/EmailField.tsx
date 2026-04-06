@@ -1,23 +1,35 @@
+/**
+ * Email Field Component
+ * 
+ * Purpose:
+ * - Specialized input field for email addresses
+ * - Auto-detects mobile email keyboards (@ symbol visible)
+ * - Validates email format through HTML input type="email"
+ * 
+ * Usage:
+ * - Use this component for email inputs in forms
+ * - Always provides email-specific UX on mobile devices
+ */
+
 'use client';
 
-interface TextFieldProps {
+interface EmailFieldProps {
   label: string;
-
   value: string;
   onChange: (value: string) => void;
   required?: boolean;
 }
 
-export default function TextField({
+export default function EmailField({
   label,
   value,
   onChange,
   required,
-}: TextFieldProps) {
+}: EmailFieldProps) {
   return (
     <div>
       <input
-        type="text"
+        type="email"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}

@@ -1,7 +1,7 @@
 /**
  * Generic Field Component
  * Renders different field types based on FieldType configuration
- * Supports: counter, checkbox, radio, select, text, email
+ * Supports: counter, checkbox, radio, select, text, email, tel
  */
 
 'use client';
@@ -13,6 +13,8 @@ import CheckboxField from './CheckboxField';
 import RadioField from './RadioField';
 import SelectField from './SelectField';
 import TextField from './TextField';
+import EmailField from './EmailField';
+import PhoneField from './PhoneField';
 
 interface FieldWrapperProps {
   field: FormField;
@@ -66,11 +68,29 @@ export default function FieldWrapper({ field, value, onChange }: FieldWrapperPro
       );
 
     case 'email':
+      return (
+        <EmailField
+          label={field.name}
+          value={value as string}
+          onChange={onChange}
+          required={field.required}
+        />
+      );
+
+    case 'tel':
+      return (
+        <PhoneField
+          label={field.name}
+          value={value as string}
+          onChange={onChange}
+          required={field.required}
+        />
+      );
+
     case 'text':
       return (
         <TextField
           label={field.name}
-          type={field.type}
           value={value as string}
           onChange={onChange}
           required={field.required}
