@@ -398,18 +398,18 @@ export default function AdminPage() {
                         return notesList.length > 0 ? (
                           <button
                             onClick={() => handleOpenNotes(estimate)}
-                            className="w-full border-t border-gray-200 pt-3 mt-3 text-left hover:bg-gray-50 p-3 rounded-lg transition -m-4 px-4 py-3"
+                            className="w-full border-t border-b border-gray-200 pt-3 mt-4 mb-4 text-left hover:bg-gray-50 p-3 rounded-lg transition -m-4 px-4 py-3"
                           >
-                            <p className="text-xs font-semibold text-gray-500 uppercase mb-2">
+                            <p className="text-sm font-semibold text-gray-500 uppercase mb-2">
                               Latest Note ({notesList.length} total)
                             </p>
                             {lastNote && (
                               <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 hover:border-blue-300 transition">
-                                <p className="text-xs text-gray-700 line-clamp-3">{lastNote.text}</p>
+                                <p className="text-sm text-gray-700 line-clamp-3">{lastNote.text}</p>
                               </div>
                             )}
                             {notesList.length > 1 && (
-                              <p className="text-xs text-gray-500 mt-1">+{notesList.length - 1} more note{notesList.length - 1 !== 1 ? 's' : ''}</p>
+                              <p className="text-sm text-gray-500 mt-1">+{notesList.length - 1} more note{notesList.length - 1 !== 1 ? 's' : ''}</p>
                             )}
                           </button>
                         ) : null;

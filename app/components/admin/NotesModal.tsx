@@ -179,8 +179,8 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
-      <div className="bg-white w-full h-full flex flex-col overflow-hidden">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white w-full max-w-2xl h-[90vh] flex flex-col overflow-hidden rounded-lg shadow-lg">
         {/* Header */}
         <div className="text-white px-6 py-4 flex justify-between items-center" style={{ backgroundColor: '#4B5368' }}>
           <div className="flex-1">
