@@ -233,9 +233,31 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 8: Add-ons (previously Step 7)
+  // Step 8: Cleaning Products
   {
     id: 8,
+    title: 'Cleaning Products',
+    description: 'How would you like us to proceed with cleaning products?',
+    fields: [
+      {
+        id: 'cleaning_products',
+        name: 'Cleaning Products',
+        type: 'radio',
+        time: 0,
+        showTime: false,
+        initialValue: '',
+        options: [
+          { label: 'Supply all cleaning products', value: 'supply', time: 0, icon: '/icons/R1KAf.jpg', price: 5 },
+          { label: 'Use your cleaning products', value: 'yours', time: 0, icon: '/icons/Xujtk.jpg' },
+        ],
+        required: true,
+      },
+    ],
+  },
+
+  // Step 9: Add-ons (previously Step 8)
+  {
+    id: 9,
     title: 'Add-ons',
     description: 'Select your options',
     fields: [
@@ -254,9 +276,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 9: Window & Door Cleaning
+  // Step 10: Window & Door Cleaning (previously Step 9)
   {
-    id: 9,
+    id: 10,
     title: 'Windows & Doors',
     description: 'Add quantity required',
     fields: [
@@ -275,9 +297,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 10: Cleaning Frequency (previously Step 9)
+  // Step 11: Cleaning Frequency (previously Step 10)
   {
-    id: 10,
+    id: 11,
     title: 'Frequency',
     description: 'How often do you need cleaning?',
     fields: [
@@ -297,9 +319,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 11: Review & Contact (previously Step 10)
+  // Step 12: Review & Contact (previously Step 11)
   {
-    id: 11,
+    id: 12,
     title: 'Review',
     description: 'Confirm your quote and enter contact details',
     fields: [

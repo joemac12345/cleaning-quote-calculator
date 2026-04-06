@@ -100,12 +100,12 @@ export default function OptionsCounterField({
                       <img
                         src={option.icon}
                         alt={String(option.label)}
-                        className="w-16 h-16 object-cover rounded flex-shrink-0"
+                        className="w-24 h-24 object-cover rounded flex-shrink-0"
                       />
                     )}
                     <div className="flex-1 min-w-0">
                       <h3 className="text-xl sm:text-2xl font-bold text-[#4B5368] mb-2">{option.label}</h3>
-                      {option.price && <p className="text-lg sm:text-xl font-semibold text-[#4B5368]">£{option.price}</p>}
+                      {option.price && <div className="inline-block bg-pink-500 text-white px-3 py-2 rounded-lg"><p className="text-lg sm:text-xl font-semibold">£{option.price.toFixed(2)}</p></div>}
                     </div>
                   </div>
                   <p className="text-base sm:text-lg text-[#4B5368] mb-8 leading-relaxed whitespace-pre-wrap">
