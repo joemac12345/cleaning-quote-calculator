@@ -176,16 +176,6 @@ export default function AdminPage() {
               </h1>
               <p className="text-xs sm:text-sm text-gray-600">Manage and review all customer estimates</p>
             </div>
-            <button
-              onClick={() => setShowSearchModal(true)}
-              className="w-10 h-10 rounded-full transition flex items-center justify-center hover:opacity-80 flex-shrink-0"
-              style={{backgroundColor: '#4B5368'}}
-              title="Search and filter"
-            >
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path>
-              </svg>
-            </button>
           </div>
         </div>
       </div>
