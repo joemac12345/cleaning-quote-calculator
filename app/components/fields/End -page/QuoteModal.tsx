@@ -44,13 +44,13 @@ export default function QuotePage({ formData, quote, onEdit }: QuotePageProps) {
           />
         </div>
         
-        <h3 className="text-lg sm:text-2xl font-bold mb-2 text-[#48546A]">Your Quote</h3>
-        <p className="text-[#48546A] text-sm sm:text-base mb-6">Here's your personalised cleaning quote based on your requirements. Review the details below and contact us to proceed with your booking.</p>
+        <h3 className="text-base sm:text-xl font-bold mb-2 text-[#48546A]">Your Quote</h3>
+        <p className="text-[#48546A] text-xs sm:text-sm mb-6">Here's your personalised cleaning quote based on your requirements. Review the details below and contact us to proceed with your booking.</p>
         
         {/* Cleaning Type */}
         <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
           <p className="text-xs sm:text-sm text-[#48546A] mb-1">Cleaning Type</p>
-          <p className="text-base sm:text-lg font-bold text-[#48546A] capitalize mb-2">
+          <p className="text-sm sm:text-base font-bold text-[#48546A] capitalize mb-2">
             {formData.frequency === 'one-off' ? 'One-off Cleaning' : 
              formData.frequency === 'weekly' ? 'Weekly Cleaning' :
              formData.frequency === 'fortnightly' ? 'Fortnightly Cleaning' :

@@ -56,7 +56,7 @@ export const formSteps: FormStep[] = [
   {
     id: 2,
     title: 'Floors',
-    description: 'How many floors need cleaning?',
+    description: 'Add quantity required',
     notificationText: 'Only select what you require cleaning.',
     fields: [
       {
@@ -65,7 +65,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 20,
         icon: '/icons/GhWMo.jpg',
-        helpText: 'Select how many staircases need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
       {
@@ -74,7 +74,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 10,
         icon: '/icons/QQC1v.jpg',
-        helpText: 'Select how many landings need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
        {
@@ -83,7 +83,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 10,
         icon: '/icons/Fcl68.jpg',
-        helpText: 'Select how many hallways need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
     ],
@@ -93,7 +93,7 @@ export const formSteps: FormStep[] = [
   {
     id: 3,
     title: 'Bedrooms',
-    description: 'How many bedrooms need cleaning?',
+    description: 'Add quantity required',
     notificationText: 'Only select what you require cleaning.',
     fields: [
       {
@@ -102,7 +102,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 15, // minutes per room
         icon: '/icons/Nqbuh.jpg',
-        helpText: 'Select the number of bedrooms that need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
     ],
@@ -112,8 +112,8 @@ export const formSteps: FormStep[] = [
   {
     id: 4,
     title: 'Bathrooms & Cloakroom',
-    description: 'How many bathrooms and cloakrooms?',
-    notificationText: 'Only select what you require cleaning.',
+    description: 'Add quantity required',
+    notificationText: 'Add if required Cleaning.',
     fields: [
       {
         id: 'bathrooms',
@@ -121,7 +121,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 45,
         icon: '/icons/nJuLg.jpg',
-        helpText: 'Select the number of bathrooms that need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
       {
@@ -130,7 +130,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 30,
         icon: '/icons/HKsqc.jpg',
-        helpText: 'Select the number of en suite bathrooms that need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
       {
@@ -139,7 +139,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 20,
         icon: '/icons/PEdH2.jpg',
-        helpText: 'Select the number of cloakrooms that need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
     ],
@@ -149,7 +149,7 @@ export const formSteps: FormStep[] = [
   {
     id: 5,
     title: 'Living Spaces',
-    description: 'How many living spaces need cleaning?',
+    description: 'Add quantity required',
     notificationText: 'Only select what you require cleaning.',
     fields: [
       {
@@ -158,7 +158,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 25,
         icon: '/icons/VlFWk.jpg',
-        helpText: 'Select the number of living rooms that need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
       {
@@ -167,7 +167,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 20,
         icon: '/icons/e3RYb.jpg',
-        helpText: 'Select the number of dining rooms that need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
       {
@@ -176,7 +176,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 15,
         icon: '/icons/wNAqS.jpg',
-        helpText: 'How many studies or offices?',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
     ],
@@ -186,8 +186,8 @@ export const formSteps: FormStep[] = [
   {
     id: 6,
     title: 'Other Rooms',
-    description: 'How many other rooms need cleaning?',
-    notificationText: 'Only select what you require cleaning.',
+    description: 'Add quantity required',
+    notificationText: 'Add if required Cleaning.',
     fields: [
       {
         id: 'kitchen',
@@ -195,7 +195,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 1,
         icon: '/icons/mqGYd.jpg',
-        helpText: 'Select the number of kitchens that need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
       {
@@ -204,7 +204,7 @@ export const formSteps: FormStep[] = [
         type: 'counter',
         time: 30,
         icon: '/icons/l7vLe.jpg',
-        helpText: 'Select the number of utility rooms that need cleaning',
+        helpText: 'Add what you need cleaned',
         initialValue: 0,
       },
      
@@ -237,7 +237,7 @@ export const formSteps: FormStep[] = [
   {
     id: 8,
     title: 'Add-ons',
-    description: 'Any extra services?',
+    description: 'Select your options',
     fields: [
       {
         id: 'extras',
@@ -258,7 +258,7 @@ export const formSteps: FormStep[] = [
   {
     id: 9,
     title: 'Windows & Doors',
-    description: 'Would you like interior window or external door cleaning?',
+    description: 'Add quantity required',
     fields: [
       {
         id: 'windows',
@@ -268,8 +268,8 @@ export const formSteps: FormStep[] = [
         showTime: false,
         initialValue: { windows: 0, doors: 0 },
         options: [
-          { label: 'Window Cleaning', value: 'windows', time: 20, icon: '/icons/IN0MN (1).jpg', price: 4, helpText: 'How many windows does your home have?', description: 'Internal window cleaning service includes:\n\n• Cleaning of the inside surface of window glass\n• Framed glass cleaning (interior side)\n• Window sill cleaning (interior)\n• Removal of dust and grime from inside\n• Streak-free finish for crystal-clear transparency from inside\n\nPrice: £4 per window\n\nPlease note: This service covers the INSIDE/INTERIOR of windows only and does not include external/outside window cleaning.' },
-          { label: 'External Doors', value: 'doors', time: 15, icon: '/icons/IN0MN (1).jpg', price: 3, helpText: 'How many external doors does your home have?', description: 'External door cleaning service includes:\n\n• Cleaning of external door glass/panels\n• External door frame cleaning\n• Frame detailing\n• Removal of dust and weather marks\n• Streak-free finish\n\nPrice: £3 per external door\n\nPlease note: This service is for external doors only. Internal doors are included as part of your room cleaning price.' },
+          { label: 'Window Cleaning', value: 'windows', time: 20, icon: '/icons/IN0MN (1).jpg', price: 4, helpText: 'Add what you need cleaned', description: 'Internal window cleaning service includes:\n\n• Cleaning of the inside surface of window glass\n• Framed glass cleaning (interior side)\n• Window sill cleaning (interior)\n• Removal of dust and grime from inside\n• Streak-free finish for crystal-clear transparency from inside\n\nPrice: £4 per window\n\nPlease note: This service covers the INSIDE/INTERIOR of windows only and does not include external/outside window cleaning.' },
+          { label: 'External Doors', value: 'doors', time: 15, icon: '/icons/IN0MN (1).jpg', price: 3, helpText: 'Add what you need cleaned', description: 'External door cleaning service includes:\n\n• Cleaning of external door glass/panels\n• External door frame cleaning\n• Frame detailing\n• Removal of dust and weather marks\n• Streak-free finish\n\nPrice: £3 per external door\n\nPlease note: This service is for external doors only. Internal doors are included as part of your room cleaning price.' },
         ],
       },
     ],

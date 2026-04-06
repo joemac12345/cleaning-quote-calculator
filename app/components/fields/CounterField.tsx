@@ -31,8 +31,8 @@ export default function CounterField({
           </div>
         )}
         <div className="min-w-0">
-          <h3 className="text-lg sm:text-xl font-medium break-words" style={{ color: '#48546A' }}>{label}</h3>
-          {helpText && <p className="text-sm sm:text-sm text-gray-600 mt-2">{helpText}</p>}
+          <h3 className="text-base sm:text-lg font-medium break-words" style={{ color: '#48546A' }}>{label}</h3>
+          {helpText && <p className="text-xs sm:text-sm text-gray-600 mt-2">{helpText}</p>}
         </div>
       </div>
       <div className="flex items-center gap-2 flex-shrink-0">
@@ -44,7 +44,7 @@ export default function CounterField({
         >
           −
         </button>
-        <span className="w-6 text-center text-xl sm:text-2xl font-semibold" style={{ color: '#48546A' }}>{value}</span>
+        <span className="w-6 text-center text-lg sm:text-xl font-semibold" style={{ color: '#48546A' }}>{value}</span>
         <button
           onClick={handleIncrement}
           className="w-8 h-8 sm:w-8 sm:h-8 flex items-center justify-center rounded-md bg-gray-200 hover:bg-gray-300 font-semibold text-sm"

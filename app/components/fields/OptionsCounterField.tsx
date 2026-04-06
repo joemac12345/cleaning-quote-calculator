@@ -61,7 +61,7 @@ export default function OptionsCounterField({
                   )}
                 </div>
                 <div className="flex flex-col gap-1">
-                  <h4 className="text-base sm:text-base text-gray-900 font-medium">{option.label}</h4>
+                  <h4 className="text-sm sm:text-base text-gray-900 font-medium">{option.label}</h4>
                   {option.helpText && <p className="text-xs sm:text-xs text-gray-600">{option.helpText}</p>}
                   {showTime && option.time && <p className="text-sm sm:text-sm text-gray-500">{option.time} min</p>}
                 </div>
@@ -74,7 +74,7 @@ export default function OptionsCounterField({
                 >
                   −
                 </button>
-                <span className="w-8 h-8 flex items-center justify-center font-semibold text-base">{count}</span>
+                <span className="w-8 h-8 flex items-center justify-center font-semibold text-sm">{count}</span>
                 <button
                   onClick={() => handleIncrement(String(option.value))}
                   className="w-8 h-8 sm:w-8 sm:h-8 flex items-center justify-center rounded-md hover:bg-gray-100 text-sm font-semibold"
@@ -104,16 +104,16 @@ export default function OptionsCounterField({
                       />
                     )}
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{option.label}</h3>
-                      {option.price && <p className="text-xl font-semibold text-[#48546A]">£{option.price}</p>}
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{option.label}</h3>
+                      {option.price && <p className="text-lg sm:text-xl font-semibold text-[#48546A]">£{option.price}</p>}
                     </div>
                   </div>
-                  <p className="text-lg text-gray-700 mb-8 leading-relaxed whitespace-pre-wrap">
+                  <p className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed whitespace-pre-wrap">
                     {option.description}
                   </p>
                   <button
                     onClick={() => setSelectedModal(null)}
-                    className="w-full bg-[#48546A] text-white py-3 rounded-lg font-medium text-lg"
+                    className="w-full bg-[#48546A] text-white py-3 rounded-lg font-medium text-base sm:text-lg"
                   >
                     Close
                   </button>

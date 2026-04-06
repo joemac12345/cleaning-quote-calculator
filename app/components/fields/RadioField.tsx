@@ -48,7 +48,7 @@ export default function RadioField({
 
               {/* Text - below icon */}
               <div className="text-center">
-                <p className="text-base sm:text-base font-medium" style={{ color: '#48546A' }}>{option.label}</p>
+                <p className="text-sm sm:text-base font-medium" style={{ color: '#48546A' }}>{option.label}</p>
                 {showTime && option.time && option.time > 0 && <p className="text-sm sm:text-sm mt-1" style={{ color: '#48546A' }}>{option.time} min</p>}
               </div>
             </label>
