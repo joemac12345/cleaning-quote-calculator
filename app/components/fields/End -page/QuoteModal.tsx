@@ -40,7 +40,7 @@ export default function QuotePage({ formData, quote, onEdit }: QuotePageProps) {
           <img 
             src="/icons/WW635.jpg" 
             alt="Company Logo" 
-            className="h-24 sm:h-40"
+            className="h-16 sm:h-24"
           />
         </div>
         

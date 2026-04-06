@@ -23,7 +23,7 @@ export default function Navigation() {
             <img 
               src="/icons/WW635.jpg" 
               alt="Company Logo" 
-              className="h-14 sm:h-16"
+              className="h-10 sm:h-12"
             />
           </Link>
 

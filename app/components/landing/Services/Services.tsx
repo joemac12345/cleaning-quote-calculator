@@ -24,8 +24,8 @@ export default function Services() {
                   <Image
                     src={service.icon}
                     alt={service.title}
-                    width={60}
-                    height={60}
+                    width={48}
+                    height={48}
                     className="object-contain"
                   />
                 )}

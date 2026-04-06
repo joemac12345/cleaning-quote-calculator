@@ -26,7 +26,7 @@ export default function CounterField({
             <img
               src={icon}
               alt={label}
-              className="w-24 h-24 sm:w-28 sm:h-28 object-cover"
+              className="w-16 h-16 sm:w-20 sm:h-20 object-cover"
             />
           </div>
         )}
