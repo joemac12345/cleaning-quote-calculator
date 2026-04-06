@@ -1,4 +1,4 @@
-import QuoteCalculator from '../components/fields/form-pricing /QuoteCalculator';
+import QuoteCalculator from '../components/QuoteCalculator';
 
 export default function QuotePage() {
   return <QuoteCalculator />;

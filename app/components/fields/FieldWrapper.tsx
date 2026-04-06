@@ -16,6 +16,7 @@ import SelectField from './SelectField';
 import TextField from './TextField';
 import EmailField from './EmailField';
 import PhoneField from './PhoneField';
+import AddressField from './AddressField';
 
 interface FieldWrapperProps {
   field: FormField;
@@ -107,6 +108,15 @@ export default function FieldWrapper({ field, value, onChange }: FieldWrapperPro
           value={value as string}
           onChange={onChange}
           required={field.required}
+        />
+      );
+
+    case 'address':
+      return (
+        <AddressField
+          field={field}
+          value={value as Record<string, string>}
+          onChange={onChange}
         />
       );
 

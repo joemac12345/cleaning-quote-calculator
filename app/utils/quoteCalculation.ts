@@ -1,9 +1,9 @@
 /**
- * Quote Calculation Utilities
- * Calculates total time and price based on form data and configuration
+ * Quote Calculation Utilities - TIME-BASED PRICING MODEL
+ * Calculates price based on time spent on rooms and add-ons
  */
 
-import { formSteps, frequencyDiscounts, HOURLY_RATE, FormField } from '@/app/config/formConfig';
+import { formSteps, FIRST_CLEAN_HOURLY_RATE, MAINTENANCE_HOURLY_RATE } from '@/app/config/formConfig';
 
 export interface QuoteStats {
   totalMinutes: number;
@@ -27,7 +27,7 @@ export interface QuoteStats {
 }
 
 /**
- * Calculate total time in minutes from form data
+ * Calculate total time in minutes from form data (only for room-type fields without prices)
  */
 function calculateTotalMinutes(formData: Record<string, any>, frequency: string = 'one-off'): number {
   let totalMinutes = 0;
@@ -37,73 +37,91 @@ function calculateTotalMinutes(formData: Record<string, any>, frequency: string 
     step.fields.forEach((field) => {
       const fieldValue = formData[field.id];
 
-      if (fieldValue === null || fieldValue === undefined) return;
+      if (fieldValue === null || fieldValue === undefined || fieldValue === '') return;
 
       // Handle different field types
       switch (field.type) {
         case 'counter':
           // Counter type: multiply count by time per unit
-          totalMinutes += (fieldValue as number) * field.time;
+          if (typeof fieldValue === 'number' && fieldValue > 0) {
+            // Only add time if this field doesn't have price options
+            const hasPrice = field.options?.some(opt => opt.price !== undefined);
+            if (!hasPrice) {
+              totalMinutes += fieldValue * field.time;
+              console.log(`${field.id}: ${fieldValue} × ${field.time}m = ${fieldValue * field.time}m`);
+            }
+          }
+          // For object types (extras, windows, other_spaces)
+          else if (typeof fieldValue === 'object' && !Array.isArray(fieldValue)) {
+            field.options?.forEach((option) => {
+              const count = fieldValue[String(option.value)] || 0;
+              // Add time if this option has a time value (for display, regardless of price)
+              if (count > 0 && option.time) {
+                totalMinutes += count * option.time;
+                console.log(`${field.id}.${option.value}: ${count} × ${option.time}m = ${count * option.time}m`);
+              }
+            });
+          }
           break;
 
         case 'radio':
-          // Radio type: if selected, add the option's time value
+          // Radio type: if selected, add the option's time value (for display, regardless of price)
           if (fieldValue) {
             const selectedOption = field.options?.find((opt) => String(opt.value) === String(fieldValue));
-            if (selectedOption?.time) {
+            if (selectedOption?.time && selectedOption.time > 0) {
               totalMinutes += selectedOption.time;
+              console.log(`${field.id}: ${selectedOption.time}m`);
             }
           }
           break;
 
-        case 'checkbox':
-          // Checkbox type: sum up times for all selected options (now stored as object with counts)
-          if (typeof fieldValue === 'object' && !Array.isArray(fieldValue)) {
-            field.options?.forEach((option) => {
-              const count = fieldValue[String(option.value)] || 0;
-              if (count > 0 && option.time) {
-                totalMinutes += count * option.time;
-              }
-            });
-          }
-          // Also handle legacy array format for backwards compatibility
-          else if (Array.isArray(fieldValue)) {
-            fieldValue.forEach((checkedValue) => {
-              const selectedOption = field.options?.find((opt) => String(opt.value) === String(checkedValue));
-              if (selectedOption?.time) {
-                totalMinutes += selectedOption.time;
-              }
-            });
-          }
-          break;
-
-        // text, email, select don't add to time by default
+        // text, email, select, checkbox don't add to time by default
       }
     });
   });
 
-  // Apply maintenance clean reduction: 50% reduction for weekly cleans, 50% for other recurring
-  if (frequency === 'weekly') {
-    totalMinutes *= 0.5; // 50% reduction for weekly
-  } else if (frequency !== 'one-off') {
-    totalMinutes *= 0.5; // 50% reduction for fortnightly/monthly
-  }
+  console.log(`Total minutes (${frequency}): ${totalMinutes}m`);
 
   return totalMinutes;
 }
 
 /**
- * Get service type multiplier from form data
+ * Calculate total price additions from option prices (fixed costs)
  */
-function getServiceMultiplier(formData: Record<string, any>): number {
-  const serviceType = formData.service_type;
-  if (!serviceType) return 0;
+function calculateOptionPrices(formData: Record<string, any>): number {
+  let totalPrice = 0;
 
-  const serviceStep = formSteps.find((s) => s.id === 1);
-  const serviceField = serviceStep?.fields.find((f) => f.id === 'service_type');
-  const selectedOption = serviceField?.options?.find((opt) => String(opt.value) === String(serviceType));
+  formSteps.forEach((step) => {
+    step.fields.forEach((field) => {
+      const fieldValue = formData[field.id];
 
-  return selectedOption?.timeMultiplier || 0;
+      if (fieldValue === null || fieldValue === undefined || fieldValue === '') return;
+
+      // Radio fields - single selection with optional price
+      if (field.type === 'radio' && fieldValue) {
+        const selectedOption = field.options?.find((opt) => String(opt.value) === String(fieldValue));
+        if (selectedOption?.price) {
+          totalPrice += selectedOption.price;
+          console.log(`${field.id} price: £${selectedOption.price}`);
+        }
+      }
+
+      // Counter fields with options (extras, windows, etc.)
+      if (field.type === 'counter' && typeof fieldValue === 'object' && !Array.isArray(fieldValue)) {
+        field.options?.forEach((option) => {
+          const count = fieldValue[String(option.value)] || 0;
+          if (count > 0 && option.price) {
+            const cost = count * option.price;
+            totalPrice += cost;
+            console.log(`${field.id}.${option.value} price: ${count} × £${option.price} = £${cost}`);
+          }
+        });
+      }
+    });
+  });
+
+  console.log(`Total option prices: £${totalPrice.toFixed(2)}`);
+  return totalPrice;
 }
 
 /**
@@ -116,62 +134,92 @@ export function formatTime(totalMinutes: number): { hours: number; minutes: numb
 }
 
 /**
- * Calculate full quote including discounts
+ * Calculate full quote based on time × hourly rate + option prices
  */
 export function calculateQuote(
   formData: Record<string, any>,
   frequency: string = 'one-off'
 ): QuoteStats {
-  const isRecurring = frequency !== 'one-off';
-  
-  // Calculate first clean price (without 15% maintenance reduction)
-  const firstCleanMinutes = calculateTotalMinutes(formData, 'one-off');
-  const firstCleanBasePrice = (firstCleanMinutes / 60) * HOURLY_RATE;
-  const discountPercent = frequencyDiscounts[frequency] || 0;
-  const firstCleanSaving = firstCleanBasePrice * discountPercent;
-  const firstCleanPriceAfterFrequency = firstCleanBasePrice + firstCleanSaving;
-  const serviceMultiplierPercent = getServiceMultiplier(formData) * 100;
-  const firstCleanServicePremium = firstCleanPriceAfterFrequency * (getServiceMultiplier(formData));
-  const firstCleanPrice = firstCleanPriceAfterFrequency + firstCleanServicePremium;
-  
-  // Calculate maintenance price (with 15% maintenance reduction if recurring)
-  const maintenanceMinutes = calculateTotalMinutes(formData, frequency);
-  const { hours, minutes } = formatTime(maintenanceMinutes);
-  const maintenanceBasePrice = (maintenanceMinutes / 60) * HOURLY_RATE;
-  const maintenanceDiscount = isRecurring ? firstCleanBasePrice * 0.15 : 0;
-  const maintenanceSaving = maintenanceBasePrice * discountPercent;
-  const maintenancePriceAfterFrequency = maintenanceBasePrice + maintenanceSaving;
-  const maintenanceServicePremium = maintenancePriceAfterFrequency * (getServiceMultiplier(formData));
-  const maintenancePrice = maintenancePriceAfterFrequency + maintenanceServicePremium;
+  try {
+    const isRecurring = frequency !== 'one-off';
 
-  // Use appropriate total price based on frequency
-  const totalPrice = isRecurring ? maintenancePrice : firstCleanPrice;
-  const basePrice = isRecurring ? maintenanceBasePrice : firstCleanBasePrice;
-  const maintenanceReduction = isRecurring ? -15 : 0;
-  const saving = isRecurring ? maintenanceSaving : firstCleanSaving;
+    // Calculate times
+    const firstCleanMinutes = calculateTotalMinutes(formData, 'one-off') || 0;
+    let maintenanceMinutes = calculateTotalMinutes(formData, frequency) || 0;
 
-  // Format times
-  const firstCleanFormatted = formatTime(firstCleanMinutes);
-  const maintenanceFormatted = formatTime(maintenanceMinutes);
+    // Reduce maintenance hours based on frequency
+    if (frequency === 'weekly') {
+      maintenanceMinutes *= 0.5; // 50% reduction
+      console.log(`After 50% maintenance reduction (weekly): ${maintenanceMinutes}m`);
+    } else if (frequency === 'fortnightly') {
+      maintenanceMinutes *= 0.6; // 40% reduction
+      console.log(`After 40% maintenance reduction (fortnightly): ${maintenanceMinutes}m`);
+    } else if (frequency === 'monthly') {
+      maintenanceMinutes *= 0.7; // 30% reduction
+      console.log(`After 30% maintenance reduction (monthly): ${maintenanceMinutes}m`);
+    }
 
-  return {
-    totalMinutes: maintenanceMinutes,
-    hours: firstCleanFormatted.hours,
-    minutes: firstCleanFormatted.minutes,
-    firstCleanHours: firstCleanFormatted.hours,
-    firstCleanMinutes: firstCleanFormatted.minutes,
-    maintenanceHours: maintenanceFormatted.hours,
-    maintenanceMinutes: maintenanceFormatted.minutes,
-    basePrice: Math.round(basePrice * 100) / 100,
-    maintenanceReduction,
-    maintenanceDiscount: Math.round(maintenanceDiscount * 100) / 100,
-    serviceMultiplierPercent,
-    servicePremium: Math.round((isRecurring ? maintenanceServicePremium : firstCleanServicePremium) * 100) / 100,
-    discountPercent: discountPercent * 100,
-    saving: Math.round(Math.abs(saving) * 100) / 100,
-    totalPrice: Math.round(totalPrice * 100) / 100,
-    firstCleanPrice: Math.round(firstCleanPrice * 100) / 100,
-    maintenancePrice: Math.round(maintenancePrice * 100) / 100,
-    isRecurring,
-  };
+    // Calculate base prices from time
+    const timeBasedPrice = (firstCleanMinutes / 60) * FIRST_CLEAN_HOURLY_RATE;
+    const optionPrice = calculateOptionPrices(formData);
+    const firstCleanBasePrice = timeBasedPrice + optionPrice;
+
+    const maintenanceTimeBasedPrice = (maintenanceMinutes / 60) * MAINTENANCE_HOURLY_RATE;
+    const maintenanceBasePrice = maintenanceTimeBasedPrice + optionPrice;
+
+    const firstCleanPrice = firstCleanBasePrice;
+    const maintenancePrice = maintenanceBasePrice;
+
+    // Format times
+    const firstCleanFormatted = formatTime(firstCleanMinutes);
+    const maintenanceFormatted = formatTime(maintenanceMinutes);
+
+    // Total price based on frequency
+    const totalPrice = isRecurring ? maintenancePrice : firstCleanPrice;
+
+    console.log(`Quote: First: £${firstCleanPrice.toFixed(2)}, Maintenance: £${maintenancePrice.toFixed(2)}`);
+
+    return {
+      totalMinutes: maintenanceMinutes,
+      hours: firstCleanFormatted.hours,
+      minutes: firstCleanFormatted.minutes,
+      firstCleanHours: firstCleanFormatted.hours,
+      firstCleanMinutes: firstCleanFormatted.minutes,
+      maintenanceHours: maintenanceFormatted.hours,
+      maintenanceMinutes: maintenanceFormatted.minutes,
+      basePrice: Math.round(firstCleanBasePrice * 100) / 100,
+      maintenanceReduction: 0,
+      maintenanceDiscount: 0,
+      serviceMultiplierPercent: 0,
+      servicePremium: 0,
+      discountPercent: 0,
+      saving: 0,
+      totalPrice: Math.round(firstCleanPrice * 100) / 100,
+      firstCleanPrice: Math.round(firstCleanPrice * 100) / 100,
+      maintenancePrice: Math.round(maintenancePrice * 100) / 100,
+      isRecurring,
+    };
+  } catch (error) {
+    console.error('Error in calculateQuote:', error);
+    return {
+      totalMinutes: 0,
+      hours: 0,
+      minutes: 0,
+      firstCleanHours: 0,
+      firstCleanMinutes: 0,
+      maintenanceHours: 0,
+      maintenanceMinutes: 0,
+      basePrice: 0,
+      maintenanceReduction: 0,
+      maintenanceDiscount: 0,
+      serviceMultiplierPercent: 0,
+      servicePremium: 0,
+      discountPercent: 0,
+      saving: 0,
+      totalPrice: 0,
+      firstCleanPrice: 0,
+      maintenancePrice: 0,
+      isRecurring: false,
+    };
+  }
 }
