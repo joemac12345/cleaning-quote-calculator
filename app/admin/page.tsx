@@ -123,21 +123,38 @@ export default function AdminPage() {
   const handleStatusToggle = async (id: string, newStatus?: string) => {
     // If a specific status is provided (from dropdown), use it directly
     // Otherwise, cycle to the next status
-    let statusToSet = newStatus;
+    let statusToSet: string = newStatus || '';
+    const estimate = estimates.find(e => e.id === id);
+    const oldStatus = estimate?.status || 'new';
     
     if (!newStatus) {
-      const estimate = estimates.find(e => e.id === id);
       const statusValues = STATUS_OPTIONS.map(opt => opt.value);
-      const currentIndex = statusValues.indexOf(estimate?.status || 'new');
+      const currentIndex = statusValues.indexOf(oldStatus);
       const nextIndex = (currentIndex + 1) % statusValues.length;
       statusToSet = statusValues[nextIndex];
     }
     
     const result = await updateEstimateStatus(id, statusToSet as 'new' | 'reviewed' | 'quoted' | 'accepted' | 'scheduled' | 'completed' | 'cancelled');
     if (result.success) {
-      setEstimates(estimates.map(e => 
+      // Update the estimates list immediately
+      const updatedEstimates = estimates.map(e => 
         e.id === id ? { ...e, status: statusToSet as any } : e
-      ));
+      );
+      
+      // If a status filter is active and the estimate no longer matches, filter it out
+      let finalEstimates = updatedEstimates;
+      if (statusFilter && statusFilter !== statusToSet) {
+        finalEstimates = updatedEstimates.filter(e => e.status === statusFilter);
+      }
+      
+      setEstimates(finalEstimates);
+      
+      // Update the status counts immediately
+      setStatusCounts(prev => ({
+        ...prev,
+        [oldStatus]: Math.max(0, (prev[oldStatus] || 0) - 1),
+        [statusToSet]: (prev[statusToSet] || 0) + 1
+      }));
     }
   };
 
