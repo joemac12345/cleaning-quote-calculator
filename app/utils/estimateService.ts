@@ -159,7 +159,7 @@ export async function updateEstimate(id: string, updates: Partial<EstimateData>)
   }
 }
 
-export async function updateEstimateStatus(id: string, status: 'new' | 'reviewed') {
+export async function updateEstimateStatus(id: string, status: 'new' | 'reviewed' | 'quoted' | 'accepted' | 'scheduled' | 'completed' | 'cancelled') {
   try {
     const { data, error } = await supabase
       .from('estimates')

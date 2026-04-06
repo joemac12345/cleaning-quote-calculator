@@ -5,6 +5,17 @@ export const dynamic = 'force-dynamic';
 import { useState, useEffect } from 'react';
 import { getEstimates, searchEstimates, deleteEstimate, updateEstimateStatus } from '@/app/utils/estimateService';
 import { NotesModal } from '@/app/components/NotesModal';
+import { StatusSelector } from '@/app/components/admin/StatusSelector';
+
+const STATUS_OPTIONS = [
+  { value: 'new', label: 'New' },
+  { value: 'reviewed', label: 'Reviewed' },
+  { value: 'quoted', label: 'Quoted' },
+  { value: 'accepted', label: 'Accepted' },
+  { value: 'scheduled', label: 'Scheduled' },
+  { value: 'completed', label: 'Completed' },
+  { value: 'cancelled', label: 'Cancelled' },
+];
 
 interface Estimate {
   id: string;
@@ -18,7 +29,7 @@ interface Estimate {
   first_clean_price: number;
   maintenance_price: number;
   created_at: string;
-  status?: 'new' | 'reviewed';
+  status?: 'new' | 'reviewed' | 'quoted' | 'accepted' | 'scheduled' | 'completed' | 'cancelled';
   notes?: any;
   form_data?: Record<string, any>;
 }
@@ -96,13 +107,35 @@ export default function AdminPage() {
   };
 
   const handleStatusToggle = async (id: string, currentStatus?: string) => {
-    const newStatus = currentStatus === 'reviewed' ? 'new' : 'reviewed';
+    const statusValues = STATUS_OPTIONS.map(opt => opt.value);
+    const currentIndex = statusValues.indexOf(currentStatus || 'new');
+    const nextIndex = (currentIndex + 1) % statusValues.length;
+    const newStatus = statusValues[nextIndex] as 'new' | 'reviewed' | 'quoted' | 'accepted' | 'scheduled' | 'completed' | 'cancelled';
+    
     const result = await updateEstimateStatus(id, newStatus);
     if (result.success) {
       setEstimates(estimates.map(e => 
         e.id === id ? { ...e, status: newStatus } : e
       ));
     }
+  };
+
+  const getStatusColor = (status?: string) => {
+    const colorMap: Record<string, { bg: string; text: string; hover: string }> = {
+      new: { bg: 'bg-blue-100', text: 'text-blue-700', hover: 'hover:bg-blue-200' },
+      reviewed: { bg: 'bg-purple-100', text: 'text-purple-700', hover: 'hover:bg-purple-200' },
+      quoted: { bg: 'bg-yellow-100', text: 'text-yellow-700', hover: 'hover:bg-yellow-200' },
+      accepted: { bg: 'bg-green-100', text: 'text-green-700', hover: 'hover:bg-green-200' },
+      scheduled: { bg: 'bg-indigo-100', text: 'text-indigo-700', hover: 'hover:bg-indigo-200' },
+      completed: { bg: 'bg-emerald-100', text: 'text-emerald-700', hover: 'hover:bg-emerald-200' },
+      cancelled: { bg: 'bg-red-100', text: 'text-red-700', hover: 'hover:bg-red-200' },
+    };
+    return colorMap[status || 'new'] || colorMap.new;
+  };
+
+  const getStatusLabel = (status?: string) => {
+    const option = STATUS_OPTIONS.find(opt => opt.value === status);
+    return option?.label || 'New';
   };
 
   const handleOpenNotes = (estimate: Estimate) => {
@@ -176,13 +209,11 @@ export default function AdminPage() {
                           <button
                             onClick={() => handleStatusToggle(estimate.id, estimate.status)}
                             className={`text-xs px-2 py-1 rounded-full font-semibold cursor-pointer transition flex-shrink-0 ${
-                              estimate.status === 'new' 
-                                ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' 
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
-                            title="Click to toggle status"
+                              getStatusColor(estimate.status).bg
+                            } ${getStatusColor(estimate.status).text} ${getStatusColor(estimate.status).hover}`}
+                            title="Click to cycle through statuses"
                           >
-                            {estimate.status === 'new' ? 'New' : 'Reviewed'}
+                            {getStatusLabel(estimate.status)}
                           </button>
                         </div>
                         <p className="text-xs text-gray-600">{formatDate(estimate.created_at)}</p>
@@ -564,19 +595,12 @@ export default function AdminPage() {
                 </div>
 
                 {/* Status Filter */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                  <select
-                    value={statusFilter}
-                    onChange={(e) => setStatusFilter(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none"
-                    style={{borderColor: '#4B5368'}}
-                  >
-                    <option value="">All</option>
-                    <option value="new">New</option>
-                    <option value="reviewed">Reviewed</option>
-                  </select>
-                </div>
+                <StatusSelector
+                  value={statusFilter}
+                  onChange={setStatusFilter}
+                  options={STATUS_OPTIONS}
+                  label="Status"
+                />
 
                 {/* Buttons */}
                 <div className="flex gap-2 pt-4">
