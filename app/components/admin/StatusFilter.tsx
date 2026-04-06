@@ -23,7 +23,7 @@ export function StatusFilter({
 }: StatusFilterProps) {
   return (
     <div
-      className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide"
+      className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide px-4 py-2"
       style={{
         scrollBehavior: 'smooth',
         WebkitOverflowScrolling: 'touch',
@@ -40,7 +40,7 @@ export function StatusFilter({
       {includeAllOption && (
         <button
           onClick={() => onChange('')}
-          className={`px-4 py-3 rounded-lg font-semibold transition text-sm whitespace-nowrap flex-shrink-0 flex items-center gap-2 ${
+          className={`relative px-4 py-3 rounded-lg font-semibold transition text-sm whitespace-nowrap flex-shrink-0 flex items-center gap-2 mt-3 ${
             value === ''
               ? 'text-white shadow-md'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -51,11 +51,7 @@ export function StatusFilter({
         >
           All
           {counts && (
-            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-              value === ''
-                ? 'bg-white text-blue-600'
-                : 'bg-blue-100 text-blue-700'
-            }`}>
+            <span className="absolute -top-3 -left-2 text-xs font-bold px-2 py-0.5 rounded-full bg-pink-500 text-white shadow-md">
               {Object.values(counts).reduce((a, b) => a + b, 0)}
             </span>
           )}
@@ -66,7 +62,7 @@ export function StatusFilter({
         <button
           key={option.value}
           onClick={() => onChange(option.value)}
-          className={`px-4 py-3 rounded-lg font-semibold transition text-sm whitespace-nowrap flex-shrink-0 flex items-center gap-2 ${
+          className={`relative px-4 py-3 rounded-lg font-semibold transition text-sm whitespace-nowrap flex-shrink-0 flex items-center gap-2 mt-3 ${
             value === option.value
               ? 'text-white shadow-md'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -77,11 +73,7 @@ export function StatusFilter({
         >
           {option.label}
           {counts && counts[option.value] !== undefined && (
-            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-              value === option.value
-                ? 'bg-white text-blue-600'
-                : 'bg-blue-100 text-blue-700'
-            }`}>
+            <span className="absolute -top-3 -left-2 text-xs font-bold px-2 py-0.5 rounded-full bg-pink-500 text-white shadow-md">
               {counts[option.value]}
             </span>
           )}

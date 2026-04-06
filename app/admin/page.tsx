@@ -120,36 +120,25 @@ export default function AdminPage() {
     }
   };
 
-  const handleStatusToggle = async (id: string, currentStatus?: string) => {
-    const statusValues = STATUS_OPTIONS.map(opt => opt.value);
-    const currentIndex = statusValues.indexOf(currentStatus || 'new');
-    const nextIndex = (currentIndex + 1) % statusValues.length;
-    const newStatus = statusValues[nextIndex] as 'new' | 'reviewed' | 'quoted' | 'accepted' | 'scheduled' | 'completed' | 'cancelled';
+  const handleStatusToggle = async (id: string, newStatus?: string) => {
+    // If a specific status is provided (from dropdown), use it directly
+    // Otherwise, cycle to the next status
+    let statusToSet = newStatus;
     
-    const result = await updateEstimateStatus(id, newStatus);
+    if (!newStatus) {
+      const estimate = estimates.find(e => e.id === id);
+      const statusValues = STATUS_OPTIONS.map(opt => opt.value);
+      const currentIndex = statusValues.indexOf(estimate?.status || 'new');
+      const nextIndex = (currentIndex + 1) % statusValues.length;
+      statusToSet = statusValues[nextIndex];
+    }
+    
+    const result = await updateEstimateStatus(id, statusToSet as 'new' | 'reviewed' | 'quoted' | 'accepted' | 'scheduled' | 'completed' | 'cancelled');
     if (result.success) {
       setEstimates(estimates.map(e => 
-        e.id === id ? { ...e, status: newStatus } : e
+        e.id === id ? { ...e, status: statusToSet as any } : e
       ));
     }
-  };
-
-  const getStatusColor = (status?: string) => {
-    const colorMap: Record<string, { bg: string; text: string; hover: string }> = {
-      new: { bg: 'bg-blue-100', text: 'text-blue-700', hover: 'hover:bg-blue-200' },
-      reviewed: { bg: 'bg-purple-100', text: 'text-purple-700', hover: 'hover:bg-purple-200' },
-      quoted: { bg: 'bg-yellow-100', text: 'text-yellow-700', hover: 'hover:bg-yellow-200' },
-      accepted: { bg: 'bg-green-100', text: 'text-green-700', hover: 'hover:bg-green-200' },
-      scheduled: { bg: 'bg-indigo-100', text: 'text-indigo-700', hover: 'hover:bg-indigo-200' },
-      completed: { bg: 'bg-emerald-100', text: 'text-emerald-700', hover: 'hover:bg-emerald-200' },
-      cancelled: { bg: 'bg-red-100', text: 'text-red-700', hover: 'hover:bg-red-200' },
-    };
-    return colorMap[status || 'new'] || colorMap.new;
-  };
-
-  const getStatusLabel = (status?: string) => {
-    const option = STATUS_OPTIONS.find(opt => opt.value === status);
-    return option?.label || 'New';
   };
 
   const handleOpenNotes = (estimate: Estimate) => {
@@ -239,15 +228,21 @@ export default function AdminPage() {
                           <h3 className="text-base sm:text-lg font-semibold truncate" style={{color: '#4B5368'}}>
                             {estimate.customer_name}
                           </h3>
-                          <button
-                            onClick={() => handleStatusToggle(estimate.id, estimate.status)}
-                            className={`text-xs px-2 py-1 rounded-full font-semibold cursor-pointer transition flex-shrink-0 ${
-                              getStatusColor(estimate.status).bg
-                            } ${getStatusColor(estimate.status).text} ${getStatusColor(estimate.status).hover}`}
-                            title="Click to cycle through statuses"
+                        </div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <label className="text-xs font-medium text-gray-600">Status:</label>
+                          <select
+                            value={estimate.status || 'new'}
+                            onChange={(e) => handleStatusToggle(estimate.id, e.target.value as any)}
+                            className="text-xs px-2 py-1 rounded-md border border-gray-300 focus:outline-none"
+                            style={{ borderColor: '#4B5368' }}
                           >
-                            {getStatusLabel(estimate.status)}
-                          </button>
+                            {STATUS_OPTIONS.map((option) => (
+                              <option key={option.value} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                         <p className="text-xs text-gray-600">{formatDate(estimate.created_at)}</p>
                       </div>
