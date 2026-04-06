@@ -165,30 +165,58 @@ export default function AdminPage() {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   return (
-    <div className="min-h-screen bg-white p-3 sm:p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <h1 className="text-2xl sm:text-4xl font-bold font-heading mb-1 sm:mb-2" style={{color: '#4B5368'}}>
-              Incoming Estimates
-            </h1>
-            <p className="text-xs sm:text-sm text-gray-600">Manage and review all customer estimates</p>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <div className="p-3 sm:p-6 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-4xl font-bold font-heading mb-1 sm:mb-2" style={{color: '#4B5368'}}>
+                Incoming Estimates
+              </h1>
+              <p className="text-xs sm:text-sm text-gray-600">Manage and review all customer estimates</p>
+            </div>
+            <button
+              onClick={() => setShowSearchModal(true)}
+              className="w-10 h-10 rounded-full transition flex items-center justify-center hover:opacity-80 flex-shrink-0"
+              style={{backgroundColor: '#4B5368'}}
+              title="Search and filter"
+            >
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path>
+              </svg>
+            </button>
           </div>
-          <button
-            onClick={() => setShowSearchModal(true)}
-            className="w-10 h-10 rounded-full transition flex items-center justify-center hover:opacity-80 flex-shrink-0"
-            style={{backgroundColor: '#4B5368'}}
-            title="Search and filter"
-          >
-            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path>
-            </svg>
-          </button>
         </div>
+      </div>
 
-        {/* Search and Filter Button */}
-        {/* Removed - now in header */}
+      {/* Status Filter Bar */}
+      <div className="sticky top-0 bg-white border-b border-gray-200 py-3 sm:py-4 px-3 sm:px-6 z-40">
+        <div className="max-w-7xl mx-auto">
+          <StatusFilter
+            value={statusFilter}
+            onChange={(newStatus) => {
+              setStatusFilter(newStatus);
+              setPage(1);
+              // Auto-filter to this status
+              searchEstimates('', {
+                status: newStatus || undefined,
+              }).then(result => {
+                if (result.success) {
+                  setEstimates(result.data as Estimate[]);
+                  setTotalCount(result.count);
+                }
+              });
+            }}
+            options={STATUS_OPTIONS}
+            includeAllOption={true}
+          />
+        </div>
+      </div>
 
+      {/* Main Content */}
+      <div className="p-3 sm:p-6">
+        <div className="max-w-7xl mx-auto">
         {/* Estimates Cards */}
         {loading ? (
           <div className="p-6 text-center text-gray-600">Loading...</div>
@@ -196,29 +224,6 @@ export default function AdminPage() {
           <div className="p-6 text-center text-gray-600">No estimates found</div>
         ) : (
           <>
-            {/* Quick Status Filter */}
-            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-              <p className="text-sm font-semibold text-gray-600 mb-3">Filter by Status</p>
-              <StatusFilter
-                value={statusFilter}
-                onChange={(newStatus) => {
-                  setStatusFilter(newStatus);
-                  setPage(1);
-                  // Auto-filter to this status
-                  searchEstimates('', {
-                    status: newStatus || undefined,
-                  }).then(result => {
-                    if (result.success) {
-                      setEstimates(result.data as Estimate[]);
-                      setTotalCount(result.count);
-                    }
-                  });
-                }}
-                options={STATUS_OPTIONS}
-                includeAllOption={true}
-              />
-            </div>
-
             <div className="grid grid-cols-1 gap-4 mb-6">
               {estimates.map((estimate) => (
                 <div key={estimate.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
@@ -446,6 +451,7 @@ export default function AdminPage() {
             )}
           </>
         )}
+        </div>
       </div>
 
       {/* Details Modal */}

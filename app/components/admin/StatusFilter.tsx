@@ -20,39 +20,40 @@ export function StatusFilter({
   includeAllOption = true,
 }: StatusFilterProps) {
   return (
-    <div className="flex flex-wrap gap-2 sm:gap-3">
-      {includeAllOption && (
-        <button
-          onClick={() => onChange('')}
-          className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition text-sm sm:text-base ${
-            value === ''
-              ? 'bg-gray-800 text-white'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          }`}
-        >
-          All
-        </button>
-      )}
-      {options.map((option) => (
-        <button
-          key={option.value}
-          onClick={() => onChange(option.value)}
-          className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition text-sm sm:text-base ${
-            value === option.value
-              ? 'text-white'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          }`}
-          style={{
-            backgroundColor:
+    <div className="w-full overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0">
+      <div className="flex gap-2 pb-2 min-w-min sm:min-w-full sm:flex-wrap">
+        {includeAllOption && (
+          <button
+            onClick={() => onChange('')}
+            className={`px-3 sm:px-4 py-3 sm:py-2 rounded-lg font-semibold transition text-sm sm:text-sm whitespace-nowrap flex-shrink-0 ${
+              value === ''
+                ? 'text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+            style={{
+              backgroundColor: value === '' ? '#4B5368' : undefined,
+            }}
+          >
+            All
+          </button>
+        )}
+        {options.map((option) => (
+          <button
+            key={option.value}
+            onClick={() => onChange(option.value)}
+            className={`px-3 sm:px-4 py-3 sm:py-2 rounded-lg font-semibold transition text-sm sm:text-sm whitespace-nowrap flex-shrink-0 ${
               value === option.value
-                ? '#4B5368'
-                : undefined,
-          }}
-        >
-          {option.icon && <span className="mr-2">{option.icon}</span>}
-          {option.label}
-        </button>
-      ))}
+                ? 'text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+            style={{
+              backgroundColor: value === option.value ? '#4B5368' : undefined,
+            }}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
