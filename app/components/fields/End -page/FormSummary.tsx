@@ -126,10 +126,6 @@ export default function FormSummary({
         title: 'Contact Information',
         fields: ['name', 'telephone', 'email', 'address', 'contact_permission'],
       },
-      {
-        title: 'Optional Services',
-        fields: ['extras', 'windows', 'doors'],
-      },
     ];
   };
 

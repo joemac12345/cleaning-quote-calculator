@@ -1,20 +1,30 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import FormSummary from '@/app/components/fields/End -page/FormSummary';
+import { saveEstimateToDatabase } from '@/app/utils/estimateService';
 
 export default function FormSummaryPage() {
   const router = useRouter();
   const [formData, setFormData] = useState<Record<string, any> | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const hasAttemptedSave = useRef(false);
 
   useEffect(() => {
     // Get form data from sessionStorage
     const storedData = sessionStorage.getItem('quoteFormData');
     if (storedData) {
       try {
-        setFormData(JSON.parse(storedData));
+        const parsedData = JSON.parse(storedData);
+        setFormData(parsedData);
+        // Auto-save to database (only once)
+        if (!hasAttemptedSave.current) {
+          hasAttemptedSave.current = true;
+          saveEstimate(parsedData);
+        }
       } catch (error) {
         console.error('Failed to parse form data:', error);
         router.push('/');
@@ -25,6 +35,19 @@ export default function FormSummaryPage() {
     }
     setIsLoading(false);
   }, [router]);
+
+  const saveEstimate = async (data: Record<string, any>) => {
+    setIsSaving(true);
+    const result = await saveEstimateToDatabase(data);
+    if (result.success) {
+      setSaveStatus('success');
+      console.log('Estimate saved successfully:', result.id);
+    } else {
+      setSaveStatus('error');
+      console.error('Failed to save estimate:', result.error);
+    }
+    setIsSaving(false);
+  };
 
   if (isLoading) {
     return (
@@ -43,15 +66,34 @@ export default function FormSummaryPage() {
   }
 
   return (
-    <FormSummary
-      formData={formData}
-      isOpen={true}
-      onClose={() => router.push('/')}
-      onEdit={(stepId) => {
-        sessionStorage.removeItem('quoteFormData');
-        router.push(`/?step=${stepId}`);
-      }}
-      isModal={false}
-    />
+    <>
+      {/* Save Status Indicator */}
+      {isSaving && (
+        <div className="fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg">
+          Saving estimate...
+        </div>
+      )}
+      {saveStatus === 'success' && (
+        <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
+          ✓ Estimate saved!
+        </div>
+      )}
+      {saveStatus === 'error' && (
+        <div className="fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg">
+          ✕ Failed to save estimate
+        </div>
+      )}
+
+      <FormSummary
+        formData={formData}
+        isOpen={true}
+        onClose={() => router.push('/')}
+        onEdit={(stepId) => {
+          sessionStorage.removeItem('quoteFormData');
+          router.push(`/?step=${stepId}`);
+        }}
+        isModal={false}
+      />
+    </>
   );
 }
