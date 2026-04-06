@@ -53,8 +53,8 @@ export default function OptionsCounterField({
                         className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded"
                       />
                       {option.description && (
-                        <div className="absolute -top-1 -left-1 w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                          ℹ
+                        <div className="absolute -top-1 -left-1 w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold leading-none">
+                          ?
                         </div>
                       )}
                     </div>
