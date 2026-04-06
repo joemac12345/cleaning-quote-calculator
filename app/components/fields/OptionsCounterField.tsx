@@ -60,9 +60,9 @@ export default function OptionsCounterField({
                     </button>
                   )}
                 </div>
-                <div className="flex flex-col gap-1">
-                  <h4 className="text-sm sm:text-base text-gray-900 font-medium">{option.label}</h4>
-                  {option.helpText && <p className="text-xs sm:text-xs text-gray-600">{option.helpText}</p>}
+                <div className="flex flex-col gap-1 w-full">
+                  <h4 className="text-sm sm:text-base text-gray-900 font-medium break-words">{option.label}</h4>
+                  {option.helpText && <p className="text-xs sm:text-xs text-gray-600 break-words">{option.helpText}</p>}
                   {showTime && option.time && <p className="text-sm sm:text-sm text-gray-500">{option.time} min</p>}
                 </div>
               </div>
