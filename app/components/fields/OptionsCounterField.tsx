@@ -46,7 +46,7 @@ export default function OptionsCounterField({
                       <img
                         src={option.icon}
                         alt={String(option.label)}
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded"
+                        className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                       />
                     </div>
                   )}
@@ -100,7 +100,7 @@ export default function OptionsCounterField({
                       <img
                         src={option.icon}
                         alt={String(option.label)}
-                        className="w-28 h-28 object-cover rounded flex-shrink-0"
+                        className="w-24 h-24 object-cover rounded flex-shrink-0"
                       />
                     )}
                     <div className="flex-1 min-w-0">
