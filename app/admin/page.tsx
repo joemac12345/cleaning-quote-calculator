@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 
 import { useState, useEffect } from 'react';
 import { getEstimates, searchEstimates, deleteEstimate, updateEstimateStatus } from '@/app/utils/estimateService';
-import { NotesModal } from '@/app/components/NotesModal';
+import { NotesModal } from '@/app/components/admin/NotesModal';
 import { StatusSelector } from '@/app/components/admin/StatusSelector';
 import { StatusFilter } from '@/app/components/admin/StatusFilter';
 
