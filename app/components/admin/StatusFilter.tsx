@@ -50,7 +50,7 @@ export function StatusFilter({
           }}
         >
           All
-          {counts && Object.values(counts).reduce((a, b) => a + b, 0) > 0 && (
+          {counts && (
             <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
               value === ''
                 ? 'bg-white text-blue-600'
@@ -76,7 +76,7 @@ export function StatusFilter({
           }}
         >
           {option.label}
-          {counts && counts[option.value] > 0 && (
+          {counts && counts[option.value] !== undefined && (
             <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
               value === option.value
                 ? 'bg-white text-blue-600'
