@@ -42,7 +42,7 @@ export default function RadioField({
                 <img
                   src={option.icon}
                   alt={String(option.label)}
-                  className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded"
+                  className="w-24 h-24 sm:w-28 sm:h-28 object-contain"
                 />
               )}
 

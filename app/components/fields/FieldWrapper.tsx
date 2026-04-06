@@ -9,6 +9,7 @@
 import React from 'react';
 import { FormField } from '@/app/config/formConfig';
 import CounterField from './CounterField';
+import OptionsCounterField from './OptionsCounterField';
 import CheckboxField from './CheckboxField';
 import RadioField from './RadioField';
 import SelectField from './SelectField';
@@ -25,13 +26,25 @@ interface FieldWrapperProps {
 export default function FieldWrapper({ field, value, onChange }: FieldWrapperProps) {
   switch (field.type) {
     case 'counter':
+      // Multi-item counter fields (like add-ons with options) use OptionsCounterField
+      if (field.options && field.options.length > 0) {
+        return (
+          <OptionsCounterField
+            label={field.name}
+            options={field.options}
+            value={value as Record<string, number>}
+            onChange={onChange}
+            showTime={field.showTime}
+          />
+        );
+      }
+      // Single-item counter fields use CounterField
       return (
         <CounterField
           label={field.name}
           icon={field.icon}
           value={value as number}
           onChange={onChange}
-          time={field.time}
           helpText={field.helpText}
         />
       );
@@ -41,9 +54,8 @@ export default function FieldWrapper({ field, value, onChange }: FieldWrapperPro
         <CheckboxField
           label={field.name}
           options={field.options || []}
-          value={value as Record<string, number>}
+          value={value as (string | number)[]}
           onChange={onChange}
-          showTime={field.showTime}
         />
       );
 

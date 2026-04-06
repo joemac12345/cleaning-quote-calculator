@@ -5,7 +5,6 @@ interface CounterFieldProps {
   value: number;
   onChange: (value: number) => void;
   icon?: string;
-  time?: number;
   helpText?: string;
 }
 
@@ -14,7 +13,6 @@ export default function CounterField({
   value,
   onChange,
   icon,
-  time,
   helpText,
 }: CounterFieldProps) {
   const handleDecrement = () => onChange(Math.max(0, value - 1));
@@ -34,7 +32,6 @@ export default function CounterField({
         )}
         <div className="min-w-0">
           <h3 className="text-lg sm:text-xl font-medium break-words" style={{ color: '#48546A' }}>{label}</h3>
-          {time && <p className="text-base sm:text-base mt-1" style={{ color: '#48546A' }}>{time} min</p>}
           {helpText && <p className="text-sm sm:text-sm text-gray-600 mt-2">{helpText}</p>}
         </div>
       </div>

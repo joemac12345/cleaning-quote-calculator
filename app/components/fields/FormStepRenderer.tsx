@@ -25,14 +25,22 @@ export default function FormStepRenderer({
     <div className="space-y-5 sm:space-y-6">
       <StepHeader title={step.title} description={step.description} />
 
-      {step.fields.map((field) => (
-        <FieldWrapper
-          key={field.id}
-          field={field}
-          value={formData[field.id] ?? field.initialValue}
-          onChange={(value) => onFieldChange(field.id, value)}
-        />
-      ))}
+      <div className="space-y-5">
+        {step.fields.map((field) => (
+          <FieldWrapper
+            key={field.id}
+            field={field}
+            value={formData[field.id] ?? field.initialValue}
+            onChange={(value) => onFieldChange(field.id, value)}
+          />
+        ))}
+      </div>
+
+      {step.notificationText && (
+        <div className="mt-6 p-4 bg-pink-50 rounded">
+          <p className="text-sm text-pink-800 font-medium">{step.notificationText}</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -15,7 +15,7 @@ export interface FormField {
   helpText?: string; // optional help text for counter/text fields
   showTime?: boolean; // whether to display time on radio/checkbox options
   initialValue: string | number | boolean | string[] | Record<string, number>;
-  options?: Array<{ label: string; value: string | number; time?: number; icon?: string; price?: number; timeMultiplier?: number }>;
+  options?: Array<{ label: string; value: string | number; time?: number; icon?: string; price?: number; timeMultiplier?: number; description?: string; helpText?: string }>;
   required?: boolean;
 }
 
@@ -23,6 +23,7 @@ export interface FormStep {
   id: number;
   title: string;
   description?: string;
+  notificationText?: string;
   fields: FormField[];
 }
 
@@ -56,14 +57,24 @@ export const formSteps: FormStep[] = [
     id: 2,
     title: 'Floors',
     description: 'How many floors need cleaning?',
+    notificationText: 'Only select what you require cleaning.',
     fields: [
       {
         id: 'floors',
-        name: 'Floors',
+        name: 'Staircases',
         type: 'counter',
         time: 20,
         icon: '/icons/GhWMo.jpg',
-        helpText: 'Select how many floors need cleaning',
+        helpText: 'Select how many staircases need cleaning',
+        initialValue: 0,
+      },
+      {
+        id: 'landings',
+        name: 'Landings',
+        type: 'counter',
+        time: 10,
+        icon: '/icons/QQC1v.jpg',
+        helpText: 'Select how many landings need cleaning',
         initialValue: 0,
       },
        {
@@ -71,7 +82,7 @@ export const formSteps: FormStep[] = [
         name: 'Hall',
         type: 'counter',
         time: 10,
-        icon: '/icons/yYWnE.jpg',
+        icon: '/icons/Fcl68.jpg',
         helpText: 'Select how many hallways need cleaning',
         initialValue: 0,
       },
@@ -83,6 +94,7 @@ export const formSteps: FormStep[] = [
     id: 3,
     title: 'Bedrooms',
     description: 'How many bedrooms need cleaning?',
+    notificationText: 'Only select what you require cleaning.',
     fields: [
       {
         id: 'bedrooms',
@@ -101,14 +113,24 @@ export const formSteps: FormStep[] = [
     id: 4,
     title: 'Bathrooms & Cloakroom',
     description: 'How many bathrooms and cloakrooms?',
+    notificationText: 'Only select what you require cleaning.',
     fields: [
       {
         id: 'bathrooms',
         name: 'Bathrooms',
         type: 'counter',
         time: 45,
-        icon: '/icons/HKsqc.jpg',
+        icon: '/icons/nJuLg.jpg',
         helpText: 'Select the number of bathrooms that need cleaning',
+        initialValue: 0,
+      },
+      {
+        id: 'ensuite',
+        name: 'En Suite Bathrooms',
+        type: 'counter',
+        time: 30,
+        icon: '/icons/HKsqc.jpg',
+        helpText: 'Select the number of en suite bathrooms that need cleaning',
         initialValue: 0,
       },
       {
@@ -123,11 +145,49 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 5: Other Rooms
+  // Step 5: Living Spaces
   {
     id: 5,
+    title: 'Living Spaces',
+    description: 'How many living spaces need cleaning?',
+    notificationText: 'Only select what you require cleaning.',
+    fields: [
+      {
+        id: 'living_rooms',
+        name: 'Living Rooms',
+        type: 'counter',
+        time: 25,
+        icon: '/icons/VlFWk.jpg',
+        helpText: 'Select the number of living rooms that need cleaning',
+        initialValue: 0,
+      },
+      {
+        id: 'dining_rooms',
+        name: 'Dining Rooms',
+        type: 'counter',
+        time: 20,
+        icon: '/icons/e3RYb.jpg',
+        helpText: 'Select the number of dining rooms that need cleaning',
+        initialValue: 0,
+      },
+      {
+        id: 'studies',
+        name: 'Studies/Offices',
+        type: 'counter',
+        time: 15,
+        icon: '/icons/wNAqS.jpg',
+        helpText: 'How many studies or offices?',
+        initialValue: 0,
+      },
+    ],
+  },
+
+  // Step 6: Other Rooms (previously Step 5)
+  {
+    id: 6,
     title: 'Other Rooms',
     description: 'How many other rooms need cleaning?',
+    notificationText: 'Only select what you require cleaning.',
     fields: [
       {
         id: 'kitchen',
@@ -152,11 +212,11 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 6: Pet Friendly Setup
+  // Step 7: Pet Friendly Setup (previously Step 6)
   {
-    id: 6,
+    id: 7,
     title: 'Pet Friendly',
-    description: 'Do you have pets?',
+    description: 'Do you have any cats or dogs in your home?',
     fields: [
       {
         id: 'pet_friendly',
@@ -166,38 +226,58 @@ export const formSteps: FormStep[] = [
         showTime: false,
         initialValue: '',
         options: [
-          { label: 'Yes', value: 'yes', time: 15 },
-          { label: 'No', value: 'no', time: 0 },
+          { label: 'Yes', value: 'yes', time: 15, icon: '/icons/g9aIZ.jpg' },
+          { label: 'No', value: 'no', time: 0, icon: '/icons/pUnIt.jpg' },
         ],
       },
     ],
   },
 
-  // Step 7: Add-ons
+  // Step 8: Add-ons (previously Step 7)
   {
-    id: 7,
+    id: 8,
     title: 'Add-ons',
     description: 'Any extra services?',
     fields: [
       {
         id: 'extras',
         name: 'Extra Services',
-        type: 'checkbox',
+        type: 'counter',
         time: 0, // varies by option
         showTime: false,
-        initialValue: { oven: 0, fridge: 0, windows: 0 },
+        initialValue: { oven: 0, fridge: 0 },
         options: [
-          { label: 'Oven Cleaning', value: 'oven', time: 45, icon: '/icons/DatSO.jpg', price: 20 },
-          { label: 'Fridge Cleaning', value: 'fridge', time: 30, icon: '/icons/EiW7c.jpg', price: 15 },
-          { label: 'Window Cleaning', value: 'windows', time: 20, icon: '/icons/IN0MN (1).jpg', price: 12 },
+          { label: 'Oven Cleaning', value: 'oven', time: 45, icon: '/icons/DatSO.jpg', price: 20, description: 'Professional oven cleaning service includes:\n\n• Deep cleaning of oven interior\n• Removal of grease and burnt-on food\n• Exterior cleaning of oven surfaces\n• Glass door cleaning (if applicable)\n• Thorough removal of stubborn stains\n\nThis is a specialist service that transforms your oven back to like-new condition.' },
+          { label: 'Fridge Cleaning', value: 'fridge', time: 30, icon: '/icons/EiW7c.jpg', price: 15, description: 'This comprehensive service includes:\n\n• Exterior cleaning of the fridge down\n• Removing everything from inside\n• Deep cleaning of all shelves\n• Cleaning the interior thoroughly\n• Placing everything back safely\n\nThe outside is cleaned as part of the kitchen cleaning service. This add-on focuses on the deep interior work.' },
         ],
       },
     ],
   },
 
-  // Step 8: Cleaning Frequency
+  // Step 9: Window & Door Cleaning
   {
-    id: 8,
+    id: 9,
+    title: 'Windows & Doors',
+    description: 'Would you like interior window or external door cleaning?',
+    fields: [
+      {
+        id: 'windows',
+        name: 'Window Services',
+        type: 'counter',
+        time: 0,
+        showTime: false,
+        initialValue: { windows: 0, doors: 0 },
+        options: [
+          { label: 'Window Cleaning', value: 'windows', time: 20, icon: '/icons/IN0MN (1).jpg', price: 4, helpText: 'How many windows does your home have?', description: 'Internal window cleaning service includes:\n\n• Cleaning of the inside surface of window glass\n• Framed glass cleaning (interior side)\n• Window sill cleaning (interior)\n• Removal of dust and grime from inside\n• Streak-free finish for crystal-clear transparency from inside\n\nPrice: £4 per window\n\nPlease note: This service covers the INSIDE/INTERIOR of windows only and does not include external/outside window cleaning.' },
+          { label: 'External Doors', value: 'doors', time: 15, icon: '/icons/IN0MN (1).jpg', price: 3, helpText: 'How many external doors does your home have?', description: 'External door cleaning service includes:\n\n• Cleaning of external door glass/panels\n• External door frame cleaning\n• Frame detailing\n• Removal of dust and weather marks\n• Streak-free finish\n\nPrice: £3 per external door\n\nPlease note: This service is for external doors only. Internal doors are included as part of your room cleaning price.' },
+        ],
+      },
+    ],
+  },
+
+  // Step 10: Cleaning Frequency (previously Step 9)
+  {
+    id: 10,
     title: 'Frequency',
     description: 'How often do you need cleaning?',
     fields: [
@@ -217,9 +297,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 9: Review & Contact
+  // Step 11: Review & Contact (previously Step 10)
   {
-    id: 9,
+    id: 11,
     title: 'Review',
     description: 'Confirm your quote and enter contact details',
     fields: [
