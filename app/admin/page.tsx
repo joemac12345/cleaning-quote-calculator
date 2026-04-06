@@ -222,69 +222,66 @@ export default function AdminPage() {
                 <div key={estimate.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
                   {/* Card Header */}
                   <div className="px-3 sm:px-4 py-3 border-b border-gray-200">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+                    <div className="flex justify-between items-start gap-4 mb-2">
                       <div className="flex-1 min-w-0">
-                        <div className="flex flex-wrap items-center gap-2 mb-1">
-                          <h3 className="text-base sm:text-lg font-semibold truncate" style={{color: '#4B5368'}}>
-                            {estimate.customer_name}
-                          </h3>
-                        </div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <label className="text-xs font-medium text-gray-600">Status:</label>
-                          <select
-                            value={estimate.status || 'new'}
-                            onChange={(e) => handleStatusToggle(estimate.id, e.target.value as any)}
-                            className="text-xs px-2 py-1 rounded-md border border-gray-300 focus:outline-none"
-                            style={{ borderColor: '#4B5368' }}
-                          >
-                            {STATUS_OPTIONS.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                        <p className="text-xs text-gray-600">{formatDate(estimate.created_at)}</p>
+                        <h3 className="text-base sm:text-lg font-semibold truncate" style={{color: '#4B5368'}}>
+                          {estimate.customer_name}
+                        </h3>
                       </div>
-                      <div className="flex gap-2 flex-wrap">
+                      <select
+                        value={estimate.status || 'new'}
+                        onChange={(e) => handleStatusToggle(estimate.id, e.target.value as any)}
+                        className="text-xs px-3 py-1.5 rounded-md border border-gray-300 focus:outline-none flex-shrink-0"
+                        style={{ borderColor: '#4B5368' }}
+                      >
+                        {STATUS_OPTIONS.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="text-xs text-gray-600">{formatDate(estimate.created_at)}</p>
+                      <div className="flex gap-2">
                         <button
                           onClick={() => handleOpenNotes(estimate)}
-                          className="text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
+                          className="text-white w-8 h-8 sm:w-9 sm:h-9 rounded-full transition flex items-center justify-center hover:opacity-80"
                           style={{backgroundColor: '#4B5368'}}
                           title="View and edit notes"
                         >
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
                           </svg>
                         </button>
                         <a
                           href={`mailto:${estimate.email}`}
-                          className="text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
+                          className="text-white w-8 h-8 sm:w-9 sm:h-9 rounded-full transition flex items-center justify-center hover:opacity-80"
                           style={{backgroundColor: '#4B5368'}}
                           title={estimate.email}
                         >
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                           </svg>
                         </a>
                         <a
                           href={`tel:${estimate.telephone}`}
-                          className="text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
+                          className="text-white w-8 h-8 sm:w-9 sm:h-9 rounded-full transition flex items-center justify-center hover:opacity-80"
                           style={{backgroundColor: '#4B5368'}}
                           title={estimate.telephone}
                         >
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                          <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                           </svg>
                         </a>
                         <button
                           onClick={() => handleDelete(estimate.id)}
-                          className="text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
+                          className="text-white w-8 h-8 sm:w-9 sm:h-9 rounded-full transition flex items-center justify-center hover:opacity-80"
                           style={{backgroundColor: '#4B5368'}}
                           title="Delete estimate"
                         >
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd"></path>
                           </svg>
                         </button>
