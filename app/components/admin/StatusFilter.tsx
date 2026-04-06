@@ -11,6 +11,7 @@ interface StatusFilterProps {
   onChange: (value: string) => void;
   options: StatusOption[];
   includeAllOption?: boolean;
+  counts?: Record<string, number>;
 }
 
 export function StatusFilter({
@@ -18,6 +19,7 @@ export function StatusFilter({
   onChange,
   options,
   includeAllOption = true,
+  counts = {},
 }: StatusFilterProps) {
   return (
     <div
@@ -38,7 +40,7 @@ export function StatusFilter({
       {includeAllOption && (
         <button
           onClick={() => onChange('')}
-          className={`px-4 py-3 rounded-lg font-semibold transition text-sm whitespace-nowrap flex-shrink-0 ${
+          className={`px-4 py-3 rounded-lg font-semibold transition text-sm whitespace-nowrap flex-shrink-0 flex items-center gap-2 ${
             value === ''
               ? 'text-white shadow-md'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -48,6 +50,15 @@ export function StatusFilter({
           }}
         >
           All
+          {counts && Object.values(counts).reduce((a, b) => a + b, 0) > 0 && (
+            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+              value === ''
+                ? 'bg-white text-blue-600'
+                : 'bg-blue-100 text-blue-700'
+            }`}>
+              {Object.values(counts).reduce((a, b) => a + b, 0)}
+            </span>
+          )}
         </button>
       )}
 
@@ -55,7 +66,7 @@ export function StatusFilter({
         <button
           key={option.value}
           onClick={() => onChange(option.value)}
-          className={`px-4 py-3 rounded-lg font-semibold transition text-sm whitespace-nowrap flex-shrink-0 ${
+          className={`px-4 py-3 rounded-lg font-semibold transition text-sm whitespace-nowrap flex-shrink-0 flex items-center gap-2 ${
             value === option.value
               ? 'text-white shadow-md'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -65,6 +76,15 @@ export function StatusFilter({
           }}
         >
           {option.label}
+          {counts && counts[option.value] > 0 && (
+            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+              value === option.value
+                ? 'bg-white text-blue-600'
+                : 'bg-blue-100 text-blue-700'
+            }`}>
+              {counts[option.value]}
+            </span>
+          )}
         </button>
       ))}
     </div>

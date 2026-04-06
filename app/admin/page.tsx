@@ -48,11 +48,24 @@ export default function AdminPage() {
   const [showNotesModal, setShowNotesModal] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
+  const [statusCounts, setStatusCounts] = useState<Record<string, number>>({});
   const itemsPerPage = 10;
 
   useEffect(() => {
     fetchEstimates();
+    fetchStatusCounts();
   }, [page]);
+
+  const fetchStatusCounts = async () => {
+    const counts: Record<string, number> = {};
+    for (const status of STATUS_OPTIONS) {
+      const result = await searchEstimates('', {
+        status: status.value,
+      });
+      counts[status.value] = result.success ? result.count : 0;
+    }
+    setStatusCounts(counts);
+  };
 
   const fetchEstimates = async () => {
     setLoading(true);
@@ -200,6 +213,7 @@ export default function AdminPage() {
             }}
             options={STATUS_OPTIONS}
             includeAllOption={true}
+            counts={statusCounts}
           />
         </div>
       </div>
