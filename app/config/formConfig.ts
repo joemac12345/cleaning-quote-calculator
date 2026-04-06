@@ -247,8 +247,8 @@ export const formSteps: FormStep[] = [
         showTime: false,
         initialValue: { oven: 0, fridge: 0 },
         options: [
-          { label: 'Oven Cleaning', value: 'oven', time: 45, icon: '/icons/DatSO.jpg', price: 20, description: 'Professional oven cleaning service includes:\n\n• Deep cleaning of oven interior\n• Removal of grease and burnt-on food\n• Exterior cleaning of oven surfaces\n• Glass door cleaning (if applicable)\n• Thorough removal of stubborn stains\n\nThis is a specialist service that transforms your oven back to like-new condition.' },
-          { label: 'Fridge Cleaning', value: 'fridge', time: 30, icon: '/icons/EiW7c.jpg', price: 15, description: 'This comprehensive service includes:\n\n• Exterior cleaning of the fridge down\n• Removing everything from inside\n• Deep cleaning of all shelves\n• Cleaning the interior thoroughly\n• Placing everything back safely\n\nThe outside is cleaned as part of the kitchen cleaning service. This add-on focuses on the deep interior work.' },
+          { label: 'Oven Cleaning', value: 'oven', time: 45, icon: '/icons/DatSO.jpg', price: 20, helpText: 'Add what you need cleaned', description: 'Professional oven cleaning service includes:\n\n• Deep cleaning of oven interior\n• Removal of grease and burnt-on food\n• Exterior cleaning of oven surfaces\n• Glass door cleaning (if applicable)\n• Thorough removal of stubborn stains\n\nThis is a specialist service that transforms your oven back to like-new condition.' },
+          { label: 'Fridge Cleaning', value: 'fridge', time: 30, icon: '/icons/EiW7c.jpg', price: 15, helpText: 'Add what you need cleaned', description: 'This comprehensive service includes:\n\n• Exterior cleaning of the fridge down\n• Removing everything from inside\n• Deep cleaning of all shelves\n• Cleaning the interior thoroughly\n• Placing everything back safely\n\nThe outside is cleaned as part of the kitchen cleaning service. This add-on focuses on the deep interior work.' },
         ],
       },
     ],
