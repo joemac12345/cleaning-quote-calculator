@@ -131,18 +131,18 @@ export default function AdminPage() {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   return (
-    <div className="min-h-screen bg-white p-6">
+    <div className="min-h-screen bg-white p-3 sm:p-6">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8 flex justify-between items-center">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-4xl font-bold font-heading mb-2" style={{color: '#4B5368'}}>
+            <h1 className="text-2xl sm:text-4xl font-bold font-heading mb-1 sm:mb-2" style={{color: '#4B5368'}}>
               Incoming Estimates
             </h1>
-            <p className="text-gray-600">Manage and review all customer estimates</p>
+            <p className="text-xs sm:text-sm text-gray-600">Manage and review all customer estimates</p>
           </div>
           <button
             onClick={() => setShowSearchModal(true)}
-            className="w-10 h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
+            className="w-10 h-10 rounded-full transition flex items-center justify-center hover:opacity-80 flex-shrink-0"
             style={{backgroundColor: '#4B5368'}}
             title="Search and filter"
           >
@@ -166,16 +166,16 @@ export default function AdminPage() {
               {estimates.map((estimate) => (
                 <div key={estimate.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
                   {/* Card Header */}
-                  <div className="px-4 py-3 border-b border-gray-200">
-                    <div className="flex justify-between items-start gap-3">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="text-lg font-semibold" style={{color: '#4B5368'}}>
+                  <div className="px-3 sm:px-4 py-3 border-b border-gray-200">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          <h3 className="text-base sm:text-lg font-semibold truncate" style={{color: '#4B5368'}}>
                             {estimate.customer_name}
                           </h3>
                           <button
                             onClick={() => handleStatusToggle(estimate.id, estimate.status)}
-                            className={`text-xs px-2 py-1 rounded-full font-semibold cursor-pointer transition ${
+                            className={`text-xs px-2 py-1 rounded-full font-semibold cursor-pointer transition flex-shrink-0 ${
                               estimate.status === 'new' 
                                 ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' 
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -187,45 +187,45 @@ export default function AdminPage() {
                         </div>
                         <p className="text-xs text-gray-600">{formatDate(estimate.created_at)}</p>
                       </div>
-                      <div className="flex gap-3">
+                      <div className="flex gap-2 flex-wrap">
                         <button
                           onClick={() => handleOpenNotes(estimate)}
-                          className="text-white w-10 h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
+                          className="text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
                           style={{backgroundColor: '#4B5368'}}
                           title="View and edit notes"
                         >
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
                           </svg>
                         </button>
                         <a
                           href={`mailto:${estimate.email}`}
-                          className="text-white w-10 h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
+                          className="text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
                           style={{backgroundColor: '#4B5368'}}
                           title={estimate.email}
                         >
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                           </svg>
                         </a>
                         <a
                           href={`tel:${estimate.telephone}`}
-                          className="text-white w-10 h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
+                          className="text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
                           style={{backgroundColor: '#4B5368'}}
                           title={estimate.telephone}
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                           </svg>
                         </a>
                         <button
                           onClick={() => handleDelete(estimate.id)}
-                          className="text-white w-10 h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
+                          className="text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full transition flex items-center justify-center hover:opacity-80"
                           style={{backgroundColor: '#4B5368'}}
                           title="Delete estimate"
                         >
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd"></path>
                           </svg>
                         </button>
@@ -234,7 +234,7 @@ export default function AdminPage() {
                   </div>
 
                   {/* Card Body */}
-                  <div className="p-4 space-y-3">
+                  <div className="p-3 sm:p-4 space-y-3">
                     {/* Address */}
                     <div>
                       <p className="text-xs font-semibold text-gray-500 uppercase">Address</p>
@@ -242,7 +242,7 @@ export default function AdminPage() {
                         href={`https://maps.google.com/?q=${encodeURIComponent(estimate.address)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-blue-500 hover:text-blue-600 underline"
+                        className="text-xs sm:text-sm text-blue-500 hover:text-blue-600 underline break-words"
                       >
                         {estimate.address}
                       </a>
@@ -252,41 +252,41 @@ export default function AdminPage() {
                     {estimate.form_data && (
                       <div className="border-t border-gray-200 pt-3 mt-3">
                         <p className="text-xs font-semibold text-gray-500 uppercase mb-2">Property Details</p>
-                        <div className="flex flex-wrap gap-2">
-                          <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">
+                        <div className="flex flex-wrap gap-1 sm:gap-2">
+                          <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">
                             {estimate.service_type === 'deep' ? 'Deep Cleaning' : estimate.service_type === 'spring' ? 'Spring Cleaning' : estimate.service_type}
                           </span>
-                          <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700 capitalize">{estimate.property_type}</span>
-                          <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700 capitalize">{estimate.frequency}</span>
+                          <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700 capitalize">{estimate.property_type}</span>
+                          <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700 capitalize">{estimate.frequency}</span>
                           {estimate.form_data.bedrooms > 0 && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">{estimate.form_data.bedrooms} bed{estimate.form_data.bedrooms !== 1 ? 's' : ''}</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">{estimate.form_data.bedrooms} bed{estimate.form_data.bedrooms !== 1 ? 's' : ''}</span>
                           )}
                           {estimate.form_data.bathrooms > 0 && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">{estimate.form_data.bathrooms} bath{estimate.form_data.bathrooms !== 1 ? 's' : ''}</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">{estimate.form_data.bathrooms} bath{estimate.form_data.bathrooms !== 1 ? 's' : ''}</span>
                           )}
                           {estimate.form_data.ensuite > 0 && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">{estimate.form_data.ensuite} en suite{estimate.form_data.ensuite !== 1 ? 's' : ''}</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">{estimate.form_data.ensuite} en suite{estimate.form_data.ensuite !== 1 ? 's' : ''}</span>
                           )}
                           {estimate.form_data.kitchen > 0 && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">{estimate.form_data.kitchen} kitchen{estimate.form_data.kitchen !== 1 ? 's' : ''}</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">{estimate.form_data.kitchen} kitchen{estimate.form_data.kitchen !== 1 ? 's' : ''}</span>
                           )}
                           {estimate.form_data.pet_friendly === 'yes' && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">🐾 Pets</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">🐾 Pets</span>
                           )}
                           {estimate.form_data.cleaning_products && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">{estimate.form_data.cleaning_products === 'supply' ? 'Supply' : 'Customer'} products</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">{estimate.form_data.cleaning_products === 'supply' ? 'Supply' : 'Customer'} products</span>
                           )}
                           {estimate.form_data.extras?.oven > 0 && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">Oven Cleaning</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">Oven Cleaning</span>
                           )}
                           {estimate.form_data.extras?.fridge > 0 && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">Fridge Cleaning</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">Fridge Cleaning</span>
                           )}
                           {estimate.form_data.windows?.windows > 0 && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">{estimate.form_data.windows.windows} Window{estimate.form_data.windows.windows !== 1 ? 's' : ''}</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">{estimate.form_data.windows.windows} Window{estimate.form_data.windows.windows !== 1 ? 's' : ''}</span>
                           )}
                           {estimate.form_data.windows?.doors > 0 && (
-                            <span className="bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700">{estimate.form_data.windows.doors} Door{estimate.form_data.windows.doors !== 1 ? 's' : ''}</span>
+                            <span className="bg-gray-200 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-xs text-gray-700">{estimate.form_data.windows.doors} Door{estimate.form_data.windows.doors !== 1 ? 's' : ''}</span>
                           )}
                         </div>
                       </div>
@@ -366,23 +366,23 @@ export default function AdminPage() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="bg-white rounded-lg shadow-md px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="text-sm text-gray-600 text-center sm:text-left">
+              <div className="bg-white rounded-lg shadow-md px-3 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+                <div className="text-xs sm:text-sm text-gray-600 text-center sm:text-left">
                   Showing {(page - 1) * itemsPerPage + 1} to {Math.min(page * itemsPerPage, totalCount)} of {totalCount}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-1 sm:gap-2 flex-wrap justify-center">
                   <button
                     onClick={() => setPage(p => Math.max(1, p - 1))}
                     disabled={page === 1}
-                    className="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded disabled:opacity-50 transition"
+                    className="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 rounded disabled:opacity-50 transition"
                   >
                     Previous
                   </button>
-                  <span className="px-4 py-2 text-gray-600 bg-gray-100 rounded">Page {page} of {totalPages}</span>
+                  <span className="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm text-gray-600 bg-gray-100 rounded">Page {page} of {totalPages}</span>
                   <button
                     onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                     disabled={page === totalPages}
-                    className="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded disabled:opacity-50 transition"
+                    className="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 rounded disabled:opacity-50 transition"
                   >
                     Next
                   </button>
