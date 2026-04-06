@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { getEstimates, searchEstimates, deleteEstimate, updateEstimateStatus } from '@/app/utils/estimateService';
 import { NotesModal } from '@/app/components/NotesModal';
 import { StatusSelector } from '@/app/components/admin/StatusSelector';
+import { StatusFilter } from '@/app/components/admin/StatusFilter';
 
 const STATUS_OPTIONS = [
   { value: 'new', label: 'New' },
@@ -195,6 +196,29 @@ export default function AdminPage() {
           <div className="p-6 text-center text-gray-600">No estimates found</div>
         ) : (
           <>
+            {/* Quick Status Filter */}
+            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+              <p className="text-sm font-semibold text-gray-600 mb-3">Filter by Status</p>
+              <StatusFilter
+                value={statusFilter}
+                onChange={(newStatus) => {
+                  setStatusFilter(newStatus);
+                  setPage(1);
+                  // Auto-filter to this status
+                  searchEstimates('', {
+                    status: newStatus || undefined,
+                  }).then(result => {
+                    if (result.success) {
+                      setEstimates(result.data as Estimate[]);
+                      setTotalCount(result.count);
+                    }
+                  });
+                }}
+                options={STATUS_OPTIONS}
+                includeAllOption={true}
+              />
+            </div>
+
             <div className="grid grid-cols-1 gap-4 mb-6">
               {estimates.map((estimate) => (
                 <div key={estimate.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
