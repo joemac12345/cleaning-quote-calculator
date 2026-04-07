@@ -207,8 +207,8 @@ export default function FormSummary({
     <>
       {isModal ? (
         // Modal View
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-end sm:items-center justify-center p-3 sm:p-4">
-          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4">
+          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl w-full sm:max-w-2xl h-screen sm:h-auto sm:max-h-[95vh] overflow-y-auto">
             <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
               {/* Price Summary Section */}
               <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
@@ -288,13 +288,13 @@ export default function FormSummary({
         </div>
       ) : (
         // Page View
-        <div className="h-screen bg-white overflow-hidden flex flex-col" style={{ marginTop: '20px' }}>
+        <div className="h-screen bg-white overflow-hidden flex flex-col">
           {/* Full-width Banner */}
-          <div className="flex-shrink-0 max-w-[320px] sm:max-w-[600px] -mb-8" style={{ width: '100%', height: 'auto', aspectRatio: '320 / 150' }}>
+          <div className="flex-shrink-0 max-w-[320px] sm:max-w-[600px]" style={{ width: '100%', height: 'auto', aspectRatio: '320 / 150' }}>
             <Banner imageSrc="/New .png" height="h-full" logoSrc="/icons/WW635.jpg" logoAlt="Logo" additionalHeight="0px" backgroundPosition="20px top" />
           </div>
 
-          <div className="flex-1 pb-6 sm:pb-8 px-6 sm:px-8 max-w-4xl mx-auto space-y-4 sm:space-y-6 overflow-hidden w-full">
+          <div className="flex-1 pb-4 sm:pb-6 px-6 sm:px-8 max-w-4xl mx-auto space-y-2 sm:space-y-4 overflow-hidden w-full">
             {/* Price Summary Section */}
             <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 relative z-20">
               <PricingCards />
@@ -362,8 +362,8 @@ export default function FormSummary({
 
           {/* Details Modal */}
           {showDetailsModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-3 sm:p-4">
-              <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-0 sm:p-4">
+              <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl w-full sm:max-w-2xl h-screen sm:h-auto sm:max-h-[95vh] overflow-y-auto">
                 <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center" style={{backgroundColor: '#48546A'}}>
                   <h2 className="text-lg sm:text-2xl font-bold font-heading">Estimate Details</h2>
                   <button
@@ -506,8 +506,8 @@ export default function FormSummary({
 
       {/* Details Modal - for Modal View */}
       {isModal && showDetailsModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-3 sm:p-4">
-          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-0 sm:p-4">
+          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl w-full sm:max-w-2xl h-screen sm:h-auto sm:max-h-[95vh] overflow-y-auto">
             <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center" style={{backgroundColor: '#48546A'}}>
               <h2 className="text-lg sm:text-2xl font-bold font-heading">Estimate Details</h2>
               <button
@@ -652,8 +652,8 @@ export default function FormSummary({
 
       {/* Pricing Modal - for Modal View */}
       {isModal && showPricingModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-3 sm:p-4">
-          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-0 sm:p-4">
+          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl w-full sm:max-w-2xl h-screen sm:h-auto sm:max-h-[95vh] overflow-y-auto">
             <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center" style={{backgroundColor: '#48546A'}}>
               <h2 className="text-lg sm:text-2xl font-bold font-heading">Pricing Breakdown</h2>
               <button
@@ -738,8 +738,8 @@ export default function FormSummary({
 
       {/* Pricing Modal - for Page View */}
       {!isModal && showPricingModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-3 sm:p-4">
-          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-0 sm:p-4">
+          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl w-full sm:max-w-2xl h-screen sm:h-auto sm:max-h-[95vh] overflow-y-auto">
             <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center" style={{backgroundColor: '#48546A'}}>
               <h2 className="text-lg sm:text-2xl font-bold font-heading">Pricing Breakdown</h2>
               <button
