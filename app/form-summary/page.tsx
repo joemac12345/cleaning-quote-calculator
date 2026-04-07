@@ -73,11 +73,6 @@ export default function FormSummaryPage() {
           Saving estimate...
         </div>
       )}
-      {saveStatus === 'success' && (
-        <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
-          ✓ Estimate saved!
-        </div>
-      )}
       {saveStatus === 'error' && (
         <div className="fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg">
           ✕ Failed to save estimate
@@ -93,6 +88,7 @@ export default function FormSummaryPage() {
           router.push(`/?step=${stepId}`);
         }}
         isModal={false}
+        saveStatus={saveStatus}
       />
     </>
   );

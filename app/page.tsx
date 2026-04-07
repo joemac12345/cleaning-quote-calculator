@@ -24,7 +24,7 @@
 
 'use client';
 
-import Navigation from './components/Navigation';
+
 import HeroSection from './components/landing/Hero/HeroSection';
 import Testimonial from './components/landing/Testimonial/Testimonial';
 import TextDescription from './components/landing/TextDescription/TextDescription';
@@ -35,14 +35,13 @@ import Reviews from './components/landing/Reviews/Reviews';
 export default function Home() {
   return (
     <>
-      <Navigation />
       <div className="min-h-screen bg-white text-gray-900">
         <HeroSection />
-      <Testimonial />
-      <TextDescription />
-      <CTAButtons />
-      <Services />
-      <Reviews />
+        <Testimonial />
+        <TextDescription />
+        <CTAButtons />
+        <Services />
+        <Reviews />
       </div>
     </>
   );

@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { formSteps } from '@/app/config/formConfig';
 import { calculateQuote, QuoteStats } from '@/app/utils/quoteCalculation';
+import Banner from '@/app/components/Banner';
 
 interface FormSummaryProps {
   formData: Record<string, any>;
@@ -10,6 +11,7 @@ interface FormSummaryProps {
   onClose: () => void;
   onEdit?: (stepId: number) => void;
   isModal?: boolean;
+  saveStatus?: 'idle' | 'success' | 'error';
 }
 
 export default function FormSummary({
@@ -18,6 +20,7 @@ export default function FormSummary({
   onClose,
   onEdit,
   isModal = true,
+  saveStatus = 'idle',
 }: FormSummaryProps) {
   if (!isOpen) return null;
 
@@ -140,7 +143,13 @@ export default function FormSummary({
       ) : (
         <>
           {/* Your First Clean */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 relative">
+            <button
+              onClick={() => setShowDetailsModal(true)}
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-white text-lg sm:text-xl font-medium rounded-lg transition font-heading flex-shrink-0" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+            >
+              +
+            </button>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
               <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Your First Clean</h3>
               <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(quoteStats.firstCleanPrice) ? quoteStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
@@ -188,17 +197,34 @@ export default function FormSummary({
         <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-end sm:items-center justify-center p-3 sm:p-4">
           <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
             <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
-              {/* View Full Details Button */}
-              <button
-                onClick={() => setShowDetailsModal(true)}
-                className="px-3 sm:px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading"
-              >
-                View Full Details
-              </button>
-
               {/* Price Summary Section */}
               <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200">
                 <PricingCards />
+              </div>
+
+              {/* Success Message */}
+              {saveStatus === 'success' && (
+                <div className="mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 text-2xl">✓</div>
+                    <div className="flex-grow">
+                      <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: '#48546A' }}>
+                        Estimate Saved Successfully!
+                      </h3>
+                      <p className="text-gray-600 text-sm sm:text-base mb-2">
+                        Thank you for using our quote calculator. Your estimate has been saved and we've recorded all your details.
+                      </p>
+                      <p className="text-gray-600 text-sm sm:text-base font-medium">
+                        A member of our team will contact you within 24 hours to confirm your booking and discuss any questions you may have.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Banner */}
+              <div className="mb-6 sm:mb-8">
+                <Banner imageSrc="/images/banner.jpg" alt="Promotional Banner" />
               </div>
 
               {/* Optional Services */}
@@ -231,7 +257,7 @@ export default function FormSummary({
                 return (
                   <div key={group.title} className="border-b border-gray-200 pb-4 sm:pb-6 last:border-b-0">
                     <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                      <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                      <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                       {group.title}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
@@ -252,7 +278,7 @@ export default function FormSummary({
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-pink-500 hover:bg-pink-600 text-white font-medium rounded-lg transition font-heading"
+                className="w-full px-6 sm:px-8 py-3 sm:py-4 text-white font-medium rounded-lg transition font-heading" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
               >
                 Close
               </button>
@@ -263,19 +289,39 @@ export default function FormSummary({
         // Page View
         <div className="min-h-screen bg-white">
           <div className="p-6 sm:p-8 max-w-4xl mx-auto space-y-4 sm:space-y-6">
-            <div className="flex items-center justify-between mb-6 sm:mb-8">
-              <h1 className="text-3xl sm:text-4xl font-bold font-heading" style={{color: '#4B5368'}}>Your Quote Summary</h1>
-              <button
-                onClick={() => setShowDetailsModal(true)}
-                className="px-3 sm:px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading flex-shrink-0"
-              >
-                View Full Details
-              </button>
+            {/* Small Banner */}
+            <div>
+              <Banner imageSrc="/icons/Untitled design.png" logoSrc="/icons/WW635.jpg" logoAlt="Logo" height="h-56 sm:h-96" />
             </div>
 
             {/* Price Summary Section */}
-            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200">
+            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200 -mt-6 sm:-mt-10">
               <PricingCards />
+            </div>
+
+            {/* Success Message */}
+            {saveStatus === 'success' && (
+              <div className="mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 text-2xl">✓</div>
+                  <div className="flex-grow">
+                    <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: '#48546A' }}>
+                      Estimate Saved Successfully!
+                    </h3>
+                    <p className="text-gray-600 text-sm sm:text-base mb-2">
+                      Thank you for using our quote calculator. Your estimate has been saved and we've recorded all your details.
+                    </p>
+                    <p className="text-gray-600 text-sm sm:text-base font-medium">
+                      A member of our team will contact you within 24 hours to confirm your booking and discuss any questions you may have.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Banner */}
+            <div className="mb-6 sm:mb-8">
+              <Banner imageSrc="/images/banner.jpg" alt="Promotional Banner" />
             </div>
 
             {/* Optional Services */}
@@ -308,7 +354,7 @@ export default function FormSummary({
               return (
                 <div key={group.title} className="border-b border-gray-200 pb-4 sm:pb-6 last:border-b-0">
                   <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                    <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                    <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                     {group.title}
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
@@ -332,11 +378,11 @@ export default function FormSummary({
           {showDetailsModal && (
             <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-3 sm:p-4">
               <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
-                <div className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center">
+                <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center" style={{backgroundColor: '#48546A'}}>
                   <h2 className="text-lg sm:text-2xl font-bold font-heading">Estimate Details</h2>
                   <button
                     onClick={() => setShowDetailsModal(false)}
-                    className="text-white hover:bg-pink-700 rounded-full w-10 h-10 flex items-center justify-center transition"
+                    className="text-white rounded-full w-10 h-10 flex items-center justify-center transition" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
                   >
                     ✕
                   </button>
@@ -345,7 +391,7 @@ export default function FormSummary({
                   {/* Contact Information */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
                     <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                      <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                      <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                       Contact Information
                     </h3>
                     <div className="space-y-2">
@@ -359,7 +405,7 @@ export default function FormSummary({
                   {/* Preferences */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
                     <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                      <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                      <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                       Preferences
                     </h3>
                     <div className="grid grid-cols-2 gap-4">
@@ -373,7 +419,7 @@ export default function FormSummary({
                   {/* Service Details */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
                     <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                      <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                      <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                       Service Details
                     </h3>
                     <div className="overflow-x-auto">
@@ -433,7 +479,7 @@ export default function FormSummary({
                   {/* Add-ons & Extras */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
                     <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                      <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                      <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                       Add-ons & Extras
                     </h3>
                     <div className="overflow-x-auto">
@@ -476,11 +522,11 @@ export default function FormSummary({
       {isModal && showDetailsModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-3 sm:p-4">
           <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
-            <div className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center">
+            <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center" style={{backgroundColor: '#48546A'}}>
               <h2 className="text-lg sm:text-2xl font-bold font-heading">Estimate Details</h2>
               <button
                 onClick={() => setShowDetailsModal(false)}
-                className="text-white hover:bg-pink-700 rounded-full w-10 h-10 flex items-center justify-center transition"
+                className="text-white rounded-full w-10 h-10 flex items-center justify-center transition" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
               >
                 ✕
               </button>
@@ -489,7 +535,7 @@ export default function FormSummary({
               {/* Contact Information */}
               <div className="border-b border-gray-200 pb-4 sm:pb-6">
                 <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                  <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                  <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                   Contact Information
                 </h3>
                 <div className="space-y-2">
@@ -503,7 +549,7 @@ export default function FormSummary({
               {/* Preferences */}
               <div className="border-b border-gray-200 pb-4 sm:pb-6">
                 <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                  <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                  <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                   Preferences
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
@@ -517,7 +563,7 @@ export default function FormSummary({
               {/* Service Details */}
               <div className="border-b border-gray-200 pb-4 sm:pb-6">
                 <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                  <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                  <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                   Service Details
                 </h3>
                 <div className="overflow-x-auto">
@@ -577,7 +623,7 @@ export default function FormSummary({
               {/* Add-ons & Extras */}
               <div className="border-b border-gray-200 pb-4 sm:pb-6">
                 <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                  <div className="w-1 h-6 bg-pink-500 rounded"></div>
+                  <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
                   Add-ons & Extras
                 </h3>
                 <div className="overflow-x-auto">
