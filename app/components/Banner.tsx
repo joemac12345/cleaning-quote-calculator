@@ -31,7 +31,7 @@ export default function Banner({
         <img
           src={logoSrc}
           alt={logoAlt}
-          className="absolute top-4 left-4 sm:top-6 sm:left-6 h-16 sm:h-24 object-contain"
+          className="absolute top-0 left-0 h-12 sm:h-24 object-contain z-0"
         />
       )}
     </div>
