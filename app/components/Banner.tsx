@@ -8,6 +8,7 @@ interface BannerProps {
   logoSrc?: string;
   logoAlt?: string;
   additionalHeight?: string;
+  backgroundPosition?: string;
 }
 
 export default function Banner({ 
@@ -17,16 +18,18 @@ export default function Banner({
   link,
   logoSrc,
   logoAlt = 'Logo',
-  additionalHeight = '0px'
+  additionalHeight = '0px',
+  backgroundPosition = 'center'
 }: BannerProps) {
   const content = (
     <div 
       className={`w-full ${height} relative z-10`}
       style={{
         backgroundImage: `url('${imageSrc}')`,
-        backgroundPosition: 'center top',
+        backgroundPosition: backgroundPosition,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
+        objectFit: 'cover',
         minHeight: `calc(100% + ${additionalHeight})`,
       }}
     >

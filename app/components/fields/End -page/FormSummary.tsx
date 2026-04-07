@@ -290,8 +290,8 @@ export default function FormSummary({
         // Page View
         <div className="h-screen bg-white overflow-hidden flex flex-col" style={{ marginTop: '20px' }}>
           {/* Full-width Banner */}
-          <div className="flex-shrink-0">
-            <Banner imageSrc="/icons/Untitled design.png" logoSrc="/icons/WW635.jpg" logoAlt="Logo" height="h-96 sm:screen-3/4" additionalHeight="10px" />
+          <div className="flex-shrink-0 max-w-[320px] sm:max-w-[600px] -mb-8" style={{ width: '100%', height: 'auto', aspectRatio: '320 / 150' }}>
+            <Banner imageSrc="/New .png" height="h-full" logoSrc="/icons/WW635.jpg" logoAlt="Logo" additionalHeight="0px" backgroundPosition="20px top" />
           </div>
 
           <div className="flex-1 pb-6 sm:pb-8 px-6 sm:px-8 max-w-4xl mx-auto space-y-4 sm:space-y-6 overflow-hidden w-full">
