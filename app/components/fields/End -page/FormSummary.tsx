@@ -146,23 +146,7 @@ export default function FormSummary({
       ) : (
         <>
           {/* Your First Clean */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 relative">
-            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex gap-2">
-              <button
-                onClick={() => setShowDetailsModal(true)}
-                title="View estimate details"
-                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading flex-shrink-0" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
-              >
-                Estimate Details
-              </button>
-              <button
-                onClick={() => setShowPricingModal(true)}
-                title="View what comes next"
-                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading flex-shrink-0" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
-              >
-                What Comes Next?
-              </button>
-            </div>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 relative flex flex-col">
             <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
               <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Your First Clean</h3>
               <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(quoteStats.firstCleanPrice) ? quoteStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
@@ -179,11 +163,27 @@ export default function FormSummary({
               <p className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3" style={{color: '#4B5368'}}>{quoteStats.firstCleanHours || 0}h {quoteStats.firstCleanMinutes || 0}m</p>
               <p className="text-xs sm:text-sm" style={{color: '#4B5368'}}>This is our estimated time to complete your cleaning based on your requirements. Actual time may vary slightly.</p>
             </div>
+            <div className="flex flex-row gap-2 mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-blue-300 flex-shrink-0">
+              <button
+                onClick={() => setShowDetailsModal(true)}
+                title="View estimate details"
+                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+              >
+                Estimate Details
+              </button>
+              <button
+                onClick={() => setShowPricingModal(true)}
+                title="View what comes next"
+                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+              >
+                What Comes Next?
+              </button>
+            </div>
           </div>
 
           {/* Maintenance Price - only show if not one-off */}
           {(formData.frequency || 'one-off') !== 'one-off' && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-6">
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-6 hidden">
               <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
                 <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Maintenance Price</h3>
                 <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(quoteStats.maintenancePrice) ? quoteStats.maintenancePrice.toFixed(2) : '0.00'}</p>
