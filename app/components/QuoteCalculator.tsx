@@ -6,12 +6,10 @@ import { formSteps } from '@/app/config/formConfig';
 import { calculateQuote } from '@/app/utils/quoteCalculation';
 import FormStepRenderer from './fields/FormStepRenderer';
 import FormNavigation from './fields/FormNavigation';
-import PricingModal from './PricingModal';
 
 export default function QuoteCalculator() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
-  const [showPricingModal, setShowPricingModal] = useState(false);
 
   // Disable body scroll on mount, re-enable on unmount
   useEffect(() => {
@@ -74,21 +72,7 @@ export default function QuoteCalculator() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <PricingModal
-        formData={formData}
-        isOpen={showPricingModal}
-        onClose={() => setShowPricingModal(false)}
-      />
-      
       <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-6 pb-6 sm:pb-12">
-        {/* View Pricing Button */}
-        <button
-          onClick={() => setShowPricingModal(true)}
-          className="mb-4 px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white text-sm font-medium rounded-lg transition font-heading"
-        >
-          View Current Pricing
-        </button>
-
         {/* Step Content */}
         <div className="mb-8 sm:mb-12">
           <FormStepRenderer

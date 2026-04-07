@@ -28,13 +28,7 @@ export default function PricingModal({ formData, isOpen, onClose }: PricingModal
     return null;
   }
 
-  // Check if values are valid numbers
-  const firstCleanPrice = isFinite(quoteStats.firstCleanPrice) ? quoteStats.firstCleanPrice : 0;
-  const maintenancePrice = isFinite(quoteStats.maintenancePrice) ? quoteStats.maintenancePrice : 0;
-  const basePrice = isFinite(quoteStats.basePrice) ? quoteStats.basePrice : 0;
-  const servicePremium = isFinite(quoteStats.servicePremium) ? quoteStats.servicePremium : 0;
-  const saving = isFinite(quoteStats.saving) ? quoteStats.saving : 0;
-  const maintenanceDiscount = isFinite(quoteStats.maintenanceDiscount) ? quoteStats.maintenanceDiscount : 0;
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-[9998] flex items-center justify-center p-4">
@@ -56,14 +50,9 @@ export default function PricingModal({ formData, isOpen, onClose }: PricingModal
         <div className="space-y-4 mb-6">
           {/* First Clean */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="font-semibold" style={{ color: '#4B5368' }}>
-                Your First Clean
-              </h3>
-              <p className="text-2xl font-bold" style={{ color: '#4B5368' }}>
-                £{firstCleanPrice.toFixed(2)}
-              </p>
-            </div>
+            <h3 className="font-semibold mb-2" style={{ color: '#4B5368' }}>
+              Your First Clean
+            </h3>
             <p className="text-sm mb-1" style={{ color: '#4B5368' }}>
               Time: {quoteStats.firstCleanHours}h {quoteStats.firstCleanMinutes}m
             </p>
@@ -73,14 +62,9 @@ export default function PricingModal({ formData, isOpen, onClose }: PricingModal
           {/* Maintenance Price - only show if not one-off */}
           {(formData.frequency || 'one-off') !== 'one-off' && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold" style={{ color: '#4B5368' }}>
-                  Maintenance Price
-                </h3>
-                <p className="text-2xl font-bold" style={{ color: '#4B5368' }}>
-                  £{maintenancePrice.toFixed(2)}
-                </p>
-              </div>
+              <h3 className="font-semibold mb-2" style={{ color: '#4B5368' }}>
+                Maintenance Price
+              </h3>
               <p className="text-sm mb-1" style={{ color: '#4B5368' }}>
                 Time: {quoteStats.maintenanceHours}h {quoteStats.maintenanceMinutes}m
               </p>
@@ -89,31 +73,7 @@ export default function PricingModal({ formData, isOpen, onClose }: PricingModal
           )}
         </div>
 
-        {/* Breakdown */}
-        <div className="bg-gray-50 rounded-lg p-4 mb-6 text-sm space-y-2">
-          <div className="flex justify-between">
-            <span style={{ color: '#4B5368' }}>Base Price:</span>
-            <span className="font-semibold">£{basePrice.toFixed(2)}</span>
-          </div>
-          {quoteStats.serviceMultiplierPercent > 0 && (
-            <div className="flex justify-between">
-              <span style={{ color: '#4B5368' }}>Service Premium ({quoteStats.serviceMultiplierPercent.toFixed(0)}%):</span>
-              <span className="font-semibold">£{servicePremium.toFixed(2)}</span>
-            </div>
-          )}
-          {quoteStats.discountPercent > 0 && (
-            <div className="flex justify-between text-green-600">
-              <span>Frequency Discount ({quoteStats.discountPercent.toFixed(0)}%):</span>
-              <span className="font-semibold">-£{saving.toFixed(2)}</span>
-            </div>
-          )}
-          {quoteStats.maintenanceReduction < 0 && (
-            <div className="flex justify-between text-green-600">
-              <span>Maintenance Reduction (15%):</span>
-              <span className="font-semibold">-£{maintenanceDiscount.toFixed(2)}</span>
-            </div>
-          )}
-        </div>
+
 
         {/* Close Button */}
         <button
