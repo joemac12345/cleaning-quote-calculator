@@ -103,24 +103,37 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
     if (!newNoteText.trim()) return;
 
     setIsLoading(true);
-    const result = await addNote(estimateId, newNoteText);
-    if (result.success && result.data?.notes) {
-      // Parse the notes in case they come back as JSON string
-      let updatedNotes = result.data.notes;
-      if (typeof updatedNotes === 'string') {
-        try {
-          updatedNotes = JSON.parse(updatedNotes);
-        } catch (e) {
-          updatedNotes = parseNotes();
+    try {
+      const result = await addNote(estimateId, newNoteText);
+      if (result.success && result.data) {
+        // Parse the notes in case they come back as JSON string
+        let updatedNotes = result.data.notes;
+        if (updatedNotes === null || updatedNotes === undefined) {
+          updatedNotes = [];
+        } else if (typeof updatedNotes === 'string') {
+          try {
+            updatedNotes = JSON.parse(updatedNotes);
+            if (!Array.isArray(updatedNotes)) {
+              updatedNotes = [];
+            }
+          } catch (e) {
+            console.error('Failed to parse notes:', e);
+            updatedNotes = [];
+          }
         }
+        if (Array.isArray(updatedNotes)) {
+          onNotesUpdate(updatedNotes);
+          setNewNoteText('');
+          setInputHeight('44px');
+        } else {
+          alert('Error: Notes data is invalid');
+        }
+      } else {
+        alert(`Error adding note: ${result.error || 'Unknown error'}`);
       }
-      if (Array.isArray(updatedNotes)) {
-        onNotesUpdate(updatedNotes);
-        setNewNoteText('');
-        setInputHeight('44px');
-      }
-    } else {
-      alert(`Error adding note: ${result.error}`);
+    } catch (error) {
+      console.error('Error in handleAddNote:', error);
+      alert('Failed to add note');
     }
     setIsLoading(false);
   };
@@ -129,25 +142,38 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
     if (!editingNoteText.trim()) return;
 
     setIsLoading(true);
-    const result = await editNote(estimateId, noteId, editingNoteText);
-    if (result.success && result.data?.notes) {
-      // Parse the notes in case they come back as JSON string
-      let updatedNotes = result.data.notes;
-      if (typeof updatedNotes === 'string') {
-        try {
-          updatedNotes = JSON.parse(updatedNotes);
-        } catch (e) {
-          updatedNotes = parseNotes();
+    try {
+      const result = await editNote(estimateId, noteId, editingNoteText);
+      if (result.success && result.data) {
+        // Parse the notes in case they come back as JSON string
+        let updatedNotes = result.data.notes;
+        if (updatedNotes === null || updatedNotes === undefined) {
+          updatedNotes = [];
+        } else if (typeof updatedNotes === 'string') {
+          try {
+            updatedNotes = JSON.parse(updatedNotes);
+            if (!Array.isArray(updatedNotes)) {
+              updatedNotes = [];
+            }
+          } catch (e) {
+            console.error('Failed to parse notes:', e);
+            updatedNotes = [];
+          }
         }
+        if (Array.isArray(updatedNotes)) {
+          onNotesUpdate(updatedNotes);
+          setEditingNoteId(null);
+          setEditingNoteText('');
+          setEditHeight('80px');
+        } else {
+          alert('Error: Notes data is invalid');
+        }
+      } else {
+        alert(`Error updating note: ${result.error || 'Unknown error'}`);
       }
-      if (Array.isArray(updatedNotes)) {
-        onNotesUpdate(updatedNotes);
-        setEditingNoteId(null);
-        setEditingNoteText('');
-        setEditHeight('80px');
-      }
-    } else {
-      alert(`Error updating note: ${result.error}`);
+    } catch (error) {
+      console.error('Error in handleEditNote:', error);
+      alert('Failed to update note');
     }
     setIsLoading(false);
   };
@@ -156,22 +182,35 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
     if (!confirm('Delete this note?')) return;
 
     setIsLoading(true);
-    const result = await deleteNote(estimateId, noteId);
-    if (result.success && result.data?.notes) {
-      // Parse the notes in case they come back as JSON string
-      let updatedNotes = result.data.notes;
-      if (typeof updatedNotes === 'string') {
-        try {
-          updatedNotes = JSON.parse(updatedNotes);
-        } catch (e) {
-          updatedNotes = parseNotes();
+    try {
+      const result = await deleteNote(estimateId, noteId);
+      if (result.success && result.data) {
+        // Parse the notes in case they come back as JSON string
+        let updatedNotes = result.data.notes;
+        if (updatedNotes === null || updatedNotes === undefined) {
+          updatedNotes = [];
+        } else if (typeof updatedNotes === 'string') {
+          try {
+            updatedNotes = JSON.parse(updatedNotes);
+            if (!Array.isArray(updatedNotes)) {
+              updatedNotes = [];
+            }
+          } catch (e) {
+            console.error('Failed to parse notes:', e);
+            updatedNotes = [];
+          }
         }
+        if (Array.isArray(updatedNotes)) {
+          onNotesUpdate(updatedNotes);
+        } else {
+          alert('Error: Notes data is invalid');
+        }
+      } else {
+        alert(`Error deleting note: ${result.error || 'Unknown error'}`);
       }
-      if (Array.isArray(updatedNotes)) {
-        onNotesUpdate(updatedNotes);
-      }
-    } else {
-      alert(`Error deleting note: ${result.error}`);
+    } catch (error) {
+      console.error('Error in handleDeleteNote:', error);
+      alert('Failed to delete note');
     }
     setIsLoading(false);
   };

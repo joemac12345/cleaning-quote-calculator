@@ -4,7 +4,7 @@ import { landingConfig } from '@/app/config/landingConfig';
 
 export default function CTAButtons() {
   const ctaConfig = (landingConfig as any).ctaButtons || {};
-  const { primaryText = 'Book Now', secondaryText = 'Contact Us', primaryLink = '/booking', secondaryLink = '/quote' } = ctaConfig;
+  const { primaryText = 'Book Now', secondaryText = 'Contact Us', primaryLink = '/booking', secondaryLink = '/01-estimate' } = ctaConfig;
 
   return (
     <section className="py-8 sm:py-12 px-3 sm:px-4 bg-white">

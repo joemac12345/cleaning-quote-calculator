@@ -3,11 +3,15 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { formSteps } from '@/app/config/formConfig';
-import { calculateQuote } from '@/app/utils/quoteCalculation';
-import FormStepRenderer from './fields/FormStepRenderer';
-import FormNavigation from './fields/FormNavigation';
+import { calculateEstimate } from '@/app/utils/estimateCalculation';
+import FormStepRenderer from './FormStepRenderer';
+import FormNavigation from './FormNavigation';
 
-export default function QuoteCalculator() {
+interface EstimateCalculatorProps {
+  onFormDataChange?: (formData: Record<string, any>) => void;
+}
+
+export default function EstimateCalculator({ onFormDataChange }: EstimateCalculatorProps) {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -32,9 +36,14 @@ export default function QuoteCalculator() {
     return initial;
   });
 
-  // Calculate quote whenever form data changes
-  const quote = useMemo(() => {
-    return calculateQuote(formData, formData.frequency || 'one-off');
+  // Sync form data changes to parent
+  useEffect(() => {
+    onFormDataChange?.(formData);
+  }, [formData, onFormDataChange]);
+
+  // Calculate estimate whenever form data changes
+  const estimate = useMemo(() => {
+    return calculateEstimate(formData, formData.frequency || 'one-off');
   }, [formData]);
 
   // Get current step
@@ -59,11 +68,11 @@ export default function QuoteCalculator() {
   const handleSubmit = () => {
     console.log('Form submitted:', {
       ...formData,
-      quote,
+      estimate,
     });
     // Store form data in sessionStorage and navigate to form summary page
-    sessionStorage.setItem('quoteFormData', JSON.stringify(formData));
-    router.push('/form-summary');
+    sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
+    router.push('/01-form-summary');
   };
 
   if (!currentStepData) {
@@ -72,7 +81,8 @@ export default function QuoteCalculator() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-3 sm:pt-6 pb-6 sm:pb-12">
+      {/* Main Content - Adjusted for fixed navbar */}
+      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-6 sm:pb-12">
         {/* Step Content */}
         <div className="mb-8 sm:mb-12">
           <FormStepRenderer

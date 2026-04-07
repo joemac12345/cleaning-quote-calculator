@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/app/utils/supabase';
+import { AdminNavigation } from '@/app/components/admin/nav-admin';
 
 export default function FeedbackPage() {
   const [feedback, setFeedback] = useState<Array<{ id: string; rating: boolean; created_at: string }>>([]);
@@ -132,6 +133,9 @@ export default function FeedbackPage() {
           </div>
         )}
       </div>
+
+      {/* Admin Navigation */}
+      <AdminNavigation />
     </div>
   );
 }

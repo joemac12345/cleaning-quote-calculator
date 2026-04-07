@@ -6,7 +6,7 @@
  * Purpose:
  * - Welcomes users to the site with a hero section
  * - Showcases testimonials, services, and customer reviews
- * - Contains CTA buttons linking to /quote (get quote) and /booking (book now)
+ * - Contains CTA buttons linking to /01-estimate (get estimate) and /booking (book now)
  * 
  * Data Source:
  * - Static content is pulled from app/config/landingConfig.ts
@@ -25,6 +25,7 @@
 'use client';
 
 
+import Navigation from './components/global-parts/Navigation';
 import HeroSection from './components/landing/Hero/HeroSection';
 import Testimonial from './components/landing/Testimonial/Testimonial';
 import TextDescription from './components/landing/TextDescription/TextDescription';
@@ -35,6 +36,7 @@ import Reviews from './components/landing/Reviews/Reviews';
 export default function Home() {
   return (
     <>
+      <Navigation />
       <div className="min-h-screen bg-white text-gray-900">
         <HeroSection />
         <Testimonial />

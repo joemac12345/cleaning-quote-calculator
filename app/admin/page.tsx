@@ -5,8 +5,9 @@ export const dynamic = 'force-dynamic';
 import { useState, useEffect } from 'react';
 import { getEstimates, searchEstimates, deleteEstimate, updateEstimateStatus } from '@/app/utils/estimateService';
 import { NotesModal } from '@/app/components/admin/NotesModal';
-import { StatusSelector } from '@/app/components/admin/StatusSelector';
-import { StatusFilter } from '@/app/components/admin/StatusFilter';
+import { StatusSelector } from '@/app/components/admin/job-status/StatusSelector';
+import { StatusFilter } from '@/app/components/admin/job-status/StatusFilter';
+import { AdminNavigation } from '@/app/components/admin/nav-admin';
 
 const STATUS_OPTIONS = [
   { value: 'new', label: 'New' },
@@ -679,6 +680,9 @@ export default function AdminPage() {
         onClose={() => setShowNotesModal(false)}
         onNotesUpdate={handleNotesUpdate}
       />
+
+      {/* Admin Navigation */}
+      <AdminNavigation />
     </div>
   );
 }

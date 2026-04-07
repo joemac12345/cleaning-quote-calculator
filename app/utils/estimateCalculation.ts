@@ -1,11 +1,11 @@
 /**
- * Quote Calculation Utilities - TIME-BASED PRICING MODEL
+ * Estimate Calculation Utilities - TIME-BASED PRICING MODEL
  * Calculates price based on time spent on rooms and add-ons
  */
 
 import { formSteps, FIRST_CLEAN_HOURLY_RATE, MAINTENANCE_HOURLY_RATE } from '@/app/config/formConfig';
 
-export interface QuoteStats {
+export interface EstimateStats {
   totalMinutes: number;
   hours: number;
   minutes: number;
@@ -48,7 +48,7 @@ function calculateTotalMinutes(formData: Record<string, any>, frequency: string 
             const hasPrice = field.options?.some(opt => opt.price !== undefined);
             if (!hasPrice) {
               totalMinutes += fieldValue * field.time;
-              console.log(`${field.id}: ${fieldValue} × ${field.time}m = ${fieldValue * field.time}m`);
+              if (process.env.NODE_ENV === 'development') console.log(`${field.id}: ${fieldValue} × ${field.time}m = ${fieldValue * field.time}m`);
             }
           }
           // For object types (extras, windows, other_spaces)
@@ -58,7 +58,7 @@ function calculateTotalMinutes(formData: Record<string, any>, frequency: string 
               // Add time if this option has a time value (for display, regardless of price)
               if (count > 0 && option.time) {
                 totalMinutes += count * option.time;
-                console.log(`${field.id}.${option.value}: ${count} × ${option.time}m = ${count * option.time}m`);
+                if (process.env.NODE_ENV === 'development') console.log(`${field.id}.${option.value}: ${count} × ${option.time}m = ${count * option.time}m`);
               }
             });
           }
@@ -70,7 +70,7 @@ function calculateTotalMinutes(formData: Record<string, any>, frequency: string 
             const selectedOption = field.options?.find((opt) => String(opt.value) === String(fieldValue));
             if (selectedOption?.time && selectedOption.time > 0) {
               totalMinutes += selectedOption.time;
-              console.log(`${field.id}: ${selectedOption.time}m`);
+              if (process.env.NODE_ENV === 'development') console.log(`${field.id}: ${selectedOption.time}m`);
             }
           }
           break;
@@ -80,7 +80,7 @@ function calculateTotalMinutes(formData: Record<string, any>, frequency: string 
     });
   });
 
-  console.log(`Total minutes (${frequency}): ${totalMinutes}m`);
+  if (process.env.NODE_ENV === 'development') console.log(`Total minutes (${frequency}): ${totalMinutes}m`);
 
   return totalMinutes;
 }
@@ -102,7 +102,7 @@ function calculateOptionPrices(formData: Record<string, any>): number {
         const selectedOption = field.options?.find((opt) => String(opt.value) === String(fieldValue));
         if (selectedOption?.price) {
           totalPrice += selectedOption.price;
-          console.log(`${field.id} price: £${selectedOption.price}`);
+          if (process.env.NODE_ENV === 'development') console.log(`${field.id} price: £${selectedOption.price}`);
         }
       }
 
@@ -113,14 +113,14 @@ function calculateOptionPrices(formData: Record<string, any>): number {
           if (count > 0 && option.price) {
             const cost = count * option.price;
             totalPrice += cost;
-            console.log(`${field.id}.${option.value} price: ${count} × £${option.price} = £${cost}`);
+            if (process.env.NODE_ENV === 'development') console.log(`${field.id}.${option.value} price: ${count} × £${option.price} = £${cost}`);
           }
         });
       }
     });
   });
 
-  console.log(`Total option prices: £${totalPrice.toFixed(2)}`);
+  if (process.env.NODE_ENV === 'development') console.log(`Total option prices: £${totalPrice.toFixed(2)}`);
   return totalPrice;
 }
 
@@ -134,12 +134,12 @@ export function formatTime(totalMinutes: number): { hours: number; minutes: numb
 }
 
 /**
- * Calculate full quote based on time × hourly rate + option prices
+ * Calculate full estimate based on time × hourly rate + option prices
  */
-export function calculateQuote(
+export function calculateEstimate(
   formData: Record<string, any>,
   frequency: string = 'one-off'
-): QuoteStats {
+): EstimateStats {
   try {
     const isRecurring = frequency !== 'one-off';
 
@@ -150,13 +150,13 @@ export function calculateQuote(
     // Reduce maintenance hours based on frequency
     if (frequency === 'weekly') {
       maintenanceMinutes *= 0.5; // 50% reduction
-      console.log(`After 50% maintenance reduction (weekly): ${maintenanceMinutes}m`);
+      if (process.env.NODE_ENV === 'development') console.log(`After 50% maintenance reduction (weekly): ${maintenanceMinutes}m`);
     } else if (frequency === 'fortnightly') {
       maintenanceMinutes *= 0.6; // 40% reduction
-      console.log(`After 40% maintenance reduction (fortnightly): ${maintenanceMinutes}m`);
+      if (process.env.NODE_ENV === 'development') console.log(`After 40% maintenance reduction (fortnightly): ${maintenanceMinutes}m`);
     } else if (frequency === 'monthly') {
       maintenanceMinutes *= 0.7; // 30% reduction
-      console.log(`After 30% maintenance reduction (monthly): ${maintenanceMinutes}m`);
+      if (process.env.NODE_ENV === 'development') console.log(`After 30% maintenance reduction (monthly): ${maintenanceMinutes}m`);
     }
 
     // Calculate base prices from time
@@ -177,7 +177,7 @@ export function calculateQuote(
     // Total price based on frequency
     const totalPrice = isRecurring ? maintenancePrice : firstCleanPrice;
 
-    console.log(`Quote: First: £${firstCleanPrice.toFixed(2)}, Maintenance: £${maintenancePrice.toFixed(2)}`);
+    if (process.env.NODE_ENV === 'development') console.log(`Estimate: First: £${firstCleanPrice.toFixed(2)}, Maintenance: £${maintenancePrice.toFixed(2)}`);
 
     return {
       totalMinutes: maintenanceMinutes,
@@ -200,7 +200,7 @@ export function calculateQuote(
       isRecurring,
     };
   } catch (error) {
-    console.error('Error in calculateQuote:', error);
+    console.error('Error in calculateEstimate:', error);
     return {
       totalMinutes: 0,
       hours: 0,

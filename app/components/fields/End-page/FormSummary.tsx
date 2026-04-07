@@ -2,10 +2,10 @@
 
 import React, { useState, useMemo } from 'react';
 import { formSteps } from '@/app/config/formConfig';
-import { calculateQuote, QuoteStats } from '@/app/utils/quoteCalculation';
-import Banner from '@/app/components/fields/End-page/Banner';
-import FeedbackWidget from '@/app/components/fields/End-page/FeedbackWidget';
-import WhatsNextButton from '@/app/components/fields/End-page/WhatsNextButton';
+import { calculateEstimate, EstimateStats } from '@/app/utils/estimateCalculation';
+import Banner from './Banner';
+import FeedbackWidget from '../price-feed-back/FeedbackWidget';
+import WhatsNextButton from './WhatsNextButton';
 
 interface FormSummaryProps {
   formData: Record<string, any>;
@@ -35,13 +35,13 @@ export default function FormSummary({
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [showPricingModal, setShowPricingModal] = useState(false);
 
-  // Calculate quote based on form data
-  const quoteStats: QuoteStats | null = useMemo(() => {
+  // Calculate estimate based on form data
+  const estimateStats: EstimateStats | null = useMemo(() => {
     try {
       const frequency = formData.frequency || 'one-off';
-      return calculateQuote(formData, frequency);
+      return calculateEstimate(formData, frequency);
     } catch (error) {
-      console.error('Error calculating quote:', error);
+      console.error('Error calculating estimate:', error);
       return null;
     }
   }, [formData]);
@@ -54,9 +54,9 @@ export default function FormSummary({
   };
 
   const getFieldLabel = (stepId: number, fieldId: string): string => {
-    const step = formSteps.find((s) => s.id === stepId);
+    const step = formSteps.find((s: any) => s.id === stepId);
     if (!step) return fieldId;
-    const field = step.fields.find((f) => f.id === fieldId);
+    const field = step.fields.find((f: any) => f.id === fieldId);
     const fieldName = field?.name || fieldId;
     
     // Custom display names for summary
@@ -70,7 +70,7 @@ export default function FormSummary({
     return customName
       .replace(/_/g, ' ')
       .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(' ');
   };
 
@@ -138,9 +138,9 @@ export default function FormSummary({
   // Render pricing cards
   const PricingCards = () => (
     <>
-      {!quoteStats ? (
+      {!estimateStats ? (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 text-sm">
-          <p className="font-semibold">Unable to calculate quote</p>
+          <p className="font-semibold">Unable to calculate estimate</p>
           <p className="text-xs">Please complete all required fields</p>
         </div>
       ) : (
@@ -149,7 +149,7 @@ export default function FormSummary({
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 relative flex flex-col">
             <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
               <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Your First Clean</h3>
-              <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(quoteStats.firstCleanPrice) ? quoteStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
+              <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(estimateStats.firstCleanPrice) ? estimateStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
             </div>
             <div>
               <p className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3" style={{color: '#4B5368'}}>What's Included</p>
@@ -160,7 +160,7 @@ export default function FormSummary({
             </div>
             <div className="hidden">
               <p className="text-xs sm:text-sm font-semibold mb-1 sm:mb-2" style={{color: '#4B5368'}}>Estimated Cleaning Time</p>
-              <p className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3" style={{color: '#4B5368'}}>{quoteStats.firstCleanHours || 0}h {quoteStats.firstCleanMinutes || 0}m</p>
+              <p className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3" style={{color: '#4B5368'}}>{estimateStats.firstCleanHours || 0}h {estimateStats.firstCleanMinutes || 0}m</p>
               <p className="text-xs sm:text-sm" style={{color: '#4B5368'}}>This is our estimated time to complete your cleaning based on your requirements. Actual time may vary slightly.</p>
             </div>
             <div className="flex flex-row gap-2 mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-blue-300 flex-shrink-0">
@@ -186,7 +186,7 @@ export default function FormSummary({
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-6 hidden">
               <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
                 <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Maintenance Price</h3>
-                <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(quoteStats.maintenancePrice) ? quoteStats.maintenancePrice.toFixed(2) : '0.00'}</p>
+                <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(estimateStats.maintenancePrice) ? estimateStats.maintenancePrice.toFixed(2) : '0.00'}</p>
               </div>
               <div className="mb-3 sm:mb-4">
                 <p className="text-xs sm:text-sm font-semibold mb-1" style={{color: '#4B5368'}}>Per clean going forward</p>
@@ -194,7 +194,7 @@ export default function FormSummary({
               </div>
               <div className="hidden">
                 <p className="text-xs sm:text-sm font-semibold mb-2" style={{color: '#4B5368'}}>Estimated Maintenance Time</p>
-                <p className="text-base sm:text-lg font-bold" style={{color: '#4B5368'}}>{quoteStats.maintenanceHours || 0}h {quoteStats.maintenanceMinutes || 0}m</p>
+                <p className="text-base sm:text-lg font-bold" style={{color: '#4B5368'}}>{estimateStats.maintenanceHours || 0}h {estimateStats.maintenanceMinutes || 0}m</p>
               </div>
             </div>
           )}

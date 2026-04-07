@@ -1,5 +1,5 @@
 import { supabase } from '@/app/utils/supabase';
-import { calculateQuote } from '@/app/utils/quoteCalculation';
+import { calculateEstimate } from '@/app/utils/estimateCalculation';
 
 export interface EstimateData {
   customer_name: string;
@@ -21,16 +21,16 @@ export interface EstimateData {
 
 export async function saveEstimateToDatabase(formData: Record<string, any>): Promise<{success: boolean; id?: string; error?: string}> {
   try {
-    // Calculate quote
+    // Calculate estimate
     const frequency = formData.frequency || 'one-off';
-    const quoteStats = calculateQuote(formData, frequency);
+    const estimateStats = calculateEstimate(formData, frequency);
 
-    if (!quoteStats) {
-      return { success: false, error: 'Failed to calculate quote' };
+    if (!estimateStats) {
+      return { success: false, error: 'Failed to calculate estimate' };
     }
 
     // Prepare estimate data
-    const estimateData: EstimateData = {
+    const estimateData = {
       customer_name: formData.name || '',
       email: formData.email || '',
       telephone: formData.telephone || '',
@@ -41,15 +41,15 @@ export async function saveEstimateToDatabase(formData: Record<string, any>): Pro
       service_type: formData.service_type || '',
       frequency: frequency,
       form_data: formData,
-      first_clean_price: quoteStats.firstCleanPrice,
-      maintenance_price: quoteStats.maintenancePrice,
-      first_clean_hours: quoteStats.firstCleanHours,
-      first_clean_minutes: quoteStats.firstCleanMinutes,
-      maintenance_hours: quoteStats.maintenanceHours,
-      maintenance_minutes: quoteStats.maintenanceMinutes,
+      first_clean_price: estimateStats.firstCleanPrice,
+      maintenance_price: estimateStats.maintenancePrice,
+      first_clean_hours: estimateStats.firstCleanHours,
+      first_clean_minutes: estimateStats.firstCleanMinutes,
+      maintenance_hours: estimateStats.maintenanceHours,
+      maintenance_minutes: estimateStats.maintenanceMinutes,
     };
 
-    // Insert into Supabase
+    // Insert into Supabase directly
     const { data, error } = await supabase
       .from('estimates')
       .insert([estimateData])
@@ -84,6 +84,26 @@ export async function getEstimates(limit = 100, offset = 0) {
   } catch (error) {
     console.error('Error fetching estimates:', error);
     return { success: false, data: [], count: 0, error: error instanceof Error ? error.message : 'Unknown error' };
+  }
+}
+
+export async function getEstimateById(id: string) {
+  try {
+    const { data, error } = await supabase
+      .from('estimates')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Supabase fetch error:', error);
+      return { success: false, data: null, error: error.message };
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error fetching estimate:', error);
+    return { success: false, data: null, error: error instanceof Error ? error.message : 'Unknown error' };
   }
 }
 

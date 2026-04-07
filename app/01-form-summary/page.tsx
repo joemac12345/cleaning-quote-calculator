@@ -15,7 +15,7 @@ export default function FormSummaryPage() {
 
   useEffect(() => {
     // Get form data from sessionStorage
-    const storedData = sessionStorage.getItem('quoteFormData');
+    const storedData = sessionStorage.getItem('estimateFormData');
     if (storedData) {
       try {
         const parsedData = JSON.parse(storedData);
@@ -52,7 +52,7 @@ export default function FormSummaryPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-600">Loading your quote...</div>
+        <div className="text-gray-600">Loading your estimate...</div>
       </div>
     );
   }
@@ -60,7 +60,7 @@ export default function FormSummaryPage() {
   if (!formData) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-600">No quote data found. Redirecting...</div>
+        <div className="text-gray-600">No estimate data found. Redirecting...</div>
       </div>
     );
   }
@@ -84,7 +84,7 @@ export default function FormSummaryPage() {
         isOpen={true}
         onClose={() => router.push('/')}
         onEdit={(stepId) => {
-          sessionStorage.removeItem('quoteFormData');
+          sessionStorage.removeItem('estimateFormData');
           router.push(`/?step=${stepId}`);
         }}
         isModal={false}

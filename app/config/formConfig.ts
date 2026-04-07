@@ -335,7 +335,7 @@ export const formSteps: FormStep[] = [
         name: 'Cleaning Frequency',
         type: 'radio',
         time: 0,
-        initialValue: 'one-off',
+        initialValue: '',
         options: [
           { label: 'One-off', value: 'one-off', price: 25 },
           { label: 'Weekly', value: 'weekly', price: 0 },

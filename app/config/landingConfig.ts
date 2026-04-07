@@ -17,7 +17,7 @@ export const landingConfig = {
     primaryText: 'Book Now',
     secondaryText: 'Contact Us',
     primaryLink: '/booking',
-    secondaryLink: '/quote'
+    secondaryLink: '/01-estimate'
   },
   services: {
     title: 'Our Cleaning Services in London',

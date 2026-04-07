@@ -1,7 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Poppins, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+
+// Suppress Next.js 16.2.1 manifest script tag warning (known issue #92180)
+if (typeof window !== 'undefined') {
+  const originalError = console.error;
+  console.error = function(...args: any[]) {
+    if (args[0]?.toString?.().includes('script tag while rendering React component')) {
+      return;
+    }
+    originalError.apply(console, args);
+  };
+}
 
 const inter = Inter({
   variable: "--font-inter",
@@ -20,11 +31,15 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#48546A",
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://toptobottomcleaning.netlify.app"),
   title: "Top To Bottom Cleaning Services - Cleaning Quote Calculator",
   description: "Get your instant cleaning quote with our fast calculator",
   manifest: "/manifest.json",
-  themeColor: "#48546A",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
