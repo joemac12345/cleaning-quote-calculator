@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { formSteps } from '@/app/config/formConfig';
 import { calculateQuote, QuoteStats } from '@/app/utils/quoteCalculation';
 import Banner from '@/app/components/Banner';
+import FeedbackWidget from '@/app/components/FeedbackWidget';
 
 interface FormSummaryProps {
   formData: Record<string, any>;
@@ -150,7 +151,7 @@ export default function FormSummary({
             >
               +
             </button>
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
+            <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
               <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Your First Clean</h3>
               <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(quoteStats.firstCleanPrice) ? quoteStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
             </div>
@@ -171,7 +172,7 @@ export default function FormSummary({
           {/* Maintenance Price - only show if not one-off */}
           {(formData.frequency || 'one-off') !== 'one-off' && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-6">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
+              <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
                 <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Maintenance Price</h3>
                 <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(quoteStats.maintenancePrice) ? quoteStats.maintenancePrice.toFixed(2) : '0.00'}</p>
               </div>
@@ -198,8 +199,13 @@ export default function FormSummary({
           <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
             <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
               {/* Price Summary Section */}
-              <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200">
+              <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
                 <PricingCards />
+              </div>
+
+              {/* Feedback Widget */}
+              <div className="mb-6 sm:mb-8">
+                <FeedbackWidget />
               </div>
 
               {/* Success Message */}
@@ -287,16 +293,21 @@ export default function FormSummary({
         </div>
       ) : (
         // Page View
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white" style={{ marginTop: '20px' }}>
+          {/* Full-width Banner */}
+          <div className="mb-0 mt-5 sm:mt-0">
+            <Banner imageSrc="/icons/Untitled design.png" logoSrc="/icons/WW635.jpg" logoAlt="Logo" height="h-64 sm:screen-1/2" additionalHeight="10px" />
+          </div>
+
           <div className="p-6 sm:p-8 max-w-4xl mx-auto space-y-4 sm:space-y-6">
-            {/* Small Banner */}
-            <div>
-              <Banner imageSrc="/icons/Untitled design.png" logoSrc="/icons/WW635.jpg" logoAlt="Logo" height="h-56 sm:h-96" />
+            {/* Price Summary Section */}
+            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 relative z-20" style={{ marginTop: '-50px' }}>
+              <PricingCards />
             </div>
 
-            {/* Price Summary Section */}
-            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200 -mt-6 sm:-mt-10">
-              <PricingCards />
+            {/* Feedback Widget */}
+            <div className="mb-6 sm:mb-8">
+              <FeedbackWidget />
             </div>
 
             {/* Success Message */}

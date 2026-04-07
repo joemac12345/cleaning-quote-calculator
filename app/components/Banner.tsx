@@ -7,6 +7,7 @@ interface BannerProps {
   link?: string;
   logoSrc?: string;
   logoAlt?: string;
+  additionalHeight?: string;
 }
 
 export default function Banner({ 
@@ -15,23 +16,26 @@ export default function Banner({
   height = 'h-64 sm:h-80',
   link,
   logoSrc,
-  logoAlt = 'Logo'
+  logoAlt = 'Logo',
+  additionalHeight = '0px'
 }: BannerProps) {
   const content = (
     <div 
-      className={`w-full ${height} relative`}
+      className={`w-full ${height} relative z-10`}
       style={{
         backgroundImage: `url('${imageSrc}')`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
+        minHeight: `calc(100% + ${additionalHeight})`,
       }}
     >
       {logoSrc && (
         <img
           src={logoSrc}
           alt={logoAlt}
-          className="absolute top-0 left-0 h-12 sm:h-24 object-contain z-0"
+          className="absolute top-0 h-12 sm:h-24 object-contain z-0"
+          style={{ left: '20px' }}
         />
       )}
     </div>
