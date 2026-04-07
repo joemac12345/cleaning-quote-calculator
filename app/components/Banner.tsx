@@ -24,7 +24,7 @@ export default function Banner({
       className={`w-full ${height} relative z-10`}
       style={{
         backgroundImage: `url('${imageSrc}')`,
-        backgroundPosition: 'center',
+        backgroundPosition: 'center top',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         minHeight: `calc(100% + ${additionalHeight})`,

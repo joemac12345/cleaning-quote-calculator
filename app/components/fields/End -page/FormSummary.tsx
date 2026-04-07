@@ -5,6 +5,7 @@ import { formSteps } from '@/app/config/formConfig';
 import { calculateQuote, QuoteStats } from '@/app/utils/quoteCalculation';
 import Banner from '@/app/components/Banner';
 import FeedbackWidget from '@/app/components/FeedbackWidget';
+import WhatsNextButton from '@/app/components/WhatsNextButton';
 
 interface FormSummaryProps {
   formData: Record<string, any>;
@@ -32,6 +33,7 @@ export default function FormSummary({
   });
 
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [showPricingModal, setShowPricingModal] = useState(false);
 
   // Calculate quote based on form data
   const quoteStats: QuoteStats | null = useMemo(() => {
@@ -145,12 +147,22 @@ export default function FormSummary({
         <>
           {/* Your First Clean */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 relative">
-            <button
-              onClick={() => setShowDetailsModal(true)}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-white text-lg sm:text-xl font-medium rounded-lg transition font-heading flex-shrink-0" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
-            >
-              +
-            </button>
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex gap-2">
+              <button
+                onClick={() => setShowDetailsModal(true)}
+                title="View estimate details"
+                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading flex-shrink-0" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+              >
+                Estimate Details
+              </button>
+              <button
+                onClick={() => setShowPricingModal(true)}
+                title="View what comes next"
+                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading flex-shrink-0" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+              >
+                What Comes Next?
+              </button>
+            </div>
             <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
               <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Your First Clean</h3>
               <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(quoteStats.firstCleanPrice) ? quoteStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
@@ -208,26 +220,6 @@ export default function FormSummary({
                 <FeedbackWidget />
               </div>
 
-              {/* Success Message */}
-              {saveStatus === 'success' && (
-                <div className="mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 text-2xl">✓</div>
-                    <div className="flex-grow">
-                      <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: '#48546A' }}>
-                        Estimate Saved Successfully!
-                      </h3>
-                      <p className="text-gray-600 text-sm sm:text-base mb-2">
-                        Thank you for using our quote calculator. Your estimate has been saved and we've recorded all your details.
-                      </p>
-                      <p className="text-gray-600 text-sm sm:text-base font-medium">
-                        A member of our team will contact you within 24 hours to confirm your booking and discuss any questions you may have.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
               {/* Banner */}
               <div className="mb-6 sm:mb-8">
                 <Banner imageSrc="/images/banner.jpg" alt="Promotional Banner" />
@@ -281,6 +273,9 @@ export default function FormSummary({
                 );
               })}
 
+              {/* What Happens Next Button */}
+              <WhatsNextButton />
+
               {/* Close Button */}
               <button
                 onClick={onClose}
@@ -293,15 +288,15 @@ export default function FormSummary({
         </div>
       ) : (
         // Page View
-        <div className="min-h-screen bg-white" style={{ marginTop: '20px' }}>
+        <div className="h-screen bg-white overflow-hidden flex flex-col" style={{ marginTop: '20px' }}>
           {/* Full-width Banner */}
-          <div className="mb-0 mt-5 sm:mt-0">
-            <Banner imageSrc="/icons/Untitled design.png" logoSrc="/icons/WW635.jpg" logoAlt="Logo" height="h-64 sm:screen-1/2" additionalHeight="10px" />
+          <div className="flex-shrink-0">
+            <Banner imageSrc="/icons/Untitled design.png" logoSrc="/icons/WW635.jpg" logoAlt="Logo" height="h-96 sm:screen-3/4" additionalHeight="10px" />
           </div>
 
-          <div className="p-6 sm:p-8 max-w-4xl mx-auto space-y-4 sm:space-y-6">
+          <div className="flex-1 pb-6 sm:pb-8 px-6 sm:px-8 max-w-4xl mx-auto space-y-4 sm:space-y-6 overflow-hidden w-full">
             {/* Price Summary Section */}
-            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 relative z-20" style={{ marginTop: '-50px' }}>
+            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 relative z-20">
               <PricingCards />
             </div>
 
@@ -309,26 +304,6 @@ export default function FormSummary({
             <div className="mb-6 sm:mb-8">
               <FeedbackWidget />
             </div>
-
-            {/* Success Message */}
-            {saveStatus === 'success' && (
-              <div className="mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 text-2xl">✓</div>
-                  <div className="flex-grow">
-                    <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: '#48546A' }}>
-                      Estimate Saved Successfully!
-                    </h3>
-                    <p className="text-gray-600 text-sm sm:text-base mb-2">
-                      Thank you for using our quote calculator. Your estimate has been saved and we've recorded all your details.
-                    </p>
-                    <p className="text-gray-600 text-sm sm:text-base font-medium">
-                      A member of our team will contact you within 24 hours to confirm your booking and discuss any questions you may have.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
 
             {/* Banner */}
             <div className="mb-6 sm:mb-8">
@@ -402,7 +377,7 @@ export default function FormSummary({
                   {/* Contact Information */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
                     <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                      <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
+                      <span className="text-xl">👤</span>
                       Contact Information
                     </h3>
                     <div className="space-y-2">
@@ -416,7 +391,7 @@ export default function FormSummary({
                   {/* Preferences */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
                     <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                      <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
+                      <span className="text-xl">⚙️</span>
                       Preferences
                     </h3>
                     <div className="grid grid-cols-2 gap-4">
@@ -430,7 +405,7 @@ export default function FormSummary({
                   {/* Service Details */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
                     <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                      <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
+                      <span className="text-xl">🏠</span>
                       Service Details
                     </h3>
                     <div className="overflow-x-auto">
@@ -490,7 +465,7 @@ export default function FormSummary({
                   {/* Add-ons & Extras */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
                     <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                      <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
+                      <span className="text-xl">✨</span>
                       Add-ons & Extras
                     </h3>
                     <div className="overflow-x-auto">
@@ -546,7 +521,7 @@ export default function FormSummary({
               {/* Contact Information */}
               <div className="border-b border-gray-200 pb-4 sm:pb-6">
                 <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                  <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
+                  <span className="text-xl">👤</span>
                   Contact Information
                 </h3>
                 <div className="space-y-2">
@@ -560,7 +535,7 @@ export default function FormSummary({
               {/* Preferences */}
               <div className="border-b border-gray-200 pb-4 sm:pb-6">
                 <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                  <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
+                  <span className="text-xl">⚙️</span>
                   Preferences
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
@@ -574,7 +549,7 @@ export default function FormSummary({
               {/* Service Details */}
               <div className="border-b border-gray-200 pb-4 sm:pb-6">
                 <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                  <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
+                  <span className="text-xl">🏠</span>
                   Service Details
                 </h3>
                 <div className="overflow-x-auto">
@@ -634,7 +609,7 @@ export default function FormSummary({
               {/* Add-ons & Extras */}
               <div className="border-b border-gray-200 pb-4 sm:pb-6">
                 <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                  <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
+                  <span className="text-xl">✨</span>
                   Add-ons & Extras
                 </h3>
                 <div className="overflow-x-auto">
@@ -665,6 +640,182 @@ export default function FormSummary({
                     </tbody>
                   </table>
                 </div>
+              </div>
+            </div>
+
+            {/* What Happens Next Button */}
+            <WhatsNextButton />
+          </div>
+
+        </div>
+      )}
+
+      {/* Pricing Modal - for Modal View */}
+      {isModal && showPricingModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
+            <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center" style={{backgroundColor: '#48546A'}}>
+              <h2 className="text-lg sm:text-2xl font-bold font-heading">Pricing Breakdown</h2>
+              <button
+                onClick={() => setShowPricingModal(false)}
+                className="text-white rounded-full w-10 h-10 flex items-center justify-center transition" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
+              {/* What Comes Next */}
+              <div className="border-b border-gray-200 pb-4 sm:pb-6">
+                <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
+                  <span className="text-xl">📋</span>
+                  What Comes Next
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex gap-3 items-start">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{backgroundColor: '#48546A'}}>1</div>
+                    <div>
+                      <p className="font-semibold" style={{color: '#4B5368'}}>Estimate Confirmation</p>
+                      <p className="text-sm" style={{color: '#4B5368'}}>Your quote has been generated and saved with all your details.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{backgroundColor: '#48546A'}}>2</div>
+                    <div>
+                      <p className="font-semibold" style={{color: '#4B5368'}}>We'll Contact You</p>
+                      <p className="text-sm" style={{color: '#4B5368'}}>A member of our team will reach out within 24 hours to confirm your booking and answer any questions.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{backgroundColor: '#48546A'}}>3</div>
+                    <div>
+                      <p className="font-semibold" style={{color: '#4B5368'}}>Schedule Your Service</p>
+                      <p className="text-sm" style={{color: '#4B5368'}}>We'll find a time that works best for you and confirm all the details of your cleaning appointment.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{backgroundColor: '#48546A'}}>4</div>
+                    <div>
+                      <p className="font-semibold" style={{color: '#4B5368'}}>Professional Cleaning</p>
+                      <p className="text-sm" style={{color: '#4B5368'}}>Our trained team will arrive on the scheduled date and provide the high-quality cleaning service you've selected.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* How It Works */}
+              <div className="border-b border-gray-200 pb-4 sm:pb-6">
+                <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
+                  <span className="text-xl">⚙️</span>
+                  How It Works
+                </h3>
+                <div className="space-y-2">
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <p className="font-semibold text-sm" style={{color: '#4B5368'}}>Access & Key</p>
+                    <p className="text-xs mt-1" style={{color: '#4B5368'}}>We'll discuss access arrangements during our confirmation call. You can provide a key or arrange to be present during the cleaning.</p>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <p className="font-semibold text-sm" style={{color: '#4B5368'}}>Team & Equipment</p>
+                    <p className="text-xs mt-1" style={{color: '#4B5368'}}>Our professional team brings all necessary cleaning equipment and supplies. We use eco-friendly products unless otherwise specified.</p>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <p className="font-semibold text-sm" style={{color: '#4B5368'}}>Quality Guarantee</p>
+                    <p className="text-xs mt-1" style={{color: '#4B5368'}}>We stand behind our work. If you're not satisfied, we're happy to address any concerns within 48 hours of your cleaning.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Important Info */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p className="text-sm font-semibold mb-2" style={{color: '#4B5368'}}>📞 Need to Make Changes?</p>
+                <p className="text-xs" style={{color: '#4B5368'}}>
+                  If you need to modify your estimate or have any questions before we contact you, please let us know immediately.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Pricing Modal - for Page View */}
+      {!isModal && showPricingModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[95vh] overflow-y-auto">
+            <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center" style={{backgroundColor: '#48546A'}}>
+              <h2 className="text-lg sm:text-2xl font-bold font-heading">Pricing Breakdown</h2>
+              <button
+                onClick={() => setShowPricingModal(false)}
+                className="text-white rounded-full w-10 h-10 flex items-center justify-center transition" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
+              {/* What Comes Next */}
+              <div className="border-b border-gray-200 pb-4 sm:pb-6">
+                <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
+                  <span className="text-xl">📋</span>
+                  What Comes Next
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex gap-3 items-start">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{backgroundColor: '#48546A'}}>1</div>
+                    <div>
+                      <p className="font-semibold" style={{color: '#4B5368'}}>Estimate Confirmation</p>
+                      <p className="text-sm" style={{color: '#4B5368'}}>Your quote has been generated and saved with all your details.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{backgroundColor: '#48546A'}}>2</div>
+                    <div>
+                      <p className="font-semibold" style={{color: '#4B5368'}}>We'll Contact You</p>
+                      <p className="text-sm" style={{color: '#4B5368'}}>A member of our team will reach out within 24 hours to confirm your booking and answer any questions.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{backgroundColor: '#48546A'}}>3</div>
+                    <div>
+                      <p className="font-semibold" style={{color: '#4B5368'}}>Schedule Your Service</p>
+                      <p className="text-sm" style={{color: '#4B5368'}}>We'll find a time that works best for you and confirm all the details of your cleaning appointment.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{backgroundColor: '#48546A'}}>4</div>
+                    <div>
+                      <p className="font-semibold" style={{color: '#4B5368'}}>Professional Cleaning</p>
+                      <p className="text-sm" style={{color: '#4B5368'}}>Our trained team will arrive on the scheduled date and provide the high-quality cleaning service you've selected.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* How It Works */}
+              <div className="border-b border-gray-200 pb-4 sm:pb-6">
+                <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
+                  <span className="text-xl">⚙️</span>
+                  How It Works
+                </h3>
+                <div className="space-y-2">
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <p className="font-semibold text-sm" style={{color: '#4B5368'}}>Access & Key</p>
+                    <p className="text-xs mt-1" style={{color: '#4B5368'}}>We'll discuss access arrangements during our confirmation call. You can provide a key or arrange to be present during the cleaning.</p>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <p className="font-semibold text-sm" style={{color: '#4B5368'}}>Team & Equipment</p>
+                    <p className="text-xs mt-1" style={{color: '#4B5368'}}>Our professional team brings all necessary cleaning equipment and supplies. We use eco-friendly products unless otherwise specified.</p>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <p className="font-semibold text-sm" style={{color: '#4B5368'}}>Quality Guarantee</p>
+                    <p className="text-xs mt-1" style={{color: '#4B5368'}}>We stand behind our work. If you're not satisfied, we're happy to address any concerns within 48 hours of your cleaning.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Important Info */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p className="text-sm font-semibold mb-2" style={{color: '#4B5368'}}>📞 Need to Make Changes?</p>
+                <p className="text-xs" style={{color: '#4B5368'}}>
+                  If you need to modify your estimate or have any questions before we contact you, please let us know immediately.
+                </p>
               </div>
             </div>
           </div>
