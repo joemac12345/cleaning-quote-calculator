@@ -3,9 +3,9 @@
 import React, { useState, useMemo } from 'react';
 import { formSteps } from '@/app/config/formConfig';
 import { calculateQuote, QuoteStats } from '@/app/utils/quoteCalculation';
-import Banner from '@/app/components/Banner';
-import FeedbackWidget from '@/app/components/FeedbackWidget';
-import WhatsNextButton from '@/app/components/WhatsNextButton';
+import Banner from '@/app/components/fields/End-page/Banner';
+import FeedbackWidget from '@/app/components/fields/End-page/FeedbackWidget';
+import WhatsNextButton from '@/app/components/fields/End-page/WhatsNextButton';
 
 interface FormSummaryProps {
   formData: Record<string, any>;

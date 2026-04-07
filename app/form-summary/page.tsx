@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import FormSummary from '@/app/components/fields/End -page/FormSummary';
+import FormSummary from '@/app/components/fields/End-page/FormSummary';
 import { saveEstimateToDatabase } from '@/app/utils/estimateService';
 
 export default function FormSummaryPage() {
