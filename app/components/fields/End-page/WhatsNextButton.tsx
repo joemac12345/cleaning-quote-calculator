@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import WhatsNextModal from './WhatsNextModal';
+import { useState, lazy, Suspense } from 'react';
+import ModalSkeleton from '@/app/components/shared/ModalSkeleton';
+
+const WhatsNextModal = lazy(() => import('./WhatsNextModal'));
 
 export default function WhatsNextButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +24,11 @@ export default function WhatsNextButton() {
       </div>
 
       {/* Modal */}
-      <WhatsNextModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      {isOpen && (
+        <Suspense fallback={<ModalSkeleton />}>
+          <WhatsNextModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        </Suspense>
+      )}
     </>
   );
 }

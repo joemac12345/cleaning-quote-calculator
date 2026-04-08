@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 interface RadioFieldProps {
   label: string;
   options: Array<{ label: string; value: string | number; time?: number; icon?: string }>;
@@ -39,10 +41,13 @@ export default function RadioField({
 
               {/* Icon - centered */}
               {option.icon && (
-                <img
+                <Image
                   src={option.icon}
                   alt={String(option.label)}
+                  width={112}
+                  height={112}
                   className="w-20 h-20 sm:w-28 sm:h-28 object-contain"
+                  sizes="(max-width: 640px) 80px, 112px"
                 />
               )}
 

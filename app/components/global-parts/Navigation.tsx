@@ -2,67 +2,112 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const slideDownStyle = `
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  `;
 
   const pages = [
     { label: 'Estimate', href: '/01-estimate' },
     { label: 'Booking', href: '/booking' },
   ];
 
-  const adminPages = [
-    { label: 'Admin - Estimates', href: '/admin' },
-    { label: 'Admin - Feedback', href: '/admin/feedback' },
-  ];
+
 
   return (
-    <nav className="sticky top-0 z-40">
+    <>
+      <style>{slideDownStyle}</style>
+      <nav className="sticky top-0 z-40">
       <div className="max-w-2xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <img 
+            <Image 
               src="/icons/WW635.jpg" 
               alt="Company Logo" 
-              className="h-10 sm:h-12"
+              width={48}
+              height={48}
+              className="h-10 sm:h-12 w-auto"
+              priority
             />
           </Link>
 
-          {/* Hamburger Icon */}
-          <button
-            onClick={() => setIsOpen(true)}
-            className="p-2 rounded-lg hover:bg-gray-100 transition"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-8 h-8 text-[#48546A]"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="flex items-center gap-2">
+            {/* Admin Icon */}
+            <Link
+              href="/admin"
+              className="p-2 rounded-full hover:bg-gray-100 transition bg-gray-50"
+              aria-label="Admin"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-8 h-8 text-[#48546A]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 12a4 4 0 100-8 4 4 0 000 8z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M20 21v-2a6 6 0 00-6-6H10a6 6 0 00-6 6v2"
+                />
+              </svg>
+            </Link>
+
+            {/* Hamburger Icon */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="p-2 rounded-lg hover:bg-gray-100 transition"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="w-8 h-8 text-[#48546A]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Modal Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 transition"
+          className="fixed inset-0 z-40 transition"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Navigation Modal */}
       {isOpen && (
-        <div className="fixed top-20 right-4 bg-white rounded-lg z-50 w-80 overflow-hidden max-h-[80vh] overflow-y-auto">
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-gray-50 z-50 max-w-2xl w-11/12 sm:w-full overflow-hidden max-h-[80vh] overflow-y-auto shadow-lg" style={{ animation: 'slideDown 0.3s ease-out' }}>
           {/* Header */}
           <div
             className="text-white px-6 py-4 flex justify-between items-center sticky top-0"
@@ -79,11 +124,12 @@ export default function Navigation() {
           </div>
 
           {/* Main Pages */}
-          <nav className="p-4 space-y-2 border-b border-gray-200">
+          <nav className="p-4 space-y-2">
             {pages.map((page) => (
               <Link
                 key={page.href}
                 href={page.href}
+                prefetch={true}
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-3 rounded-lg hover:bg-gray-100 transition font-medium text-[#48546A]"
               >
@@ -91,25 +137,9 @@ export default function Navigation() {
               </Link>
             ))}
           </nav>
-
-          {/* Admin Pages */}
-          <div className="p-4">
-            <p className="text-xs font-semibold text-gray-500 uppercase mb-3 px-4">Admin</p>
-            <nav className="space-y-2">
-              {adminPages.map((page) => (
-                <Link
-                  key={page.href}
-                  href={page.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block px-4 py-3 rounded-lg hover:bg-gray-100 transition font-medium text-[#48546A]"
-                >
-                  {page.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
         </div>
       )}
-    </nav>
+      </nav>
+    </>
   );
 }

@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 interface CounterFieldProps {
   label: string;
   value: number;
@@ -23,10 +25,13 @@ export default function CounterField({
       <div className="flex items-center gap-3 flex-1 min-w-0">
         {icon && (
           <div className="flex-shrink-0">
-            <img
+            <Image
               src={icon}
               alt={label}
+              width={80}
+              height={80}
               className="w-16 h-16 sm:w-20 sm:h-20 object-cover"
+              sizes="(max-width: 640px) 64px, 80px"
             />
           </div>
         )}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface OptionsCounterFieldProps {
   label: string;
@@ -64,10 +65,13 @@ export default function OptionsCounterField({
                         onClick={() => option.description && setSelectedModal(String(option.value))}
                         title="Click for more information"
                       >
-                        <img
+                        <Image
                           src={option.icon}
                           alt={String(option.label)}
+                          width={48}
+                          height={48}
                           className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded"
+                          sizes="(max-width: 640px) 40px, 48px"
                         />
                         {option.description && (
                           <div className="absolute -top-1 -left-1 w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold leading-none animate-pulse-ring">

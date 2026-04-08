@@ -2,12 +2,14 @@
 
 export const dynamic = 'force-dynamic';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { getEstimates, searchEstimates, deleteEstimate, updateEstimateStatus } from '@/app/utils/estimateService';
-import { NotesModal } from '@/app/components/admin/NotesModal';
 import { StatusSelector } from '@/app/components/admin/job-status/StatusSelector';
 import { StatusFilter } from '@/app/components/admin/job-status/StatusFilter';
 import { AdminNavigation } from '@/app/components/admin/nav-admin';
+import ModalSkeleton from '@/app/components/shared/ModalSkeleton';
+
+const NotesModal = lazy(() => import('@/app/components/admin/NotesModal').then(mod => ({ default: mod.NotesModal })));
 
 const STATUS_OPTIONS = [
   { value: 'new', label: 'New' },
@@ -672,14 +674,16 @@ export default function AdminPage() {
       )}
 
       {/* Notes Modal */}
-      <NotesModal
-        isOpen={showNotesModal}
-        estimateId={selectedEstimate?.id || ''}
-        customerName={selectedEstimate?.customer_name || ''}
-        notes={selectedEstimate?.notes}
-        onClose={() => setShowNotesModal(false)}
-        onNotesUpdate={handleNotesUpdate}
-      />
+      <Suspense fallback={showNotesModal ? <ModalSkeleton /> : null}>
+        <NotesModal
+          isOpen={showNotesModal}
+          estimateId={selectedEstimate?.id || ''}
+          customerName={selectedEstimate?.customer_name || ''}
+          notes={selectedEstimate?.notes}
+          onClose={() => setShowNotesModal(false)}
+          onNotesUpdate={handleNotesUpdate}
+        />
+      </Suspense>
 
       {/* Admin Navigation */}
       <AdminNavigation />

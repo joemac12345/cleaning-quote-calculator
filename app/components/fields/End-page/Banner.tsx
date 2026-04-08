@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 interface BannerProps {
   imageSrc?: string;
   alt?: string;
@@ -34,11 +36,14 @@ export default function Banner({
       }}
     >
       {logoSrc && (
-        <img
+        <Image
           src={logoSrc}
           alt={logoAlt}
-          className="absolute top-0 h-12 sm:h-24 object-contain z-0"
+          width={96}
+          height={96}
+          className="absolute top-0 h-12 sm:h-24 w-auto object-contain z-0"
           style={{ left: '20px' }}
+          sizes="(max-width: 640px) 48px, 96px"
         />
       )}
     </div>
