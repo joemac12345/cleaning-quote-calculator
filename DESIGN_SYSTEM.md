@@ -145,9 +145,9 @@ When using icons without text, **always provide `aria-label`** for accessibility
 ## Typography
 
 ### Font Families
-- **Headings (H1-H4)**: `font-poppins` (weight: 400/normal) — friendly, rounded aesthetic
-- **Body/Default**: `font-inter` (weights: 400)
-- **Available Alternative**: None currently (Outfit available in globals.css if needed)
+- **Headings (H1-H4)**: `font-poppins` — friendly, rounded aesthetic (weight: 100/thin for elegance)
+- **Body/Default**: `font-inter` (weight: 400) — clean, legible body text
+- **CTA/Button Text**: `font-poppins` (weight: 600/semibold for prominence) — stronger presence for interactive elements
 
 ### Font Hierarchy & Responsive Sizing
 
@@ -193,8 +193,9 @@ All sizes are responsive (mobile-first, scale up) using Tailwind's breakpoint sy
 ### Whitespace Principles
 - **Generous padding inside containers**: Forms, cards, modals use `px-4 py-4` minimum
 - **Gap between elements**: Use `gap-3` or `gap-4` for consistent rhythm
-- **Vertical breathing room**: Add space between sections with `mb-6` or `space-y-6`
+- **Vertical breathing room**: Add space between sections with `mb-20 sm:mb-24` (80-96px) for major sections
 - **Mobile padding**: Always include adequate padding on mobile (`px-3 sm:px-4`)
+- **Section spacing standard**: Major sections separated by `space-y-20` (80px) minimum
 
 ### Component Density
 - Avoid packing elements tightly — each component needs visual isolation
@@ -207,24 +208,26 @@ All sizes are responsive (mobile-first, scale up) using Tailwind's breakpoint sy
 
 ### Buttons
 
-**Default Button** (Primary)
+**Primary Button (CTA - Call-to-Action)**
+Use for main actions: submit, book, next, send. Weight: **semibold** (`font-poppins font-semibold`) for prominence.
 ```jsx
-<button className="px-4 py-3 bg-[#48546A] text-white rounded-lg font-outfit font-600 text-base hover:opacity-90 focus:ring-2 focus:ring-[#48546A] focus:outline-none disabled:opacity-50 transition">
-  Click Me
+<button className="px-6 py-3 sm:py-4 bg-[#48546A] text-white rounded-lg font-poppins font-semibold text-base hover:opacity-90 focus:ring-2 focus:ring-[#48546A] focus:outline-none disabled:opacity-50 transition">
+  Get Started
 </button>
 ```
 
-**Secondary Button**
+**Secondary Button (Regular Actions)**
+Use for secondary actions: cancel, back, learn more. Weight: **thin** (`font-poppins font-thin`) to de-emphasize.
 ```jsx
-<button className="px-4 py-3 bg-gray-100 text-gray-900 rounded-lg font-outfit font-600 text-base hover:bg-gray-200 focus:ring-2 focus:ring-[#48546A] focus:outline-none disabled:opacity-50 transition">
-  Secondary
+<button className="px-4 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg font-poppins font-thin text-base hover:bg-gray-50 focus:ring-2 focus:ring-[#48546A] focus:outline-none disabled:opacity-50 transition">
+  Learn More
 </button>
 ```
 
-**Outline Button**
+**Outline Button (Tertiary)**
 ```jsx
-<button className="px-4 py-3 border-2 border-[#48546A] bg-white text-[#48546A] rounded-lg font-outfit font-600 text-base hover:bg-slate-50 focus:ring-2 focus:ring-[#48546A] focus:outline-none disabled:opacity-50 transition">
-  Outline
+<button className="px-4 py-3 border-2 border-[#48546A] bg-white text-[#48546A] rounded-lg font-poppins font-semibold text-base hover:bg-slate-50 focus:ring-2 focus:ring-[#48546A] focus:outline-none disabled:opacity-50 transition">
+  Outline CTA
 </button>
 ```
 

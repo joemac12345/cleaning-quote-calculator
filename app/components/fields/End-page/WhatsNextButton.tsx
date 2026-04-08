@@ -14,7 +14,7 @@ export default function WhatsNextButton() {
       <div className="mt-8 sm:mt-10">
         <button
           onClick={() => setIsOpen(true)}
-          className="w-full px-6 sm:px-8 py-3 sm:py-4 text-white font-poppins font-thin rounded-lg transition"
+          className="w-full px-6 sm:px-8 py-3 sm:py-4 text-white font-poppins font-semibold rounded-lg transition"
           style={{ backgroundColor: '#48546A' }}
           onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'}
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}

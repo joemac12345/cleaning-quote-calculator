@@ -167,14 +167,14 @@ export default function FormSummary({
               <button
                 onClick={() => setShowDetailsModal(true)}
                 title="View estimate details"
-                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-poppins font-thin rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}  
+                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-poppins font-semibold rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}  
               >
                 Estimate Details
               </button>
               <button
                 onClick={() => setShowPricingModal(true)}
                 title="View what comes next"
-                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-poppins font-thin rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-poppins font-semibold rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
               >
                 What Comes Next?
               </button>

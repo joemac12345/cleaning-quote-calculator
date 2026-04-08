@@ -76,7 +76,7 @@ export default function WhatsNextModal({ isOpen, onClose }: WhatsNextModalProps)
         <div className="border-t border-gray-300 p-6 sm:p-8">
           <button
             onClick={onClose}
-            className="w-full px-6 py-3 text-white font-poppins font-thin rounded-lg transition"
+            className="w-full px-6 py-3 text-white font-poppins font-semibold rounded-lg transition"
             style={{ backgroundColor: '#48546A' }}
             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'}
             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
