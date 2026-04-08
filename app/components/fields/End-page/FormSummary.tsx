@@ -6,6 +6,7 @@ import { calculateEstimate, EstimateStats } from '@/app/utils/estimateCalculatio
 import Banner from './Banner';
 import FeedbackWidget from '../price-feed-back/FeedbackWidget';
 import WhatsNextButton from './WhatsNextButton';
+import EstimateOptionsMenu from './EstimateOptionsMenu';
 
 interface FormSummaryProps {
   formData: Record<string, any>;
@@ -146,10 +147,20 @@ export default function FormSummary({
       ) : (
         <>
           {/* Your First Clean */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 relative flex flex-col">
-            <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
-              <h3 className="heading-h2 text-primary">Your First Clean</h3>
-              <p className="text-3xl sm:text-4xl font-bold flex-shrink-0 text-primary font-poppins">£{isFinite(estimateStats.firstCleanPrice) ? estimateStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
+          <div className="border border-gray-200 rounded-lg p-4 sm:p-6 relative flex flex-col">
+            {/* Header with title and menu */}
+            <div className="flex justify-between items-start mb-4 sm:mb-6">
+              <div className="flex flex-col justify-between items-start gap-2 sm:gap-4">
+                <h3 className="heading-h2 text-primary">Your First Clean</h3>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-3xl sm:text-4xl font-bold text-primary font-poppins">£{isFinite(estimateStats.firstCleanPrice) ? estimateStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
+                  <p className="text-xs sm:text-sm text-pink-500 font-inter font-semibold">Fixed cost</p>
+                </div>
+              </div>
+              <EstimateOptionsMenu
+                onEstimateDetails={() => setShowDetailsModal(true)}
+                onWhatComesNext={() => setShowPricingModal(true)}
+              />
             </div>
             <div>
               <p className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3 text-primary font-poppins">What's Included</p>
@@ -158,41 +169,28 @@ export default function FormSummary({
             <div>
               <p className="text-xs sm:text-sm text-primary font-inter font-normal">The time will be dependent on the team size. Larger teams can complete your clean faster, while smaller teams may take longer - quality is kept to the highest priority.</p>
             </div>
-            <div className="hidden">
+            <div>
               <p className="text-xs sm:text-sm font-semibold mb-1 sm:mb-2 text-primary font-poppins">Estimated Cleaning Time</p>
               <p className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3 text-primary font-poppins">{estimateStats.firstCleanHours || 0}h {estimateStats.firstCleanMinutes || 0}m</p>
               <p className="text-xs sm:text-sm text-primary font-inter font-normal">This is our estimated time to complete your cleaning based on your requirements. Actual time may vary slightly.</p>
-            </div>
-            <div className="flex flex-row gap-2 mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-blue-300 flex-shrink-0">
-              <button
-                onClick={() => setShowDetailsModal(true)}
-                title="View estimate details"
-                className="btn-primary px-3 sm:px-4 py-2 text-xs sm:text-sm font-poppins font-semibold rounded-lg transition flex-1"
-              >
-                Estimate Details
-              </button>
-              <button
-                onClick={() => setShowPricingModal(true)}
-                title="View what comes next"
-                className="btn-primary px-3 sm:px-4 py-2 text-xs sm:text-sm font-poppins font-semibold rounded-lg transition flex-1"
-              >
-                What Comes Next?
-              </button>
             </div>
           </div>
 
           {/* Maintenance Price - only show if not one-off */}
           {(formData.frequency || 'one-off') !== 'one-off' && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-6 hidden">
+            <div className="border border-gray-200 rounded-lg p-4 sm:p-6">
               <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
                 <h3 className="heading-h2 text-primary">Maintenance Price</h3>
-                <p className="text-3xl sm:text-4xl font-bold flex-shrink-0 text-primary font-poppins">£{isFinite(estimateStats.maintenancePrice) ? estimateStats.maintenancePrice.toFixed(2) : '0.00'}</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-3xl sm:text-4xl font-bold text-primary font-poppins">£{isFinite(estimateStats.maintenancePrice) ? estimateStats.maintenancePrice.toFixed(2) : '0.00'}</p>
+                  <p className="text-xs sm:text-sm text-pink-500 font-inter font-semibold">Flexible</p>
+                </div>
               </div>
               <div className="mb-3 sm:mb-4">
                 <p className="text-xs sm:text-sm font-semibold mb-1 text-primary font-poppins">Per clean going forward</p>
                 <p className="text-xs sm:text-sm text-primary font-inter font-normal">Regular price for each scheduled cleaning ({formData.frequency || 'one-off'})</p>
               </div>
-              <div className="hidden">
+              <div>
                 <p className="text-xs sm:text-sm font-semibold mb-2 text-primary font-poppins">Estimated Maintenance Time</p>
                 <p className="text-base sm:text-lg font-bold text-primary font-poppins">{estimateStats.maintenanceHours || 0}h {estimateStats.maintenanceMinutes || 0}m</p>
               </div>
@@ -209,21 +207,16 @@ export default function FormSummary({
         // Modal View
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
           <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl w-full sm:max-w-2xl h-screen sm:h-auto sm:max-h-[95vh] overflow-y-auto">
-            <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
+            <div className="p-6 sm:p-8 space-y-6">
               {/* Price Summary Section */}
-              <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+              <section className="space-y-6">
                 <PricingCards />
-              </div>
-
-              {/* Feedback Widget */}
-              <div className="mb-6 sm:mb-8">
-                <FeedbackWidget />
-              </div>
+              </section>
 
               {/* Banner */}
-              <div className="mb-6 sm:mb-8">
+              <section>
                 <Banner imageSrc="/images/banner.jpg" alt="Promotional Banner" />
-              </div>
+              </section>
 
               {/* Optional Services */}
               {getSummaryGroups().map((group) => {
@@ -288,27 +281,17 @@ export default function FormSummary({
         </div>
       ) : (
         // Page View
-        <div className="h-screen bg-white overflow-hidden flex flex-col">
-          {/* Full-width Banner */}
-          <div className="flex-shrink-0 max-w-[320px] sm:max-w-[600px]" style={{ width: '100%', height: 'auto', aspectRatio: '320 / 150' }}>
-            <Banner imageSrc="/New .png" height="h-full" logoSrc="/icons/WW635.jpg" logoAlt="Logo" additionalHeight="0px" backgroundPosition="20px top" />
-          </div>
-
-          <div className="flex-1 pb-4 sm:pb-6 px-6 sm:px-8 max-w-4xl mx-auto space-y-2 sm:space-y-4 overflow-hidden w-full">
+        <div className="min-h-screen bg-white flex flex-col">
+          <div className="flex-1 px-6 sm:px-8 py-8 sm:py-12 max-w-4xl mx-auto w-full space-y-8">
             {/* Price Summary Section */}
-            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 relative z-20">
+            <section className="space-y-6">
               <PricingCards />
-            </div>
-
-            {/* Feedback Widget */}
-            <div className="mb-6 sm:mb-8">
-              <FeedbackWidget />
-            </div>
+            </section>
 
             {/* Banner */}
-            <div className="mb-6 sm:mb-8">
+            <section>
               <Banner imageSrc="/images/banner.jpg" alt="Promotional Banner" />
-            </div>
+            </section>
 
             {/* Optional Services */}
             {getSummaryGroups().map((group) => {

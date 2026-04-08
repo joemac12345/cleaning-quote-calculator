@@ -47,6 +47,7 @@ export async function saveEstimateToDatabase(formData: Record<string, any>): Pro
       first_clean_minutes: estimateStats.firstCleanMinutes,
       maintenance_hours: estimateStats.maintenanceHours,
       maintenance_minutes: estimateStats.maintenanceMinutes,
+      status: 'new',
     };
 
     // Insert into Supabase directly

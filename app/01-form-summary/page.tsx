@@ -52,7 +52,7 @@ export default function FormSummaryPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-600">Loading your estimate...</div>
+        <div className="text-secondary font-inter font-normal">Loading your estimate...</div>
       </div>
     );
   }
@@ -60,7 +60,7 @@ export default function FormSummaryPage() {
   if (!formData) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-600">No estimate data found. Redirecting...</div>
+        <div className="text-secondary font-inter font-normal">No estimate data found. Redirecting...</div>
       </div>
     );
   }
@@ -69,12 +69,12 @@ export default function FormSummaryPage() {
     <>
       {/* Save Status Indicator */}
       {isSaving && (
-        <div className="fixed top-4 right-4 bg-primary text-white px-4 py-2 rounded-lg font-poppins font-thin">
+        <div className="fixed top-4 right-4 bg-primary text-white px-4 py-2 rounded-lg font-poppins font-semibold z-50">
           Saving estimate...
         </div>
       )}
       {saveStatus === 'error' && (
-        <div className="fixed top-4 right-4 bg-primary text-white px-4 py-2 rounded-lg font-poppins font-thin">
+        <div className="fixed top-4 right-4 bg-primary text-white px-4 py-2 rounded-lg font-poppins font-semibold z-50">
           ✕ Failed to save estimate
         </div>
       )}

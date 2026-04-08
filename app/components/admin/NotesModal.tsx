@@ -221,10 +221,10 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-2xl h-[90vh] flex flex-col overflow-hidden rounded-lg border border-gray-300">
         {/* Header */}
-        <div className="text-white px-6 py-4 flex justify-between items-center" style={{ backgroundColor: '#4B5368' }}>
+        <div className="text-white px-6 py-4 flex justify-between items-center bg-primary">
           <div className="flex-1">
-            <h2 className="text-xl font-poppins font-thin">{customerName}</h2>
-            <p className="text-sm opacity-90">Notes & Messages</p>
+            <h2 className="text-xl font-poppins font-semibold">{customerName}</h2>
+            <p className="text-sm opacity-90 font-inter font-normal">Notes & Messages</p>
           </div>
           <button
             onClick={onClose}
@@ -239,8 +239,8 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
           {notesList.length === 0 ? (
             <div className="h-full flex items-center justify-center">
               <div className="text-center text-gray-400">
-                <p className="text-lg font-poppins font-thin">No notes yet</p>
-                <p className="text-sm">Start the conversation by adding a note</p>
+                <p className="text-lg font-poppins font-semibold">No notes yet</p>
+                <p className="text-sm font-inter font-normal">Start the conversation by adding a note</p>
               </div>
             </div>
           ) : (
@@ -256,7 +256,7 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
                         setEditingNoteText(e.target.value);
                         adjustEditHeight();
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#48546A] focus:border-transparent resize-none"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent resize-none font-inter font-normal"
                       style={{ height: editHeight, maxHeight: '200px', minHeight: '80px' }}
                       disabled={isLoading}
                     />
@@ -264,14 +264,14 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
                       <button
                         onClick={() => handleEditNote(note.id)}
                         disabled={isLoading || !editingNoteText.trim()}
-                        className="px-4 py-1.5 bg-[#48546A] hover:opacity-90 disabled:opacity-50 text-white text-sm font-poppins font-thin rounded transition"
+                        className="btn-primary px-4 py-1.5 hover:opacity-90 disabled:opacity-50 text-white text-sm font-poppins font-semibold rounded transition"
                       >
                         Save
                       </button>
                       <button
                         onClick={() => setEditingNoteId(null)}
                         disabled={isLoading}
-                        className="px-4 py-1.5 bg-gray-300 hover:opacity-90 text-gray-900 text-sm font-poppins font-thin rounded transition"
+                        className="px-4 py-1.5 bg-gray-300 hover:opacity-90 text-gray-900 text-sm font-poppins font-semibold rounded transition"
                       >
                         Cancel
                       </button>
@@ -282,31 +282,31 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
                   <div className="flex gap-3">
                     {/* Avatar */}
                     <div className="flex-shrink-0">
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{ backgroundColor: '#4B5368' }}>
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold bg-primary">
                         N
                       </div>
                     </div>
                     {/* Message Bubble */}
                     <div className="flex-1 max-w-xl">
                       <div className="bg-white rounded-lg p-3 border border-gray-300 shadow-sm">
-                        <p className="text-sm text-gray-800 whitespace-pre-wrap break-words leading-relaxed">{note.text}</p>
+                        <p className="text-sm text-gray-800 whitespace-pre-wrap break-words leading-relaxed font-inter font-normal">{note.text}</p>
                       </div>
                       <div className="flex items-center gap-2 mt-1.5 px-2">
-                        <p className="text-xs text-gray-500">{formatNoteTime(note.timestamp)}</p>
+                        <p className="text-xs text-gray-500 font-inter font-normal">{formatNoteTime(note.timestamp)}</p>
                         <button
                           onClick={() => {
                             setEditingNoteId(note.id);
                             setEditingNoteText(note.text);
                           }}
                           disabled={isLoading}
-                          className="text-xs text-blue-500 hover:text-blue-700 font-poppins font-thin transition disabled:opacity-50"
+                          className="text-xs text-blue-500 hover:text-blue-700 font-poppins font-semibold transition disabled:opacity-50"
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => handleDeleteNote(note.id)}
                           disabled={isLoading}
-                          className="text-xs text-red-500 hover:text-red-700 font-poppins font-thin transition disabled:opacity-50"
+                          className="text-xs text-red-500 hover:text-red-700 font-poppins font-semibold transition disabled:opacity-50"
                         >
                           Delete
                         </button>
@@ -321,7 +321,7 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
         </div>
 
         {/* Input Area */}
-        <div className="border-t border-gray-200 bg-white p-4">
+        <div className="border-t border-gray-300 bg-white p-4">
           <div className="flex gap-2 items-flex-end">
             <textarea
               ref={inputTextareaRef}
@@ -336,15 +336,14 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
                 }
               }}
               placeholder="Add a note... (Ctrl+Enter to send)"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 resize-none"
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none font-inter font-normal"
               style={{ height: inputHeight, maxHeight: '200px', minHeight: '44px' }}
               disabled={isLoading}
             />
             <button
               onClick={handleAddNote}
               disabled={isLoading || !newNoteText.trim()}
-              className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg text-white font-bold transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ backgroundColor: '#4B5368' }}
+              className="btn-primary flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg text-white font-bold transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
               title="Send note"
             >
               {isLoading ? '...' : '➤'}

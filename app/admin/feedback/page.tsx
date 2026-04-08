@@ -55,7 +55,7 @@ export default function FeedbackPage() {
   if (isLoading) {
     return (
       <div className="p-6 sm:p-8">
-        <p className="text-gray-600">Loading feedback...</p>
+        <p className="text-secondary font-inter font-normal">Loading feedback...</p>
       </div>
     );
   }
@@ -65,51 +65,51 @@ export default function FeedbackPage() {
 
   return (
     <div className="p-6 sm:p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl sm:text-4xl font-poppins font-thin mb-8" style={{ color: '#48546A' }}>
+      <h1 className="heading-h1 text-primary mb-8">
         Price Feedback
       </h1>
 
       {/* Stats Summary */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <div className="bg-white border border-gray-300 rounded-lg p-6">
           <div className="text-4xl mb-2">👍</div>
-          <div className="text-2xl font-bold mb-1" style={{ color: '#48546A' }}>
+          <div className="text-2xl font-bold mb-1 text-primary font-poppins">
             {thumbsUp}
           </div>
-          <div className="text-sm text-gray-600">Positive feedback</div>
+          <div className="text-sm text-secondary font-inter font-normal">Positive feedback</div>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <div className="bg-white border border-gray-300 rounded-lg p-6">
           <div className="text-4xl mb-2">👎</div>
-          <div className="text-2xl font-bold mb-1" style={{ color: '#48546A' }}>
+          <div className="text-2xl font-bold mb-1 text-primary font-poppins">
             {thumbsDown}
           </div>
-          <div className="text-sm text-gray-600">Negative feedback</div>
+          <div className="text-sm text-secondary font-inter font-normal">Negative feedback</div>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <div className="bg-white border border-gray-300 rounded-lg p-6">
           <div className="text-4xl mb-2">📊</div>
-          <div className="text-2xl font-bold mb-1" style={{ color: '#48546A' }}>
+          <div className="text-2xl font-bold mb-1 text-primary font-poppins">
             {thumbsUpPercentage}%
           </div>
-          <div className="text-sm text-gray-600">Satisfaction rate</div>
+          <div className="text-sm text-secondary font-inter font-normal">Satisfaction rate</div>
         </div>
       </div>
 
       {/* Feedback List */}
-      <div className="bg-white border border-gray-200 rounded-lg">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-xl font-bold" style={{ color: '#48546A' }}>
+      <div className="bg-white border border-gray-300 rounded-lg">
+        <div className="p-6 border-b border-gray-300">
+          <h2 className="text-xl font-bold text-primary font-poppins">
             All Feedback ({total})
           </h2>
         </div>
 
         {feedback.length === 0 ? (
-          <div className="p-6 text-gray-600 text-center">
+          <div className="p-6 text-secondary text-center font-inter font-normal">
             No feedback yet
           </div>
         ) : (
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-gray-300">
             {feedback.map((item) => (
               <div key={item.id} className="p-6 flex items-center justify-between hover:bg-gray-50">
                 <div className="flex items-center gap-4">
@@ -117,14 +117,14 @@ export default function FeedbackPage() {
                     {item.rating ? '👍' : '👎'}
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-secondary font-inter font-normal">
                       {new Date(item.created_at).toLocaleDateString()} {new Date(item.created_at).toLocaleTimeString()}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => deleteFeedback(item.id)}
-                  className="text-sm px-4 py-2 text-red-600 hover:bg-red-50 rounded transition"
+                  className="text-sm px-4 py-2 text-red-600 hover:bg-red-50 rounded transition font-medium"
                 >
                   Delete
                 </button>
