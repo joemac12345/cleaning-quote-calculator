@@ -36,7 +36,7 @@ export default function CounterField({
           </div>
         )}
         <div className="min-w-0">
-          <h3 className="text-base sm:text-lg font-medium break-words" style={{ color: '#48546A' }}>{label}</h3>
+          <h3 className="text-base sm:text-lg font-poppins font-thin break-words" style={{ color: '#48546A' }}>{label}</h3>
           {helpText && <p className="text-xs sm:text-sm text-gray-600 mt-2">{helpText}</p>}
         </div>
       </div>

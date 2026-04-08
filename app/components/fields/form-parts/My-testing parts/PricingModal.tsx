@@ -26,7 +26,7 @@ export default function PricingModal({ formData }: PricingModalProps) {
   const displayMinutes = estimateStats ? (isRecurring ? estimateStats.maintenanceMinutes : estimateStats.firstCleanMinutes) : 0;
 
   return (
-    <div className="fixed top-0 left-0 right-0 bg-white border-b-2 border-blue-200 shadow-md z-50">
+    <div className="fixed top-0 left-0 right-0 bg-white border-b border-gray-300 z-50">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
         {/* Left: Service Type */}
         <div className="flex-1">
@@ -46,7 +46,7 @@ export default function PricingModal({ formData }: PricingModalProps) {
         {/* Right: Current Price */}
         <div className="flex-1 text-right">
           <p className="text-xs sm:text-sm text-gray-600">Current Price</p>
-          <p className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">
+          <p className="text-2xl sm:text-3xl font-bold text-[#48546A]">
             £{isFinite(displayPrice) ? displayPrice.toFixed(2) : '0.00'}
           </p>
         </div>

@@ -113,7 +113,7 @@ export default function Navigation() {
             className="text-white px-6 py-4 flex justify-between items-center sticky top-0"
             style={{ backgroundColor: '#4B5368' }}
           >
-            <h2 className="text-lg font-bold font-heading">Navigation</h2>
+            <h2 className="text-lg font-poppins font-thin">Navigation</h2>
             <button
               onClick={() => setIsOpen(false)}
               className="text-white hover:opacity-80 transition text-2xl leading-none"
@@ -131,7 +131,7 @@ export default function Navigation() {
                 href={page.href}
                 prefetch={true}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 rounded-lg hover:bg-gray-100 transition font-medium text-[#48546A]"
+                className="block px-4 py-3 rounded-lg hover:bg-gray-100 transition font-poppins font-thin text-[#48546A]"
               >
                 {page.label}
               </Link>

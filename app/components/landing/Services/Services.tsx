@@ -9,7 +9,7 @@ export default function Services() {
   return (
     <section className="py-8 sm:py-12 px-3 sm:px-4 bg-white">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl text-[#48546A] mb-3 sm:mb-4" style={{ fontWeight: 50 }}>
+        <h2 className="text-3xl sm:text-4xl text-[#48546A] mb-3 sm:mb-4 font-poppins font-thin">
           {title}
         </h2>
         <p className="text-base sm:text-lg text-[#48546A] mb-8 sm:mb-10 font-normal">
@@ -18,7 +18,7 @@ export default function Services() {
 
         <div className="space-y-6">
           {servicesList.map((service: any, index: number) => (
-            <div key={index} className={`flex gap-4 sm:gap-6 items-start pb-6 ${index !== servicesList.length - 1 ? 'border-b border-gray-200' : ''}`}>
+            <div key={index} className={`flex gap-4 sm:gap-6 items-start pb-6 ${index !== servicesList.length - 1 ? 'border-b border-gray-300' : ''}`}>
               <div className="flex-shrink-0">
                 {service.icon && (
                   <Image
@@ -31,7 +31,7 @@ export default function Services() {
                 )}
               </div>
               <div>
-                <h3 className="text-base sm:text-lg text-[#48546A] mb-1 font-normal">
+                <h3 className="text-base sm:text-lg text-[#48546A] mb-1 font-poppins font-thin">
                   {service.title}
                 </h3>
                 <p className="text-base sm:text-lg text-gray-600 font-normal">

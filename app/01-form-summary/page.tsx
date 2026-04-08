@@ -69,12 +69,12 @@ export default function FormSummaryPage() {
     <>
       {/* Save Status Indicator */}
       {isSaving && (
-        <div className="fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg">
+        <div className="fixed top-4 right-4 bg-[#48546A] text-white px-4 py-2 rounded-lg font-poppins font-thin">
           Saving estimate...
         </div>
       )}
       {saveStatus === 'error' && (
-        <div className="fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg">
+        <div className="fixed top-4 right-4 bg-[#48546A] text-white px-4 py-2 rounded-lg font-poppins font-thin">
           ✕ Failed to save estimate
         </div>
       )}

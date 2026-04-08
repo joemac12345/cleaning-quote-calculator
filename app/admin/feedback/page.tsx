@@ -65,7 +65,7 @@ export default function FeedbackPage() {
 
   return (
     <div className="p-6 sm:p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-8" style={{ color: '#48546A' }}>
+      <h1 className="text-3xl sm:text-4xl font-poppins font-thin mb-8" style={{ color: '#48546A' }}>
         Price Feedback
       </h1>
 

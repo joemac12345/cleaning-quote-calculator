@@ -189,11 +189,11 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="p-3 sm:p-6 border-b border-gray-200">
+      <div className="p-3 sm:p-6 border-b border-gray-300">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-2xl sm:text-4xl font-bold font-heading mb-1 sm:mb-2" style={{color: '#4B5368'}}>
+              <h1 className="text-2xl sm:text-4xl font-poppins font-thin mb-1 sm:mb-2" style={{color: '#4B5368'}}>
                 Incoming Estimates
               </h1>
               <p className="text-xs sm:text-sm text-gray-600">Manage and review all customer estimates</p>

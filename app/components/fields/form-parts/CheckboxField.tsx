@@ -35,7 +35,7 @@ export default function CheckboxField({
               onChange={(e) => handleChange(option.value, e.target.checked)}
               className="w-5 h-5 rounded border-gray-300 text-[#48546A] cursor-pointer"
             />
-            <span className="text-gray-900 font-medium">{option.label}</span>
+            <span className="text-gray-900 font-poppins font-thin">{option.label}</span>
           </label>
         ))}
       </div>

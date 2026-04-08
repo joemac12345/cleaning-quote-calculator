@@ -167,14 +167,14 @@ export default function FormSummary({
               <button
                 onClick={() => setShowDetailsModal(true)}
                 title="View estimate details"
-                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-poppins font-thin rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}  
               >
                 Estimate Details
               </button>
               <button
                 onClick={() => setShowPricingModal(true)}
                 title="View what comes next"
-                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-medium rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-poppins font-thin rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
               >
                 What Comes Next?
               </button>
@@ -261,7 +261,7 @@ export default function FormSummary({
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
                       {groupData.map(({ fieldId, value, displayName, isExtra }: any) => (
                         <div key={fieldId} className="flex flex-col justify-between bg-gray-50 p-2 rounded-lg hover:bg-gray-100 transition w-full h-full">
-                          <p className="text-sm font-medium" style={{color: '#4B5368'}}>
+                          <p className="text-sm font-poppins font-thin" style={{color: '#4B5368'}}>
                             {displayName}: <span className="text-sm font-semibold ml-2" style={{color: '#4B5368'}}>
                               {fieldId.startsWith('windows_') || fieldId.startsWith('doors_') ? `${value}` : '✓'}
                             </span>
@@ -279,7 +279,7 @@ export default function FormSummary({
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="w-full px-6 sm:px-8 py-3 sm:py-4 text-white font-medium rounded-lg transition font-heading" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+                className="w-full px-6 sm:px-8 py-3 sm:py-4 text-white font-poppins font-thin rounded-lg transition font-heading" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
               >
                 Close
               </button>
@@ -346,7 +346,7 @@ export default function FormSummary({
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
                     {groupData.map(({ fieldId, value, displayName, isExtra }: any) => (
                       <div key={fieldId} className="flex flex-col justify-between bg-gray-50 p-2 rounded-lg hover:bg-gray-100 transition w-full h-full">
-                        <p className="text-sm font-medium" style={{color: '#4B5368'}}>
+                        <p className="text-sm font-poppins font-thin" style={{color: '#4B5368'}}>
                           {displayName}: <span className="text-sm font-semibold ml-2" style={{color: '#4B5368'}}>
                             {fieldId.startsWith('windows_') || fieldId.startsWith('doors_') ? `${value}` : '✓'}
                           </span>

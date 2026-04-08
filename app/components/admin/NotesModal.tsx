@@ -218,12 +218,12 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white w-full max-w-2xl h-[90vh] flex flex-col overflow-hidden rounded-lg shadow-lg">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="bg-white w-full max-w-2xl h-[90vh] flex flex-col overflow-hidden rounded-lg border border-gray-300">
         {/* Header */}
         <div className="text-white px-6 py-4 flex justify-between items-center" style={{ backgroundColor: '#4B5368' }}>
           <div className="flex-1">
-            <h2 className="text-xl font-bold font-heading">{customerName}</h2>
+            <h2 className="text-xl font-poppins font-thin">{customerName}</h2>
             <p className="text-sm opacity-90">Notes & Messages</p>
           </div>
           <button
@@ -239,7 +239,7 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
           {notesList.length === 0 ? (
             <div className="h-full flex items-center justify-center">
               <div className="text-center text-gray-400">
-                <p className="text-lg font-medium">No notes yet</p>
+                <p className="text-lg font-poppins font-thin">No notes yet</p>
                 <p className="text-sm">Start the conversation by adding a note</p>
               </div>
             </div>
@@ -248,7 +248,7 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
               <div key={note.id} className="message-container">
                 {editingNoteId === note.id ? (
                   // Edit Mode
-                  <div className="bg-blue-50 rounded-lg p-4 border-2 border-blue-200">
+                  <div className="bg-white rounded-lg p-4 border border-gray-300">
                     <textarea
                       ref={editTextareaRef}
                       value={editingNoteText}
@@ -256,7 +256,7 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
                         setEditingNoteText(e.target.value);
                         adjustEditHeight();
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 resize-none"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#48546A] focus:border-transparent resize-none"
                       style={{ height: editHeight, maxHeight: '200px', minHeight: '80px' }}
                       disabled={isLoading}
                     />
@@ -264,14 +264,14 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
                       <button
                         onClick={() => handleEditNote(note.id)}
                         disabled={isLoading || !editingNoteText.trim()}
-                        className="px-4 py-1.5 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 text-white text-sm font-medium rounded transition"
+                        className="px-4 py-1.5 bg-[#48546A] hover:opacity-90 disabled:opacity-50 text-white text-sm font-poppins font-thin rounded transition"
                       >
                         Save
                       </button>
                       <button
                         onClick={() => setEditingNoteId(null)}
                         disabled={isLoading}
-                        className="px-4 py-1.5 bg-gray-400 hover:bg-gray-500 text-white text-sm font-medium rounded transition"
+                        className="px-4 py-1.5 bg-gray-300 hover:opacity-90 text-gray-900 text-sm font-poppins font-thin rounded transition"
                       >
                         Cancel
                       </button>
@@ -288,7 +288,7 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
                     </div>
                     {/* Message Bubble */}
                     <div className="flex-1 max-w-xl">
-                      <div className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm">
+                      <div className="bg-white rounded-lg p-3 border border-gray-300 shadow-sm">
                         <p className="text-sm text-gray-800 whitespace-pre-wrap break-words leading-relaxed">{note.text}</p>
                       </div>
                       <div className="flex items-center gap-2 mt-1.5 px-2">
@@ -299,14 +299,14 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
                             setEditingNoteText(note.text);
                           }}
                           disabled={isLoading}
-                          className="text-xs text-blue-500 hover:text-blue-700 font-medium transition disabled:opacity-50"
+                          className="text-xs text-blue-500 hover:text-blue-700 font-poppins font-thin transition disabled:opacity-50"
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => handleDeleteNote(note.id)}
                           disabled={isLoading}
-                          className="text-xs text-red-500 hover:text-red-700 font-medium transition disabled:opacity-50"
+                          className="text-xs text-red-500 hover:text-red-700 font-poppins font-thin transition disabled:opacity-50"
                         >
                           Delete
                         </button>

@@ -39,11 +39,11 @@ export default function Banner({
         <Image
           src={logoSrc}
           alt={logoAlt}
-          width={96}
-          height={96}
-          className="absolute top-0 h-12 sm:h-24 w-auto object-contain z-0"
+          width={64}
+          height={64}
+          className="absolute top-0 h-10 sm:h-16 w-auto object-contain z-0"
           style={{ left: '20px' }}
-          sizes="(max-width: 640px) 48px, 96px"
+          sizes="(max-width: 640px) 40px, 64px"
         />
       )}
     </div>

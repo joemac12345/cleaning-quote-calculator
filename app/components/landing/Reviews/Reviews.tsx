@@ -10,7 +10,7 @@ export default function Reviews() {
   return (
     <section className="py-8 sm:py-12 px-3 sm:px-4 bg-white">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl text-[#48546A] mb-8 sm:mb-10" style={{ fontWeight: 50 }}>
+        <h2 className="text-3xl sm:text-4xl text-[#48546A] mb-8 sm:mb-10 font-poppins font-thin">
           {title}
         </h2>
 
@@ -20,7 +20,7 @@ export default function Reviews() {
           >
             {reviewsList.map((review: any, index: number) => (
               <div key={index} className="flex-shrink-0 w-72 sm:w-96">
-                <div className="bg-gray-50 p-6 sm:p-8 rounded-lg shadow-sm h-full flex flex-col">
+                <div className="bg-gray-50 p-6 sm:p-8 rounded-lg border border-gray-300 h-full flex flex-col">
                   <div className="flex gap-0.5 mb-4">
                     {[...Array(review.rating || 5)].map((_, i) => (
                       <span key={i} className="bg-[#48546A] rounded w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-sm sm:text-base text-white">★</span>

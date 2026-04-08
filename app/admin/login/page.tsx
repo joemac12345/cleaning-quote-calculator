@@ -38,8 +38,8 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-6 sm:p-8">
-        <h1 className="text-2xl font-bold text-center mb-6" style={{ color: '#4B5368' }}>
+      <div className="max-w-md w-full bg-white rounded-lg border border-gray-300 p-6 sm:p-8">
+        <h1 className="text-2xl font-poppins font-thin text-center mb-6" style={{ color: '#4B5368' }}>
           Admin Login
         </h1>
 
@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter admin password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#48546A] focus:border-transparent"
               disabled={isLoading}
             />
           </div>

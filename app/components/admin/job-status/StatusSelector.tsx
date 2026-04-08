@@ -22,7 +22,7 @@ export function StatusSelector({
 }: StatusSelectorProps) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>
+      <label className="block text-sm font-poppins font-thin text-gray-700 mb-2">{label}</label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}

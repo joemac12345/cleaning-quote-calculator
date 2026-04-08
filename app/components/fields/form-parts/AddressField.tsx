@@ -73,7 +73,7 @@ export default function AddressField({
         type="button"
         onClick={handleGeolocation}
         disabled={isLocating}
-        className="w-full px-6 py-4 bg-pink-500 hover:bg-pink-600 disabled:bg-gray-400 text-white font-medium rounded-lg transition flex items-center justify-center gap-2"
+        className="w-full px-6 py-4 bg-[#48546A] hover:opacity-90 disabled:opacity-50 text-white font-poppins font-thin rounded-lg transition flex items-center justify-center gap-2"
       >
         {isLocating ? (
           <>
@@ -108,7 +108,7 @@ export default function AddressField({
 
       {locationError && (
         <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-          <p className="text-sm text-yellow-700 font-medium">Unable to access location</p>
+          <p className="text-sm text-yellow-700 font-poppins font-thin">Unable to access location</p>
           <p className="text-xs text-yellow-600 mt-1">
             {locationError === 'Location error: User denied Geolocation'
               ? 'Please enter your address manually below, or check your browser location permissions.'
@@ -119,8 +119,8 @@ export default function AddressField({
 
       {/* Display Current Address */}
       {(value.street || value.city || value.postcode) && (
-        <div className="p-4 bg-pink-50 rounded-lg border border-pink-200">
-          <p className="text-sm font-medium text-gray-900">Your Address:</p>
+        <div className="p-4 bg-gray-50 rounded-lg border border-gray-300">
+          <p className="text-sm font-poppins font-thin text-gray-900">Your Address:</p>
           <p className="text-sm text-gray-700 mt-1">
             {value.street}
             {value.city && `, ${value.city}`}
@@ -131,8 +131,8 @@ export default function AddressField({
 
       {/* Manual Entry Fields */}
       {(locationError || (value.street || value.city || value.postcode)) && (
-        <div className="space-y-3 pt-4 border-t border-gray-200">
-          <p className="text-xs text-gray-500 font-medium">Or enter manually:</p>
+        <div className="space-y-3 pt-4 border-t border-gray-300">
+          <p className="text-sm text-gray-500 font-poppins font-thin">Or enter manually:</p>
 
           {/* Street Address - with native device autocomplete */}
           <div>
@@ -141,7 +141,7 @@ export default function AddressField({
               placeholder="Street Address"
               value={value.street || ''}
               onChange={(e) => onChange({ ...value, street: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#48546A] focus:border-transparent outline-none transition text-base sm:text-base"
               required={field.required}
               autoComplete="street-address"
             />
@@ -154,7 +154,7 @@ export default function AddressField({
               placeholder="City"
               value={value.city || ''}
               onChange={(e) => onChange({ ...value, city: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#48546A] focus:border-transparent outline-none transition text-base sm:text-base"
               required={field.required}
               autoComplete="address-level2"
             />
@@ -167,7 +167,7 @@ export default function AddressField({
               placeholder="County"
               value={value.county || ''}
               onChange={(e) => onChange({ ...value, county: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#48546A] focus:border-transparent outline-none transition text-base sm:text-base"
               autoComplete="address-level1"
             />
           </div>
@@ -179,7 +179,7 @@ export default function AddressField({
               placeholder="Postcode"
               value={value.postcode || ''}
               onChange={(e) => onChange({ ...value, postcode: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#48546A] focus:border-transparent outline-none transition text-base sm:text-base"
               required={field.required}
               autoComplete="postal-code"
             />
@@ -188,7 +188,7 @@ export default function AddressField({
       )}
 
       {error && (
-        <p className="text-red-500 text-sm font-medium">{error}</p>
+        <p className="text-red-500 text-sm font-poppins font-thin">{error}</p>
       )}
     </div>
   );

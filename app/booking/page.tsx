@@ -5,7 +5,7 @@ export default function BookingPage() {
     <div className="min-h-screen bg-white text-gray-900">
       <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-12 sm:pt-16 pb-12">
         {/* Header */}
-        <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-[#48546A]">Ready to Book?</h1>
+        <h1 className="text-3xl sm:text-4xl font-poppins font-thin mb-2 text-[#48546A]">Ready to Book?</h1>
         <p className="text-gray-600 text-sm sm:text-base mb-8">Thank you for getting your quote! We're excited to help you keep your space clean and fresh.</p>
 
         {/* Content Sections */}
@@ -16,7 +16,7 @@ export default function BookingPage() {
             <p className="text-sm sm:text-base text-gray-600 mb-4">
               Choose your preferred date and time to get started. Our booking system makes it easy to find a slot that works for you.
             </p>
-            <button className="w-full px-6 py-3 bg-[#48546A] text-white rounded-lg hover:bg-[#3a3f52] font-medium transition">
+            <button className="w-full px-6 py-3 bg-[#48546A] text-white rounded-lg hover:opacity-90 font-medium transition">
               Browse Available Times
             </button>
           </div>
