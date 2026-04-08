@@ -10,7 +10,7 @@ export default function Reviews() {
   return (
     <section className="py-8 sm:py-12 px-3 sm:px-4 bg-white">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl text-[#48546A] mb-8 sm:mb-10 font-poppins font-thin">
+        <h2 className="heading-h2 mb-8 sm:mb-10">
           {title}
         </h2>
 
@@ -23,13 +23,13 @@ export default function Reviews() {
                 <div className="bg-gray-50 p-6 sm:p-8 rounded-lg border border-gray-300 h-full flex flex-col">
                   <div className="flex gap-0.5 mb-4">
                     {[...Array(review.rating || 5)].map((_, i) => (
-                      <span key={i} className="bg-[#48546A] rounded w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-sm sm:text-base text-white">★</span>
+                      <span key={i} className="bg-primary rounded w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-sm sm:text-base text-white">★</span>
                     ))}
                   </div>
-                  <p className="text-base sm:text-lg text-gray-700 font-normal mb-6 leading-relaxed flex-grow">
+                  <p className="body-text mb-6 leading-relaxed flex-grow">
                     "{review.text}"
                   </p>
-                  <p className="text-sm sm:text-base text-[#48546A] font-semibold">
+                  <p className="text-sm sm:text-base text-primary font-semibold">
                     {review.author}
                   </p>
                   {review.title && (

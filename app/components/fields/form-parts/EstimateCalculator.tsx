@@ -82,7 +82,7 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Main Content - Adjusted for fixed navbar */}
-      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-6 sm:pb-12">
+      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-8 sm:pt-12 pb-24 sm:pb-28">
         {/* Step Content */}
         <div className="mb-8 sm:mb-12">
           <FormStepRenderer

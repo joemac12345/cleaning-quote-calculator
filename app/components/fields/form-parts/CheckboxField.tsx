@@ -22,23 +22,24 @@ export default function CheckboxField({
   };
 
   return (
-    <div>
+    <fieldset className="w-full border-0">
+      <legend className="block text-sm font-poppins text-gray-900 mb-3 font-medium">{label}</legend>
       <div className="space-y-3">
         {options.map((option) => (
           <label
             key={option.value}
-            className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50"
+            className="flex items-center gap-3 p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition"
           >
             <input
               type="checkbox"
               checked={value.includes(option.value)}
               onChange={(e) => handleChange(option.value, e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 text-[#48546A] cursor-pointer"
+              className="w-5 h-5 rounded border-gray-300 text-primary cursor-pointer accent-primary"
             />
-            <span className="text-gray-900 font-poppins font-thin">{option.label}</span>
+            <span className="text-gray-900 font-inter font-normal">{option.label}</span>
           </label>
         ))}
       </div>
-    </div>
+    </fieldset>
   );
 }

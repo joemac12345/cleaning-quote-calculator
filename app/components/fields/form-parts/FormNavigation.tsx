@@ -18,8 +18,8 @@ export default function FormNavigation({
   onSubmit,
 }: FormNavigationProps) {
   return (
-    <div className="fixed bottom-4 left-0 right-0 bg-white border-t border-gray-200 p-4 sm:p-6 z-50 max-w-2xl mx-auto w-full">
-      <div className="flex gap-4">
+    <div className="fixed bottom-4 left-0 right-0 bg-white border-t border-gray-300 p-4 sm:p-6 z-50 max-w-2xl mx-auto w-full">
+      <div className="flex gap-3 sm:gap-4">
         <Button
           label="← Previous"
           onClick={onPrevious}

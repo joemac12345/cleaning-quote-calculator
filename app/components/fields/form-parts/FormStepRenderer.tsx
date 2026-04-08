@@ -38,7 +38,7 @@ export default function FormStepRenderer({
 
       {step.notificationText && (
         <div className="mt-6 p-4 bg-white border border-gray-300 rounded">
-          <p className="text-sm text-[#48546A] font-poppins font-thin">{step.notificationText}</p>
+          <p className="text-sm text-primary font-poppins font-light">{step.notificationText}</p>
         </div>
       )}
     </div>

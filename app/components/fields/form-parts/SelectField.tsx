@@ -14,10 +14,12 @@ export default function SelectField({
   onChange,
 }: SelectFieldProps) {
   return (
-    <select
+    <div className="w-full">
+      <label className="block text-sm font-poppins text-gray-900 mb-2">{label}</label>
+      <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#48546A] focus:border-transparent"
+        className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 font-inter font-normal focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
       >
         <option value="">Select {label.toLowerCase()}</option>
         {options.map((option) => (
@@ -26,5 +28,6 @@ export default function SelectField({
           </option>
         ))}
       </select>
+    </div>
   );
 }

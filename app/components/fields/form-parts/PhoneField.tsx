@@ -27,13 +27,17 @@ export default function PhoneField({
   required,
 }: PhoneFieldProps) {
   return (
-    <div>
+    <div className="w-full flex flex-col">
+      <label className="block text-sm font-poppins text-gray-900 mb-2 font-medium">
+        {label}
+        {required && <span className="text-primary ml-1">*</span>}
+      </label>
       <input
         type="tel"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
-        className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#48546A] focus:border-transparent"
+        className="w-full px-4 py-3 text-base font-inter font-normal border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
         placeholder={`Enter ${label.toLowerCase()}`}
       />
     </div>

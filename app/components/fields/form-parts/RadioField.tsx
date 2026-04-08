@@ -18,8 +18,9 @@ export default function RadioField({
   showTime = true,
 }: RadioFieldProps) {
   return (
-    <div>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-3">
+    <fieldset className="w-full">
+      <legend className="block text-sm font-poppins text-gray-900 mb-3 font-medium">{label}</legend>
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {options.map((option) => {
           const isSelected = String(value) === String(option.value);
           return (
@@ -27,8 +28,8 @@ export default function RadioField({
               key={option.value}
               className={`flex flex-col items-center gap-3 p-4 sm:p-6 border rounded-lg cursor-pointer transition relative ${
                 isSelected
-                  ? 'border-[#48546A] bg-slate-50'
-                  : 'border-gray-200 bg-white hover:border-gray-300'
+                  ? 'border-primary bg-slate-50'
+                  : 'border-gray-300 bg-white hover:border-primary'
               }`}
             >
               {/* Radio button - top left */}
@@ -36,7 +37,7 @@ export default function RadioField({
                 type="radio"
                 checked={isSelected}
                 onChange={() => onChange(String(option.value))}
-                className="absolute top-2 left-2 sm:top-3 sm:left-3 w-5 h-5 text-[#48546A] accent-[#48546A]"
+                className="absolute top-2 left-2 sm:top-3 sm:left-3 w-5 h-5 text-primary accent-primary cursor-pointer"
               />
 
               {/* Icon - centered */}
@@ -53,13 +54,13 @@ export default function RadioField({
 
               {/* Text - below icon */}
               <div className="text-center">
-                <p className="text-sm sm:text-base font-poppins font-thin" style={{ color: '#48546A' }}>{option.label}</p>
-                {showTime && option.time && option.time > 0 && <p className="text-sm sm:text-sm mt-1 font-inter font-normal" style={{ color: '#48546A' }}>{option.time} min</p>}
+                <p className="text-sm sm:text-base font-poppins font-light text-gray-900">{option.label}</p>
+                {showTime && option.time && option.time > 0 && <p className="text-xs sm:text-sm mt-1 font-inter font-normal text-gray-600">{option.time} min</p>}
               </div>
             </label>
           );
         })}
       </div>
-    </div>
+    </fieldset>
   );
 }

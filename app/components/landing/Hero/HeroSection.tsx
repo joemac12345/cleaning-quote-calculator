@@ -20,10 +20,10 @@ export default function HeroSection() {
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg">
         <div className="relative z-10 max-w-2xl mx-auto px-3 sm:px-4 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl text-white mb-4 sm:mb-6 font-poppins font-thin">
+          <h1 className="heading-h1-hero mb-4 sm:mb-6">
             {title}
           </h1>
-          <p className="text-lg sm:text-xl text-gray-100 mb-8 sm:mb-10 font-normal">
+          <p className="text-lg sm:text-xl text-gray-100 mb-8 sm:mb-10 font-inter font-normal">
             {description}
           </p>
         </div>

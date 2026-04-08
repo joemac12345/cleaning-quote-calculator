@@ -48,16 +48,17 @@ export default function OptionsCounterField({
           animation: pulse-ring 2s infinite;
         }
       `}</style>
-      <div>
-        <div className="space-y-3">
+      <fieldset className="w-full border-0">
+        <legend className="block text-sm font-poppins text-gray-900 mb-4 font-medium">{label}</legend>
+        <div className="space-y-4">
           {options.map((option) => {
             const count = value[String(option.value)] || 0;
             return (
               <div
                 key={option.value}
-                className="flex items-center justify-between border border-gray-300 rounded-lg p-5 sm:p-4 gap-3"
+                className="flex items-center justify-between border border-gray-300 rounded-lg p-5 sm:p-6 gap-4 transition"
               >
-                <div className="flex items-start gap-3 flex-1 min-w-0">
+                <div className="flex items-start gap-4 flex-1 min-w-0">
                   <div className="flex flex-col items-start gap-2 flex-shrink-0">
                     {option.icon && (
                       <div 
@@ -74,7 +75,7 @@ export default function OptionsCounterField({
                           sizes="(max-width: 640px) 48px, 48px"
                         />
                         {option.description && (
-                          <div className="absolute -top-1 -left-1 w-5 h-5 bg-[#48546A] rounded-full flex items-center justify-center text-white text-xs font-bold leading-none animate-pulse-ring">
+                          <div className="absolute -top-1 -left-1 w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white text-xs font-bold leading-none animate-pulse-ring">
                             ?
                           </div>
                         )}
@@ -82,23 +83,23 @@ export default function OptionsCounterField({
                     )}
                   </div>
                   <div className="flex flex-col gap-1 w-full">
-                    <h4 className="text-base sm:text-base text-[#48546A] font-poppins font-thin break-words">{option.label}</h4>
-                    {option.helpText && <p className="text-sm sm:text-xs text-[#48546A] break-words">{option.helpText}</p>}
-                    {showTime && option.time && <p className="text-sm sm:text-sm text-gray-500">{option.time} min</p>}
+                    <h4 className="text-base sm:text-base text-gray-900 font-poppins font-light break-words">{option.label}</h4>
+                    {option.helpText && <p className="text-xs sm:text-xs text-gray-600 break-words font-inter font-normal">{option.helpText}</p>}
+                    {showTime && option.time && <p className="text-xs sm:text-xs text-gray-500 font-inter font-normal">{option.time} min</p>}
                   </div>
                 </div>
-                <div className="flex items-center gap-3 flex-shrink-0">
+                <div className="flex items-center gap-4 flex-shrink-0">
                   <button
                     onClick={() => handleDecrement(String(option.value))}
                     disabled={count === 0}
-                    className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center rounded-md bg-gray-50 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-semibold"
+                    className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center rounded-md bg-gray-50 hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm font-semibold"
                   >
                     −
                   </button>
-                  <span className="w-10 h-10 flex items-center justify-center font-semibold text-base text-[#48546A]">{count}</span>
+                  <span className="w-10 h-10 flex items-center justify-center font-semibold text-base text-primary">{count}</span>
                   <button
                     onClick={() => handleIncrement(String(option.value))}
-                    className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center rounded-md bg-gray-50 hover:bg-gray-100 text-sm font-semibold"
+                    className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center rounded-md bg-gray-50 hover:bg-gray-100 transition text-sm font-semibold"
                   >
                     +
                   </button>
@@ -107,7 +108,7 @@ export default function OptionsCounterField({
             );
           })}
         </div>
-      </div>
+      </fieldset>
 
       {/* Modal */}
       {selectedModal && (
@@ -126,16 +127,16 @@ export default function OptionsCounterField({
                       />
                     )}
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-xl sm:text-2xl font-poppins font-thin text-[#48546A] mb-2">{option.label}</h3>
-                      {option.price && <div className="inline-block bg-[#48546A] text-white px-3 py-2 rounded-lg"><p className="text-lg sm:text-xl font-semibold">£{option.price.toFixed(2)}</p></div>}
+                      <h3 className="text-xl sm:text-2xl font-poppins font-light text-gray-900 mb-2">{option.label}</h3>
+                      {option.price && <div className="inline-block bg-primary text-white px-3 py-2 rounded-lg"><p className="text-lg sm:text-xl font-semibold">£{option.price.toFixed(2)}</p></div>}
                     </div>
                   </div>
-                  <p className="text-base sm:text-lg text-[#48546A] mb-8 leading-relaxed whitespace-pre-wrap">
+                  <p className="body-text mb-8 leading-relaxed whitespace-pre-wrap">
                     {option.description}
                   </p>
                   <button
                     onClick={() => setSelectedModal(null)}
-                    className="w-full bg-[#48546A] text-white py-3 rounded-lg font-poppins font-thin text-base sm:text-lg"
+                    className="w-full btn-primary"
                   >
                     Close
                   </button>

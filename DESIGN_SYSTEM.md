@@ -21,11 +21,15 @@ This design system prioritizes clarity, accessibility, and elegant simplicity. E
   - Maintains brand identity while supporting minimalist aesthetic
 
 ### Neutral Surfaces & Text
-- **Text**: `text-gray-900` (#111827) on light backgrounds
+- **Body Text**: `text-gray-600` (#4b5563) — soft, readable, primary paragraph color
+- **Secondary Text**: `text-gray-600` for all secondary content (descriptions, labels, metadata)
+- **Headings**: `text-[#48546A]` — always use primary color for headings
 - **Background**: `bg-white` (#FFFFFF) as default canvas
-- **Subtle Hover**: `hover:bg-gray-50` (#F9FAFB) for light interaction feedback
+- **Subtle Backgrounds**: `hover:bg-gray-50` (#F9FAFB) for light interaction feedback
+- **Hero Banner**: `bg-gradient-to-b from-gray-50 to-white` with `border-b border-gray-300`
 - **Focus Ring**: `focus:ring-2 focus:ring-[#48546A]` with `focus:border-transparent`
 - **Borders**: `border-gray-300` (#D1D5DB) for input/card edges
+- **Footer Text**: `text-gray-500` (#6B7280) for very light, de-emphasized text
 - **Disabled/Inactive**: `opacity-50` or `text-gray-400` (#9CA3AF)
 
 ### Semantic Color Usage
@@ -151,29 +155,38 @@ When using icons without text, **always provide `aria-label`** for accessibility
 
 ### Font Hierarchy & Responsive Sizing
 
-All sizes are responsive (mobile-first, scale up) using Tailwind's breakpoint system. All headings use **Poppins, font-thin (100)**:
+All sizes are responsive (mobile-first, scale up) using Tailwind's breakpoint system.
 
-| Element | Mobile | Tablet/Desktop | Weight | Line Height |
-|---------|--------|----------------|--------|-----------|
-| **H1** (Page Title) | `text-3xl` (30px) | `text-5xl` (48px) | 100 | 1.2 |
-| **H2** (Section Title) | `text-2xl` (24px) | `text-4xl` (36px) | 100 | 1.2 |
-| **H3** (Subsection) | `text-xl` (20px) | `text-2xl` (24px) | 100 | 1.2 |
-| **H4** (Card Title) | `text-lg` (18px) | `text-lg` (18px) | 100 | 1.2 |
-| **Body Text** | `text-base` (16px) | `text-base` (16px) | 400 | 1.2 |
-| **Small Text** (Labels, captions) | `text-sm` (14px) | `text-sm` (14px) | 400 | 1.2 |
-| **Extra Small** (Hints, metadata) | `text-xs` (12px) | `text-xs` (12px) | 400 | 1.2 |
+| Element | Mobile | Tablet/Desktop | Weight | Line Height | Usage |
+|---------|--------|----------------|--------|-----------|-------|
+| **H1** (Page Title) | `text-4xl` (36px) | `text-5xl` (48px) | 350 | 1.2 | Large page titles, hero headings |
+| **H2** (Section Title) | `text-2xl` (24px) | `text-3xl` (30px) | 300 | 1.2 | Major section headings (Services, FAQ, Contact) |
+| **H3** (Subsection) | `text-lg` (18px) | `text-lg` (18px) | 400 | 1.2 | Card titles, smaller sections |
+| **H4** (Card Title) | `text-base` (16px) | `text-lg` (18px) | 300 | 1.2 | Tertiary headings |
+| **Body Text** | `text-base` (16px) | `text-lg` (18px) | 400 | 1.2 | Paragraph content, descriptions |
+| **Small Text** (Labels, captions) | `text-sm` (14px) | `text-sm` (14px) | 400 | 1.2 | Labels, secondary info |
+| **Extra Small** (Hints, metadata) | `text-xs` (12px) | `text-xs` (12px) | 400 | 1.2 | Hints, footer text |
 
 ### Font Weight Usage
-- **100** (Thin): All headings (H1–H4) — ultra-light, elegant, minimalist
-- **400** (Normal): Body text, paragraphs, form inputs, descriptions
-- **500** (Medium): Button text, input labels, emphasis within body (rare)
-- **600** (Semibold): Reserved for strong emphasis if needed
+- **300** (Light): H2, H4 headings — elegant, minimal weight
+- **350** (Light-Medium): H1 headings — slightly stronger than H2 for visual hierarchy
+- **400** (Normal): H3, body text, paragraphs, form inputs, descriptions
+- **600** (Semibold): Primary CTA buttons, strong emphasis actions
+
+### Text Color Palette (Updated)
+- **Body paragraphs**: `text-gray-600` (#4b5563) for soft, readable text
+- **Headings**: `text-[#48546A]` for primary brand color
+- **Secondary labels**: `text-gray-600` for de-emphasized content
+- **Very light text**: `text-gray-500` for hints, metadata, footer attributions
 
 ### Line Height
 - **1.2** across all text (headings and body) for tight, minimalist spacing
 
 ### Implementation Notes
-- All `<h1>`, `<h2>`, `<h3>`, `<h4>` use `font-poppins font-thin` for a unified, ultra-light appearance
+- All `<h1>` use `font-poppins font-light` (weight 350) — strongest heading weight
+- All `<h2>` use `font-poppins font-light` (weight 300) — section titles
+- All `<h3>` use `font-poppins` (weight 400) — stronger subsection weight
+- Body text always `font-inter font-normal` (weight 400)
 - Responsive scales via Tailwind breakpoints (`sm:`, `md:`, `lg:`)
 - No letter-spacing or text-transform unless semantically required (e.g., `<label>` inside forms)
 
@@ -191,16 +204,38 @@ All sizes are responsive (mobile-first, scale up) using Tailwind's breakpoint sy
 - **Extra Large**: `px-8` / `py-8` / `gap-8` (32px)
 
 ### Whitespace Principles
-- **Generous padding inside containers**: Forms, cards, modals use `px-4 py-4` minimum
+- **Generous padding inside containers**: Forms, cards, modals use `px-6 sm:px-8` / `py-4` minimum
 - **Gap between elements**: Use `gap-3` or `gap-4` for consistent rhythm
-- **Vertical breathing room**: Add space between sections with `mb-20 sm:mb-24` (80-96px) for major sections
-- **Mobile padding**: Always include adequate padding on mobile (`px-3 sm:px-4`)
-- **Section spacing standard**: Major sections separated by `space-y-20` (80px) minimum
+- **Vertical breathing room**: Add space between sections with `mb-20 sm:mb-24` (80-96px) for major sections — **this is the canonical section spacing**
+- **Mobile padding**: Always include adequate padding on mobile (`px-6` minimum, `sm:px-8` on tablet+)
+- **Section spacing standard**: Major sections separated by `mb-20 sm:mb-24` (80px mobile, 96px desktop+)
+- **Container max-width**: All content pages use `max-w-4xl mx-auto` for readable text width
 
 ### Component Density
 - Avoid packing elements tightly — each component needs visual isolation
 - Use negative space to define component boundaries implicitly
 - Reduce information per screen on mobile; expand on desktop
+
+### Page Layout Template (Reference: MQ MAID Glasgow)
+All professional service pages should follow this structure:
+
+1. **Hero Banner** (optional)
+   - `bg-gradient-to-b from-gray-50 to-white border-b border-gray-300`
+   - `py-12 sm:py-16` padding
+   - H1 headline (weight 350) + supporting paragraph (text-gray-600)
+
+2. **Main Content Container**
+   - `max-w-4xl mx-auto px-6 sm:px-8`
+   - Wraps all major sections
+
+3. **Major Sections**
+   - `mb-20 sm:mb-24` spacing between each
+   - H2 headline (weight 300) + content
+
+4. **Grid Sections** (Services, Info Cards, etc.)
+   - `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6`
+   - Each card: `bg-white border border-gray-300 rounded-lg p-6`
+   - Hover: `hover:border-[#48546A]` for interactive feedback
 
 ---
 
@@ -498,8 +533,222 @@ export default function ContactForm() {
 
 ---
 
+## Page Layout Pattern: Service/Business Profile
+
+**Reference**: MQ MAID Glasgow (`app/font-test/page.tsx`)
+
+This canonical pattern should be used for all service business profile pages, professional bios, and standalone content pages.
+
+### Structure
+```
+1. Hero Banner (optional)
+2. Main Container (max-w-4xl mx-auto px-6 sm:px-8)
+   ├─ About Section
+   ├─ Features/Services Grid
+   ├─ FAQ/Details Accordion
+   ├─ Info Cards (Hours, Overview)
+   ├─ Contact Section
+   └─ CTA Section
+3. Footer
+```
+
+### Hero Banner
+If needed at page top:
+```jsx
+<div className="bg-gradient-to-b from-gray-50 to-white border-b border-gray-300 py-12 sm:py-16">
+  <div className="max-w-4xl mx-auto px-6 sm:px-8">
+    <h1 className="text-4xl sm:text-5xl font-poppins text-[#48546A] mb-3">
+      Page Title
+    </h1>
+    <p className="text-lg sm:text-xl font-inter font-normal text-gray-600 max-w-2xl">
+      Supporting tagline or description
+    </p>
+  </div>
+</div>
+```
+
+### Main Content Container
+All sections should be inside:
+```jsx
+<div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
+  {/* All sections go here */}
+</div>
+```
+
+### Section Spacing
+- **Between sections**: `mb-20 sm:mb-24` (80-96px)
+- **Within section**: `mb-8` for section titles, `mb-6` for paragraphs
+- **Headings**: H2 (`text-2xl sm:text-3xl font-poppins font-light`) + optional description
+
+### About Paragraph
+```jsx
+<section className="mb-20 sm:mb-24">
+  <p className="text-base sm:text-lg font-inter font-normal text-gray-600 leading-relaxed mb-6">
+    Main content paragraph
+  </p>
+  <p className="text-base sm:text-lg font-inter font-normal text-gray-600 leading-relaxed">
+    Supporting paragraph
+  </p>
+</section>
+```
+
+### Service/Feature Grid
+```jsx
+<section className="mb-20 sm:mb-24">
+  <h2 className="text-2xl sm:text-3xl font-poppins font-light text-[#48546A] mb-8">
+    Services
+  </h2>
+  <p className="text-gray-600 mb-8">
+    Section description
+  </p>
+  
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {items.map((item) => (
+      <div key={item} className="bg-white border border-gray-300 rounded-lg p-6 hover:border-[#48546A] transition">
+        <div className="text-4xl mb-3">{item.icon}</div>
+        <h3 className="text-lg font-poppins font-light text-[#48546A] mb-2">
+          {item.title}
+        </h3>
+        <p className="text-sm font-inter font-normal text-gray-600">
+          {item.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+```
+
+### FAQ/Accordion Section
+```jsx
+<section className="mb-20 sm:mb-24">
+  <h2 className="text-2xl sm:text-3xl font-poppins font-light text-[#48546A] mb-8">
+    FAQ
+  </h2>
+  
+  <div className="space-y-3">
+    {faqs.map((faq, i) => (
+      <div key={i} className="border border-gray-300 rounded-lg overflow-hidden">
+        <button
+          onClick={() => setExpanded(expanded === i ? null : i)}
+          className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition text-left"
+        >
+          <h3 className="font-poppins font-light text-[#48546A] text-base">
+            {faq.question}
+          </h3>
+          <span className={`text-[#48546A] transition-transform ${expanded === i ? 'rotate-180' : ''}`}>
+            ▼
+          </span>
+        </button>
+        {expanded === i && (
+          <div className="px-6 py-4 bg-gray-50 border-t border-gray-300">
+            <p className="text-base font-inter font-normal text-gray-600">
+              {faq.answer}
+            </p>
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+```
+
+### Info Cards Grid
+```jsx
+<section className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-20 sm:mb-24">
+  <div className="bg-white border border-gray-300 rounded-lg p-6">
+    <h3 className="text-lg font-poppins font-light text-[#48546A] mb-4">
+      Card Title
+    </h3>
+    <div className="space-y-3 text-sm font-inter font-normal text-gray-600">
+      <p><span className="font-semibold">Label:</span> Value</p>
+      <p><span className="font-semibold">Label:</span> Value</p>
+    </div>
+  </div>
+  
+  <div className="bg-white border border-gray-300 rounded-lg p-6">
+    <h3 className="text-lg font-poppins font-light text-[#48546A] mb-4">
+      Second Card
+    </h3>
+    <div className="space-y-2 text-sm font-inter font-normal text-gray-600">
+      <p><span className="font-semibold">Label:</span> Value</p>
+    </div>
+  </div>
+</section>
+```
+
+### Contact Section
+```jsx
+<section className="bg-white border border-gray-300 rounded-lg p-6 sm:p-8 mb-20 sm:mb-24">
+  <h2 className="text-2xl sm:text-3xl font-poppins font-light text-[#48546A] mb-8">
+    Contact
+  </h2>
+  
+  <div className="space-y-4">
+    <div className="flex items-start gap-4">
+      <span className="text-[#48546A] text-base flex-shrink-0 mt-1">☎</span>
+      <div>
+        <p className="font-poppins font-light text-[#48546A] text-sm mb-1">
+          Phone
+        </p>
+        <a href="tel:+1234567890" className="text-base font-inter font-normal text-[#48546A] hover:underline">
+          +1 123 456 7890
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+### CTA Section
+```jsx
+<section className="bg-[#48546A] text-white rounded-lg p-8 sm:p-12 text-center mb-20 sm:mb-24">
+  <h2 className="text-2xl sm:text-3xl font-poppins font-light mb-4">
+    CTA Headline
+  </h2>
+  <p className="text-base sm:text-lg font-inter font-normal mb-8 max-w-xl mx-auto">
+    Supporting text
+  </p>
+  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+    <button className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-[#48546A] rounded-lg font-poppins font-semibold text-base hover:opacity-90 transition">
+      Primary CTA
+    </button>
+    <button className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-white text-white rounded-lg font-poppins font-light text-base hover:opacity-90 transition">
+      Secondary CTA
+    </button>
+  </div>
+</section>
+```
+
+### Footer
+```jsx
+<footer className="bg-white border-t border-gray-300 py-8 sm:py-12">
+  <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
+    <p className="text-sm font-inter font-normal text-gray-600">
+      Copyright text
+    </p>
+    <p className="text-xs font-inter font-normal text-gray-500 mt-2">
+      Attribution
+    </p>
+  </div>
+</footer>
+```
+
+### Key Design Rules for This Pattern
+1. **Section spacing**: All major sections use `mb-20 sm:mb-24` for breathing room
+2. **Font weights**: H2=300 (light), H3=400 (normal body), Body=400 (Inter normal)
+3. **Text colors**: All body text `text-gray-600`, headings always `text-[#48546A]`
+4. **Card style**: `border border-gray-300` with `hover:border-[#48546A]` for interaction
+5. **Container max-width**: `max-w-4xl` for readable content width
+6. **Mobile padding**: `px-6 sm:px-8` on all containers
+7. **No shadows**: Only use borders for definition
+8. **Hover states**: Subtle `opacity-90` or border color change
+9. **Grid gaps**: `gap-6` for consistent spacing between cards
+
+---
+
 ## Version History
 
+- **v1.1** (April 8, 2026): Added MQ MAID page layout pattern — canonical structure for service/business profile pages
 - **v1.0** (April 8, 2026): Initial design system — minimalistic, flat, accessibility-first, mobile-first responsive.
 
 ---

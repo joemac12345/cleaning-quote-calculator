@@ -131,7 +131,7 @@ export default function Navigation() {
                 href={page.href}
                 prefetch={true}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 rounded-lg hover:bg-gray-100 transition font-poppins font-thin text-[#48546A]"
+                className="block px-4 py-3 rounded-lg hover:bg-gray-100 transition font-poppins font-thin text-gray-900"
               >
                 {page.label}
               </Link>

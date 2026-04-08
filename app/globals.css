@@ -1,7 +1,47 @@
 @import "tailwindcss";
 
+/**
+ * DESIGN TOKENS - CSS VARIABLES
+ * 
+ * Change values here and they automatically propagate through:
+ * 1. Tailwind theme tokens (via Tailwind config references)
+ * 2. Global styles (headings, body, etc.)
+ * 3. All components using the Tailwind tokens
+ * 
+ * Usage: In Tailwind: text-primary, bg-primary, etc.
+ * Usage: In CSS: var(--color-primary)
+ */
+
 @theme {
+  /* PRIMARY COLORS */
   --color-primary: #48546A;
+  --color-primary-light: #5a6b7b;
+  --color-primary-dark: #3a4052;
+
+  /* SEMANTIC COLORS */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* NEUTRAL GREYS */
+  --color-text-primary: #111827;      /* text-gray-900 */
+  --color-text-secondary: #4b5563;    /* text-gray-600 */
+  --color-text-tertiary: #6b7280;     /* text-gray-500 */
+
+  /* SURFACES & BACKGROUNDS */
+  --color-bg-default: #ffffff;         /* bg-white */
+  --color-bg-subtle: #f9fafb;          /* bg-gray-50 */
+  --color-border: #d1d5db;             /* border-gray-300 */
+
+  /* FONT FAMILIES */
+  --font-poppins: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-outfit: 'Outfit', system-ui, -apple-system, sans-serif;
+
+  /* SPACING */
+  --spacing-section: 5rem;   /* 80px - major section spacing (mb-20) */
+  --spacing-section-lg: 6rem; /* 96px - large section spacing (sm:mb-24) */
 }
 
 :root {
@@ -18,32 +58,33 @@ body {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
-  font-weight: 600;
+h1 {
+  font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+  font-weight: 350;
+  color: var(--color-text-primary);
+}
+
+h2 {
+  font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+  font-weight: 300;
+  color: var(--color-text-primary);
+}
+
+h3 {
+  font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+h4, h5, h6 {
+  font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+  font-weight: 300;
+  color: var(--color-text-primary);
 }
 
 /* Buttons and labels */
 button, label, [role="button"] {
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
-}
-
-/* Utility classes */
-.text-accent {
-  @apply text-blue-600;
-}
-
-.bg-accent {
-  @apply bg-blue-600;
-}
-
-.border-accent {
-  @apply border-blue-600;
-}
-
-.font-heading {
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
-  font-weight: 600;
+  font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
 }
 
 /* Smooth transitions */
@@ -72,6 +113,50 @@ input[type="radio"] {
 @layer utilities {
   .animate-slideup {
     animation: slideup 0.3s ease-out;
+  }
+
+  /* DESIGN TOKEN UTILITIES */
+  
+  /* Primary color utility for buttons and interactive elements */
+  .btn-primary {
+    @apply bg-primary text-white font-poppins font-semibold hover:opacity-90 focus:ring-2 focus:ring-primary focus:outline-none transition;
+  }
+
+  /* Secondary button utility */
+  .btn-secondary {
+    @apply bg-white border border-gray-300 text-gray-900 font-poppins font-light hover:bg-gray-50 focus:ring-2 focus:ring-primary focus:outline-none transition;
+  }
+
+  /* Section spacing utility */
+  .section-spacing {
+    @apply mb-20 sm:mb-24;
+  }
+
+  /* Heading styles */
+  .heading-h1 {
+    @apply text-4xl sm:text-5xl font-poppins font-light text-gray-900;
+  }
+
+  .heading-h1-hero {
+    @apply text-4xl sm:text-5xl md:text-6xl font-poppins font-light text-white;
+  }
+
+  .heading-h2 {
+    @apply text-2xl sm:text-3xl font-poppins font-light text-gray-900;
+  }
+
+  .heading-h3 {
+    @apply text-lg sm:text-lg font-poppins font-light text-gray-900;
+  }
+
+  /* Body text utility */
+  .body-text {
+    @apply text-base sm:text-lg font-inter font-normal text-gray-600;
+  }
+
+  /* Small text utility */
+  .text-small {
+    @apply text-sm font-inter font-normal text-gray-600;
   }
 }
 

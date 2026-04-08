@@ -148,33 +148,33 @@ export default function FormSummary({
           {/* Your First Clean */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 relative flex flex-col">
             <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
-              <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Your First Clean</h3>
-              <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(estimateStats.firstCleanPrice) ? estimateStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
+              <h3 className="heading-h2 text-primary">Your First Clean</h3>
+              <p className="text-3xl sm:text-4xl font-bold flex-shrink-0 text-primary font-poppins">£{isFinite(estimateStats.firstCleanPrice) ? estimateStats.firstCleanPrice.toFixed(2) : '0.00'}</p>
             </div>
             <div>
-              <p className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3" style={{color: '#4B5368'}}>What's Included</p>
-              <p className="text-xs sm:text-sm mb-3 sm:mb-4" style={{color: '#4B5368'}}>A comprehensive clean of all rooms in your property, including dusting, vacuuming, mopping, and bathroom facilities. We'll customize the service to your preferences and complete it within the estimated time.</p>
+              <p className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3 text-primary font-poppins">What's Included</p>
+              <p className="text-xs sm:text-sm mb-3 sm:mb-4 text-primary font-inter font-normal">A comprehensive clean of all rooms in your property, including dusting, vacuuming, mopping, and bathroom facilities. We'll customize the service to your preferences and complete it within the estimated time.</p>
             </div>
             <div>
-              <p className="text-xs sm:text-sm" style={{color: '#4B5368'}}>The time will be dependent on the team size. Larger teams can complete your clean faster, while smaller teams may take longer - quality is kept to the highest priority.</p>
+              <p className="text-xs sm:text-sm text-primary font-inter font-normal">The time will be dependent on the team size. Larger teams can complete your clean faster, while smaller teams may take longer - quality is kept to the highest priority.</p>
             </div>
             <div className="hidden">
-              <p className="text-xs sm:text-sm font-semibold mb-1 sm:mb-2" style={{color: '#4B5368'}}>Estimated Cleaning Time</p>
-              <p className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3" style={{color: '#4B5368'}}>{estimateStats.firstCleanHours || 0}h {estimateStats.firstCleanMinutes || 0}m</p>
-              <p className="text-xs sm:text-sm" style={{color: '#4B5368'}}>This is our estimated time to complete your cleaning based on your requirements. Actual time may vary slightly.</p>
+              <p className="text-xs sm:text-sm font-semibold mb-1 sm:mb-2 text-primary font-poppins">Estimated Cleaning Time</p>
+              <p className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3 text-primary font-poppins">{estimateStats.firstCleanHours || 0}h {estimateStats.firstCleanMinutes || 0}m</p>
+              <p className="text-xs sm:text-sm text-primary font-inter font-normal">This is our estimated time to complete your cleaning based on your requirements. Actual time may vary slightly.</p>
             </div>
             <div className="flex flex-row gap-2 mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-blue-300 flex-shrink-0">
               <button
                 onClick={() => setShowDetailsModal(true)}
                 title="View estimate details"
-                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-poppins font-semibold rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}  
+                className="btn-primary px-3 sm:px-4 py-2 text-xs sm:text-sm font-poppins font-semibold rounded-lg transition flex-1"
               >
                 Estimate Details
               </button>
               <button
                 onClick={() => setShowPricingModal(true)}
                 title="View what comes next"
-                className="px-3 sm:px-4 py-2 sm:py-2 text-white text-xs sm:text-sm font-poppins font-semibold rounded-lg transition font-heading flex-1" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+                className="btn-primary px-3 sm:px-4 py-2 text-xs sm:text-sm font-poppins font-semibold rounded-lg transition flex-1"
               >
                 What Comes Next?
               </button>
@@ -185,16 +185,16 @@ export default function FormSummary({
           {(formData.frequency || 'one-off') !== 'one-off' && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-6 hidden">
               <div className="flex flex-col justify-between items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
-                <h3 className="text-lg sm:text-2xl font-bold font-heading" style={{color: '#4B5368'}}>Maintenance Price</h3>
-                <p className="text-3xl sm:text-4xl font-bold flex-shrink-0" style={{color: '#4B5368'}}>£{isFinite(estimateStats.maintenancePrice) ? estimateStats.maintenancePrice.toFixed(2) : '0.00'}</p>
+                <h3 className="heading-h2 text-primary">Maintenance Price</h3>
+                <p className="text-3xl sm:text-4xl font-bold flex-shrink-0 text-primary font-poppins">£{isFinite(estimateStats.maintenancePrice) ? estimateStats.maintenancePrice.toFixed(2) : '0.00'}</p>
               </div>
               <div className="mb-3 sm:mb-4">
-                <p className="text-xs sm:text-sm font-semibold mb-1" style={{color: '#4B5368'}}>Per clean going forward</p>
-                <p className="text-xs sm:text-sm" style={{color: '#4B5368'}}>Regular price for each scheduled cleaning ({formData.frequency || 'one-off'})</p>
+                <p className="text-xs sm:text-sm font-semibold mb-1 text-primary font-poppins">Per clean going forward</p>
+                <p className="text-xs sm:text-sm text-primary font-inter font-normal">Regular price for each scheduled cleaning ({formData.frequency || 'one-off'})</p>
               </div>
               <div className="hidden">
-                <p className="text-xs sm:text-sm font-semibold mb-2" style={{color: '#4B5368'}}>Estimated Maintenance Time</p>
-                <p className="text-base sm:text-lg font-bold" style={{color: '#4B5368'}}>{estimateStats.maintenanceHours || 0}h {estimateStats.maintenanceMinutes || 0}m</p>
+                <p className="text-xs sm:text-sm font-semibold mb-2 text-primary font-poppins">Estimated Maintenance Time</p>
+                <p className="text-base sm:text-lg font-bold text-primary font-poppins">{estimateStats.maintenanceHours || 0}h {estimateStats.maintenanceMinutes || 0}m</p>
               </div>
             </div>
           )}
@@ -207,7 +207,7 @@ export default function FormSummary({
     <>
       {isModal ? (
         // Modal View
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
           <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl w-full sm:max-w-2xl h-screen sm:h-auto sm:max-h-[95vh] overflow-y-auto">
             <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
               {/* Price Summary Section */}
@@ -279,7 +279,7 @@ export default function FormSummary({
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="w-full px-6 sm:px-8 py-3 sm:py-4 text-white font-poppins font-thin rounded-lg transition font-heading" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+                className="btn-primary w-full px-6 sm:px-8 py-3 sm:py-4 font-poppins font-semibold rounded-lg transition"
               >
                 Close
               </button>
@@ -339,15 +339,15 @@ export default function FormSummary({
 
               return (
                 <div key={group.title} className="border-b border-gray-200 pb-4 sm:pb-6 last:border-b-0">
-                  <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
-                    <div className="w-1 h-6 rounded" style={{backgroundColor: '#9CA3AF'}}></div>
+                  <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-poppins text-primary">
+                    <div className="w-1 h-6 rounded bg-gray-400"></div>
                     {group.title}
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
                     {groupData.map(({ fieldId, value, displayName, isExtra }: any) => (
                       <div key={fieldId} className="flex flex-col justify-between bg-gray-50 p-2 rounded-lg hover:bg-gray-100 transition w-full h-full">
-                        <p className="text-sm font-poppins font-thin" style={{color: '#4B5368'}}>
-                          {displayName}: <span className="text-sm font-semibold ml-2" style={{color: '#4B5368'}}>
+                        <p className="text-sm font-poppins font-normal text-primary">
+                          {displayName}: <span className="text-sm font-semibold ml-2 text-primary">
                             {fieldId.startsWith('windows_') || fieldId.startsWith('doors_') ? `${value}` : '✓'}
                           </span>
                         </p>
@@ -362,13 +362,13 @@ export default function FormSummary({
 
           {/* Details Modal */}
           {showDetailsModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] flex items-end sm:items-center justify-center p-0 sm:p-4">
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
               <div className="bg-white rounded-t-lg sm:rounded-lg shadow-2xl w-full sm:max-w-2xl h-screen sm:h-auto sm:max-h-[95vh] overflow-y-auto">
-                <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center" style={{backgroundColor: '#48546A'}}>
-                  <h2 className="text-lg sm:text-2xl font-bold font-heading">Estimate Details</h2>
+                <div className="sticky top-0 text-white px-6 sm:px-8 py-5 sm:py-6 flex justify-between items-center bg-primary">
+                  <h2 className="text-lg sm:text-2xl font-bold font-poppins">Estimate Details</h2>
                   <button
                     onClick={() => setShowDetailsModal(false)}
-                    className="text-white rounded-full w-10 h-10 flex items-center justify-center transition" style={{backgroundColor: '#48546A'}} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48546A'}
+                    className="text-white rounded-full w-10 h-10 flex items-center justify-center transition hover:opacity-80"
                   >
                     ✕
                   </button>
@@ -376,28 +376,28 @@ export default function FormSummary({
                 <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
                   {/* Contact Information */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
-                    <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
+                    <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-poppins text-primary">
                       <span className="text-xl">👤</span>
                       Contact Information
                     </h3>
-                    <div className="space-y-2">
-                      <p style={{color: '#4B5368'}}>Name: <span className="font-semibold">{formData.name || '-'}</span></p>
-                      <p style={{color: '#4B5368'}}>Phone: <span className="font-semibold">{formData.telephone || '-'}</span></p>
-                      <p style={{color: '#4B5368'}}>Email: <span className="font-semibold">{formData.email || '-'}</span></p>
-                      <p style={{color: '#4B5368'}}>Address: <span className="font-semibold">{typeof formData.address === 'object' ? `${formData.address?.street}, ${formData.address?.city}` : formData.address || '-'}</span></p>
+                    <div className="space-y-2 font-inter font-normal text-primary">
+                      <p>Name: <span className="font-semibold">{formData.name || '-'}</span></p>
+                      <p>Phone: <span className="font-semibold">{formData.telephone || '-'}</span></p>
+                      <p>Email: <span className="font-semibold">{formData.email || '-'}</span></p>
+                      <p>Address: <span className="font-semibold">{typeof formData.address === 'object' ? `${formData.address?.street}, ${formData.address?.city}` : formData.address || '-'}</span></p>
                     </div>
                   </div>
 
                   {/* Preferences */}
                   <div className="border-b border-gray-200 pb-4 sm:pb-6">
-                    <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-heading" style={{color: '#4B5368'}}>
+                    <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 font-poppins text-primary">
                       <span className="text-xl">⚙️</span>
                       Preferences
                     </h3>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div><p style={{color: '#4B5368'}}>Type: <span className="font-semibold">{formData.property_type || '-'}</span></p></div>
-                      <div><p style={{color: '#4B5368'}}>Service: <span className="font-semibold">{formData.service_type || '-'}</span></p></div>
-                      <div><p style={{color: '#4B5368'}}>Frequency: <span className="font-semibold">{formData.frequency || '-'}</span></p></div>
+                    <div className="grid grid-cols-2 gap-4 font-inter font-normal text-primary">
+                      <div><p>Type: <span className="font-semibold">{formData.property_type || '-'}</span></p></div>
+                      <div><p>Service: <span className="font-semibold">{formData.service_type || '-'}</span></p></div>
+                      <div><p>Frequency: <span className="font-semibold">{formData.frequency || '-'}</span></p></div>
                       <div><p style={{color: '#4B5368'}}>Pet Friendly: <span className="font-semibold">{formData.pet_friendly ? 'Yes' : 'No'}</span></p></div>
                     </div>
                   </div>

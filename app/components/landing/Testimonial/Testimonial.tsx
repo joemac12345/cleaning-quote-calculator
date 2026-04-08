@@ -12,10 +12,10 @@ export default function Testimonial() {
         <div className="flex items-center gap-4 sm:gap-6">
           <div className="flex gap-0.5">
             {[...Array(rating)].map((_, i) => (
-              <span key={i} className="bg-[#48546A] rounded w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-sm sm:text-base text-white">★</span>
+              <span key={i} className="bg-primary rounded w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-sm sm:text-base text-white">★</span>
             ))}
           </div>
-          <p className="text-sm sm:text-base text-[#48546A] font-normal">
+          <p className="text-sm sm:text-base text-gray-600 font-inter font-normal">
             Proudly trusted by {customers} customers
           </p>
         </div>
