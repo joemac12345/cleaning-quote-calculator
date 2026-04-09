@@ -98,10 +98,13 @@ export default function AdminPage() {
         // Update status counts
         const oldEstimate = estimates.find((e) => e.id === id);
         if (oldEstimate?.status) {
+          const oldStatusKey = String(oldEstimate?.status ?? "unknown");
+          const newStatusKey = String(newStatus);
+
           setStatusCounts((prev) => ({
             ...prev,
-            [oldEstimate.status]: Math.max(0, (prev[oldEstimate.status] || 0) - 1),
-            [newStatus]: (prev[newStatus] || 0) + 1,
+            [oldStatusKey]: Math.max(0, (prev[oldStatusKey] || 0) - 1),
+            [newStatusKey]: (prev[newStatusKey] || 0) + 1,
           }));
         }
       }
