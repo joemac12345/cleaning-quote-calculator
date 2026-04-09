@@ -8,7 +8,7 @@ export default function HeroSection() {
   const backgroundImage = '/landing.svg';
 
   return (
-    <section className="mx-auto overflow-hidden rounded-lg" style={{ width: '672px', height: '250px', maxWidth: '100%' }}>
+    <section className="mx-auto overflow-hidden rounded-lg relative" style={{ width: '672px', height: '250px', maxWidth: '100%' }}>
       <Image 
         src={backgroundImage}
         alt="Cleaning Services" 
