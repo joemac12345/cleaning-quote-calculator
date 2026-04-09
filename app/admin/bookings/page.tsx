@@ -15,6 +15,10 @@ interface Booking {
   status: string;
   created_at: string;
   confirmed_at: string | null;
+  rooms?: number;
+  service_type?: string;
+  frequency?: string;
+  estimated_price?: number;
   estimate_data?: {
     rooms?: number;
     serviceType?: string;
@@ -76,32 +80,16 @@ export default function BookingsAdmin() {
         throw fetchError;
       }
       
-      // Try to fetch estimate data for each booking
-      const bookingsWithEstimates = await Promise.all(
-        (data || []).map(async (booking) => {
-          try {
-            // Try to fetch estimate from estimates table if it exists
-            const { data: estimateData } = await supabase
-              .from('estimates')
-              .select('*')
-              .eq('id', booking.estimate_id)
-              .single();
-            
-            return {
-              ...booking,
-              estimate_data: estimateData ? {
-                rooms: estimateData.rooms || 0,
-                serviceType: estimateData.service_type || 'Standard',
-                frequency: estimateData.frequency || 'One-off',
-                estimatedPrice: estimateData.estimated_price || 0,
-              } : undefined,
-            };
-          } catch {
-            // If estimates table doesn't exist or no data, return booking without estimate
-            return booking;
-          }
-        })
-      );
+      // Map the booking data, extracting estimate details from booking record
+      const bookingsWithEstimates = (data || []).map((booking) => ({
+        ...booking,
+        estimate_data: {
+          rooms: booking.rooms || 0,
+          serviceType: booking.service_type || 'N/A',
+          frequency: booking.frequency || 'N/A',
+          estimatedPrice: booking.estimated_price || 0,
+        },
+      }));
       
       setBookings(bookingsWithEstimates);
     } catch (err) {

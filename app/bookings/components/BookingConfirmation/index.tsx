@@ -56,13 +56,17 @@ export default function BookingConfirmation({
     setIsSubmitting(true);
 
     try {
-      // Create booking record
+      // Create booking record with estimate details
       const bookingResult = await createBooking({
         estimate_id: estimateId || '',
         customer_name: formData.customer_name,
         email: formData.email,
         telephone: formData.telephone,
         address: formData.address,
+        rooms: estimateData?.rooms,
+        service_type: estimateData?.service_type,
+        frequency: estimateData?.frequency,
+        estimated_price: estimateData?.estimated_price,
       });
 
       if (!bookingResult.success) {

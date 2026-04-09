@@ -6,6 +6,10 @@ export interface BookingData {
   email: string;
   telephone: string;
   address: string;
+  rooms?: number;
+  service_type?: string;
+  frequency?: string;
+  estimated_price?: number;
 }
 
 export async function createBooking(bookingData: BookingData): Promise<{success: boolean; id?: string; error?: string}> {
@@ -17,6 +21,10 @@ export async function createBooking(bookingData: BookingData): Promise<{success:
       email: bookingData.email,
       telephone: bookingData.telephone,
       address: bookingData.address,
+      rooms: bookingData.rooms || null,
+      service_type: bookingData.service_type || null,
+      frequency: bookingData.frequency || null,
+      estimated_price: bookingData.estimated_price || null,
       status: 'pending',
       confirmed_at: null,
     };
