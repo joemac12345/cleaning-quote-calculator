@@ -55,7 +55,7 @@ function BookingPageContent() {
   if (bookingSuccess) {
     return (
       <div className="min-h-screen">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16 mt-8 sm:mt-12">
           {/* Success Message */}
           <div className="text-left mb-12">
             <div className="flex mb-6">
@@ -117,7 +117,7 @@ function BookingPageContent() {
   if (!estimateData) {
     return (
       <div className="min-h-screen">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16 mt-8 sm:mt-12">
           <h1 className="heading-h1 text-primary mb-4">
             No Estimate Found
           </h1>
@@ -138,7 +138,7 @@ function BookingPageContent() {
   // Booking form state - with estimate data
   return (
     <div className="min-h-screen">
-      <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
+      <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16 mt-8 sm:mt-12">
         {/* Booking Confirmation Form */}
         <div>
           <BookingConfirmation
