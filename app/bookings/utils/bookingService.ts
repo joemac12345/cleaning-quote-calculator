@@ -52,9 +52,38 @@ export async function createBooking(bookingData: BookingData): Promise<{success:
       return { success: false, error: error.message };
     }
 
-    return { success: true, id: data?.[0]?.id };
+    const bookingId = data?.[0]?.id;
+    
+    // After successful booking creation, delete the estimate (all data is preserved in booking)
+    if (bookingId && bookingData.estimate_id) {
+      deleteEstimate(bookingData.estimate_id).catch(err => {
+        console.warn('Warning: Could not delete estimate after booking:', err);
+        // Don't fail the booking if estimate deletion fails
+      });
+    }
+
+    return { success: true, id: bookingId };
   } catch (error) {
     console.error('Error creating booking:', error);
+    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+  }
+}
+
+export async function deleteEstimate(estimateId: string): Promise<{success: boolean; error?: string}> {
+  try {
+    const { error } = await supabase
+      .from('estimates')
+      .delete()
+      .eq('id', estimateId);
+
+    if (error) {
+      console.error('Supabase delete error:', error);
+      return { success: false, error: error.message };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting estimate:', error);
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
   }
 }
