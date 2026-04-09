@@ -115,7 +115,7 @@ export default function BookingConfirmation({
 
         <PricingSummary formData={estimateData} />
 
-        <h2 className="heading-h3 font-black">
+        <h2 className="heading-h3">
           Ready to book
         </h2>
 

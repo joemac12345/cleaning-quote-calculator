@@ -31,8 +31,8 @@ export default function FormField({
   required = false,
 }: FormFieldProps) {
   const baseClasses =
-    'w-full px-4 py-3 border rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-primary transition text-base font-inter font-normal';
-  const errorClasses = error ? 'border-red-500' : 'border-gray-300';
+    'w-full px-4 py-3 border rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary transition text-base font-inter font-normal';
+  const errorClasses = error ? 'border-error' : 'border-gray-300';
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);

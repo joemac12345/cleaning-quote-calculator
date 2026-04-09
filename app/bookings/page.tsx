@@ -63,10 +63,10 @@ function BookingPageContent() {
                 <span className="text-3xl">✓</span>
               </div>
             </div>
-            <h1 className="heading-h1 text-green-700 mb-4">
+            <h1 className="heading-h1 text-success mb-4">
               Booking Confirmed!
             </h1>
-            <p className="body-text text-gray-700 mb-8">
+            <p className="body-text text-gray-600 mb-8">
               Thank you for your booking. Our team will contact you within 24 hours to arrange a date and time.
             </p>
 
@@ -81,8 +81,8 @@ function BookingPageContent() {
 
             {/* Next Steps */}
             <div className="mb-8 text-left">
-              <h2 className="heading-h3 text-gray-900 mb-4">What Happens Next?</h2>
-              <ol className="space-y-3 text-small text-gray-700">
+              <h2 className="heading-h3 mb-4">What Happens Next?</h2>
+              <ol className="space-y-3 text-small text-gray-600">
                 <li className="flex gap-3">
                   <span className="font-bold">1.</span>
                   <span>Our team will review your booking</span>
@@ -102,7 +102,7 @@ function BookingPageContent() {
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => window.location.href = '/'}
-                className="btn-primary px-8 py-3 font-poppins font-semibold rounded-lg transition"
+                className="btn-primary px-8 py-3 transition"
               >
                 Return Home
               </button>
@@ -121,12 +121,12 @@ function BookingPageContent() {
           <h1 className="heading-h1 text-primary mb-4">
             No Estimate Found
           </h1>
-          <p className="body-text text-gray-700 mb-8">
+          <p className="body-text text-gray-600 mb-8">
             Please complete an estimate first before proceeding to book.
           </p>
           <button
             onClick={() => window.location.href = '/01-estimate'}
-            className="btn-primary px-8 py-3 font-poppins font-semibold rounded-lg transition"
+            className="btn-primary px-8 py-3 transition"
           >
             Start Estimate
           </button>
