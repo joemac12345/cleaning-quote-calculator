@@ -70,9 +70,9 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
       ...formData,
       estimate,
     });
-    // Store form data in sessionStorage and navigate to form summary page
+    // Store form data in sessionStorage and navigate to booking page
     sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
-    router.push('/01-form-summary');
+    router.push('/booking');
   };
 
   if (!currentStepData) {

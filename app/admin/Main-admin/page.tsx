@@ -4,12 +4,12 @@ export const dynamic = 'force-dynamic';
 
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { getEstimates, searchEstimates, deleteEstimate, updateEstimateStatus } from '@/app/utils/estimateService';
-import { StatusSelector } from '@/app/components/admin/job-status/StatusSelector';
-import { StatusFilter } from '@/app/components/admin/job-status/StatusFilter';
-import { AdminNavigation } from '@/app/components/admin/Founders';
+import { StatusSelector } from '@/app/admin/components/job-status/StatusSelector';
+import { StatusFilter } from '@/app/admin/components/job-status/StatusFilter';
+import { AdminNavigation } from '@/app/admin/components/Founders';
 import ModalSkeleton from '@/app/components/shared/ModalSkeleton';
 
-const NotesModal = lazy(() => import('@/app/components/admin/NotesModal').then(mod => ({ default: mod.NotesModal })));
+const NotesModal = lazy(() => import('@/app/admin/components/NotesModal').then(mod => ({ default: mod.NotesModal })));
 
 const STATUS_OPTIONS = [
   { value: 'new', label: 'New' },

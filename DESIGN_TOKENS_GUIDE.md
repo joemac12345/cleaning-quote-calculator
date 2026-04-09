@@ -137,7 +137,7 @@ These are instantly available in all components:
 
 ### Heading Utilities
 ```jsx
-<h1 className="heading-h1">Page Title</h1>        {/* text-4xl sm:text-5xl, font-light */}
+<h1 className="heading-h1">Page Title</h1>        {/* text-4xl sm:text-5xl, font-semibold */}
 <h2 className="heading-h2">Section Title</h2>    {/* text-2xl sm:text-3xl, font-light */}
 <h3 className="heading-h3">Card Title</h3>       {/* text-lg, font-light */}
 ```
@@ -161,7 +161,7 @@ Since the system is new, existing components have hardcoded colors like `text-[#
 
 ### Before (Hardcoded)
 ```jsx
-<h1 className="text-4xl font-poppins font-light text-[#48546A]">
+<h1 className="text-4xl font-poppins font-semibold text-[#48546A]">
   Title
 </h1>
 ```
@@ -174,7 +174,7 @@ Since the system is new, existing components have hardcoded colors like `text-[#
 OR
 
 ```jsx
-<h1 className="text-4xl font-poppins font-light text-gray-900">
+<h1 className="text-4xl font-poppins font-semibold text-gray-900">
   Title
 </h1>
 ```

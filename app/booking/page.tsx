@@ -1,59 +1,167 @@
 'use client';
 
-export default function BookingPage() {
-  return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
-        {/* Header */}
-        <h1 className="text-4xl sm:text-5xl font-poppins font-light text-gray-900 mb-3">Ready to Book?</h1>
-        <p className="text-gray-600 text-base sm:text-lg mb-20 sm:mb-24">Thank you for getting your quote! We're excited to help you keep your space clean and fresh.</p>
+import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import BookingConfirmation from './components/BookingConfirmation';
 
-        {/* Content Sections */}
-        <div className="space-y-6 mb-20 sm:mb-24">
-          {/* Option 1: Book Online */}
-          <div className="border border-gray-300 rounded-lg p-6">
-            <h2 className="text-lg sm:text-xl font-poppins font-normal text-gray-900 mb-3">🗓️ Book Your Appointment</h2>
-            <p className="text-base sm:text-lg text-gray-600 mb-6 font-inter font-normal">
-              Choose your preferred date and time to get started. Our booking system makes it easy to find a slot that works for you.
-            </p>
-            <button className="w-full px-6 py-3 bg-[#48546A] text-white rounded-lg hover:opacity-90 font-poppins font-semibold transition">
-              Browse Available Times
-            </button>
-          </div>
+function BookingPageContent() {
+  const searchParams = useSearchParams();
+  const [estimateData, setEstimateData] = useState<Record<string, any> | null>(null);
+  const [estimateId, setEstimateId] = useState<string | null>(null);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [bookingId, setBookingId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-          {/* Option 2: Request a Call */}
-          <div className="border border-gray-300 rounded-lg p-6">
-            <h2 className="text-lg sm:text-xl font-poppins font-normal text-gray-900 mb-3">📞 Request a Call Back</h2>
-            <p className="text-base sm:text-lg text-gray-600 mb-6 font-inter font-normal">
-              Prefer to discuss your booking over the phone? Let us know your availability and we'll call you at a time that suits you best.
-            </p>
-            <button className="px-6 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 font-poppins font-light transition">
-              Request a Call Back
-            </button>
-          </div>
+  useEffect(() => {
+    // Get estimate data from sessionStorage
+    const storedData = sessionStorage.getItem('estimateFormData');
+    const storedEstimateId = sessionStorage.getItem('estimateId');
+    
+    if (storedData) {
+      try {
+        const parsedData = JSON.parse(storedData);
+        setEstimateData(parsedData);
+      } catch (error) {
+        console.error('Failed to parse estimate data:', error);
+      }
+    }
 
-          {/* Option 3: Contact Info */}
-          <div className="bg-gray-50 border border-gray-300 rounded-lg p-6">
-            <h2 className="text-lg sm:text-xl font-poppins font-normal text-gray-900 mb-3">💬 Get in Touch</h2>
-            <p className="text-base sm:text-lg text-gray-600 mb-6 font-inter font-normal">
-              Have questions? Contact us directly and we'll be happy to help.
+    if (storedEstimateId) {
+      setEstimateId(storedEstimateId);
+    }
+
+    setIsLoading(false);
+  }, []);
+
+  const handleBookingSuccess = (newBookingId: string) => {
+    setBookingId(newBookingId);
+    setBookingSuccess(true);
+  };
+
+  const handleBackToSummary = () => {
+    window.history.back();
+  };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-600 text-lg font-inter">Loading...</p>
+      </div>
+    );
+  }
+
+  // Success state
+  if (bookingSuccess) {
+    return (
+      <div className="min-h-screen">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
+          {/* Success Message */}
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-6">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                <span className="text-3xl">✓</span>
+              </div>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold text-green-700 font-poppins mb-4">
+              Booking Confirmed!
+            </h1>
+            <p className="text-gray-600 text-base sm:text-lg font-inter mb-8">
+              Thank you for your booking. Our team will contact you within 24 hours to arrange a date and time.
             </p>
-            <div className="flex gap-3">
-              <button className="px-6 py-2 bg-white border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 font-poppins font-light transition text-sm sm:text-base">
-                Email Us
-              </button>
-              <button className="px-6 py-2 bg-white border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 font-poppins font-light transition text-sm sm:text-base">
-                Call Us
+
+            {/* Booking Reference */}
+            {bookingId && (
+              <div className="p-6 mb-8 inline-block">
+                <p className="text-sm text-gray-600 font-inter mb-2">Booking Reference</p>
+                <p className="text-2xl font-bold text-primary font-poppins">{bookingId}</p>
+              </div>
+            )}
+
+            {/* Next Steps */}
+            <div className="p-6 mb-8 text-left max-w-2xl mx-auto">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 font-poppins">What Happens Next?</h2>
+              <ol className="space-y-3 text-sm sm:text-base text-gray-700 font-inter">
+                <li className="flex gap-3">
+                  <span className="font-bold">1.</span>
+                  <span>Our team will review your booking</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-bold">2.</span>
+                  <span>We'll contact you to confirm the date and time</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-bold">3.</span>
+                  <span>You'll receive a confirmation email with all details</span>
+                </li>
+              </ol>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => window.location.href = '/'}
+                className="btn-primary px-8 py-3 font-poppins font-semibold rounded-lg transition"
+              >
+                Return Home
               </button>
             </div>
           </div>
         </div>
+      </div>
+    );
+  }
 
-        {/* Footer Note */}
-        <p className="text-sm text-gray-500 text-center">
-          Your quote is waiting for you. Book your first appointment today and experience our professional cleaning service.
-        </p>
+  // Booking form state - no estimate data
+  if (!estimateData) {
+    return (
+      <div className="min-h-screen">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
+          <h1 className="text-3xl sm:text-4xl font-bold text-primary font-poppins mb-4">
+            No Estimate Found
+          </h1>
+          <p className="text-gray-600 text-base sm:text-lg font-inter mb-8">
+            Please complete an estimate first before proceeding to book.
+          </p>
+          <button
+            onClick={() => window.location.href = '/01-estimate'}
+            className="btn-primary px-8 py-3 font-poppins font-semibold rounded-lg transition"
+          >
+            Start Estimate
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Booking form state - with estimate data
+  return (
+    <div className="min-h-screen">
+      <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
+        {/* Booking Confirmation Form */}
+        <div>
+          <BookingConfirmation
+            estimateData={estimateData}
+            estimateId={estimateId || ''}
+            onSuccess={handleBookingSuccess}
+            onError={(error) => console.error('Booking error:', error)}
+          />
+        </div>
       </div>
     </div>
+  );
+}
+
+export default function BookingPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-gray-600 text-lg font-inter">Loading...</p>
+        </div>
+      }
+    >
+      <BookingPageContent />
+    </Suspense>
   );
 }

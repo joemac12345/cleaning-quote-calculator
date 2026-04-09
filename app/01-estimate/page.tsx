@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import EstimateCalculator from '../components/fields/form-parts/EstimateCalculator';
+import EstimateCalculator from './components/form-parts/EstimateCalculator';
 
 export default function EstimatePage() {
   const [formData, setFormData] = useState<Record<string, any>>({});
