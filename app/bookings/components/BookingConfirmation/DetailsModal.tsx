@@ -33,9 +33,9 @@ export default function DetailsModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-      <div className="bg-white w-full sm:max-w-lg h-screen sm:h-auto sm:max-h-[90vh] overflow-y-auto rounded-t-lg sm:rounded-lg shadow-2xl">
-        <div className="p-4 sm:p-8 space-y-6 mt-5 sm:mt-0">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl">
+        <div className="p-4 sm:p-8 space-y-6">
           {/* Close button */}
           <div className="flex justify-between items-center mb-4">
             <h3 className="heading-h3 font-bold text-primary">Your Details</h3>
