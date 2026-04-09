@@ -77,8 +77,17 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
       const estimateResult = await saveEstimateToDatabase(formData);
       
       if (estimateResult.success && estimateResult.id) {
-        // Store both in sessionStorage for reference
-        sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
+        // Store form data, calculation results, and estimate ID in sessionStorage
+        sessionStorage.setItem('estimateFormData', JSON.stringify({
+          ...formData,
+          // Include all calculated fields for booking page
+          first_clean_price: estimate?.firstCleanPrice,
+          maintenance_price: estimate?.maintenancePrice,
+          first_clean_hours: estimate?.firstCleanHours,
+          first_clean_minutes: estimate?.firstCleanMinutes,
+          maintenance_hours: estimate?.maintenanceHours,
+          maintenance_minutes: estimate?.maintenanceMinutes,
+        }));
         sessionStorage.setItem('estimateId', estimateResult.id);
         
         // Navigate to booking page with estimate ID as query param
@@ -86,13 +95,29 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
       } else {
         console.error('Failed to save estimate:', estimateResult.error);
         // Still allow navigation even if save fails
-        sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
+        sessionStorage.setItem('estimateFormData', JSON.stringify({
+          ...formData,
+          first_clean_price: estimate?.firstCleanPrice,
+          maintenance_price: estimate?.maintenancePrice,
+          first_clean_hours: estimate?.firstCleanHours,
+          first_clean_minutes: estimate?.firstCleanMinutes,
+          maintenance_hours: estimate?.maintenanceHours,
+          maintenance_minutes: estimate?.maintenanceMinutes,
+        }));
         router.push('/bookings');
       }
     } catch (error) {
       console.error('Error during form submission:', error);
       // Still allow navigation as fallback
-      sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
+      sessionStorage.setItem('estimateFormData', JSON.stringify({
+        ...formData,
+        first_clean_price: estimate?.firstCleanPrice,
+        maintenance_price: estimate?.maintenancePrice,
+        first_clean_hours: estimate?.firstCleanHours,
+        first_clean_minutes: estimate?.firstCleanMinutes,
+        maintenance_hours: estimate?.maintenanceHours,
+        maintenance_minutes: estimate?.maintenanceMinutes,
+      }));
       router.push('/bookings');
     }
   };
