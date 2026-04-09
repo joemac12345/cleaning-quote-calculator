@@ -73,7 +73,7 @@ export default function BookingConfirmation({
         first_clean_minutes: estimateData?.first_clean_minutes,
         maintenance_hours: estimateData?.maintenance_hours,
         maintenance_minutes: estimateData?.maintenance_minutes,
-        form_data: estimateData?.form_data,
+        form_data: estimateData,
       });
 
       if (!bookingResult.success) {

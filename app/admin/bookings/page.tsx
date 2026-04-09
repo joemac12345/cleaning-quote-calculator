@@ -5,6 +5,7 @@ import { supabase } from '@/app/utils/supabase';
 import Link from 'next/link';
 import { AdminNavigation } from '@/app/admin/components/Founders';
 import BookingCard from './components/BookingCard';
+import FilterModal from './components/FilterModal';
 
 interface Booking {
   id: string;
@@ -54,6 +55,7 @@ export default function BookingsAdmin() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [statusCounts, setStatusCounts] = useState<Record<string, number>>({});
+  const [showFilterModal, setShowFilterModal] = useState(false);
 
   useEffect(() => {
     fetchBookings();
@@ -185,38 +187,22 @@ export default function BookingsAdmin() {
         </div>
       </div>
 
-      {/* Status Filter Bar */}
-      <div className="sticky top-0 bg-white border-b border-gray-200 py-3 sm:py-4 px-3 sm:px-6 z-40">
+      {/* Filter Bar */}
+      <div className="bg-white border-b border-gray-200 py-3 sm:py-4 px-3 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex gap-2 overflow-x-auto">
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-sm text-gray-600 font-medium">
+              Status: <span style={{ color: '#4B5368' }} className="font-semibold">
+                {filter === 'all' ? 'All' : STATUS_OPTIONS.find(s => s.value === filter)?.label || filter}
+              </span>
+            </p>
             <button
-              onClick={() => {
-                setFilter('all');
-                setLoading(true);
-              }}
-              className={`px-4 py-2 rounded-md text-sm whitespace-nowrap font-medium transition ${
-                filter === 'all'
-                  ? 'text-white'
-                  : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
-              }`}
-              style={filter === 'all' ? { backgroundColor: '#4B5368' } : {}}
+              onClick={() => setShowFilterModal(true)}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white transition hover:opacity-90"
+              style={{ backgroundColor: '#4B5368' }}
             >
-              All
+              Filter Bookings
             </button>
-            {STATUS_OPTIONS.map((status) => (
-              <button
-                key={status.value}
-                onClick={() => setFilter(status.value)}
-                className={`px-4 py-2 rounded-md text-sm whitespace-nowrap font-medium transition ${
-                  filter === status.value
-                    ? 'text-white'
-                    : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
-                }`}
-                style={filter === status.value ? { backgroundColor: '#4B5368' } : {}}
-              >
-                {status.label} ({statusCounts[status.value] || 0})
-              </button>
-            ))}
           </div>
         </div>
       </div>
@@ -270,6 +256,20 @@ export default function BookingsAdmin() {
 
       {/* Admin Navigation */}
       <AdminNavigation />
+
+      {/* Filter Modal */}
+      <FilterModal
+        isOpen={showFilterModal}
+        onClose={() => setShowFilterModal(false)}
+        filter={filter}
+        onFilterChange={(newFilter) => {
+          setFilter(newFilter);
+          setShowFilterModal(false);
+          setLoading(true);
+        }}
+        statusOptions={STATUS_OPTIONS}
+        statusCounts={statusCounts}
+      />
     </div>
   );
 }

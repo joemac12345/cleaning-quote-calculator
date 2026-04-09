@@ -15,6 +15,7 @@ interface EstimateCalculatorProps {
 export default function EstimateCalculator({ onFormDataChange }: EstimateCalculatorProps) {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
+  const [validationError, setValidationError] = useState('');
 
   // Disable body scroll on mount, re-enable on unmount
   useEffect(() => {
@@ -55,6 +56,29 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
   };
 
   const handleNext = () => {
+    // Validate required fields in current step
+    const currentStepFields = currentStepData?.fields || [];
+    const requiredFields = currentStepFields.filter(field => field.required);
+    
+    // Check if all required fields are filled
+    const unfilled = requiredFields.filter(field => {
+      const value = formData[field.id];
+      
+      // Handle empty strings, null, undefined
+      if (value === '' || value === null || value === undefined) return true;
+      
+      // Handle empty objects (for address type)
+      if (typeof value === 'object' && Object.keys(value).every(k => !value[k])) return true;
+      
+      return false;
+    });
+
+    if (unfilled.length > 0) {
+      setValidationError('Please fill in all required fields');
+      return;
+    }
+
+    setValidationError('');
     if (currentStep < formSteps.length) {
       setCurrentStep(currentStep + 1);
     }
@@ -146,6 +170,13 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
     <div className="min-h-screen bg-white text-gray-900">
       {/* Main Content - Adjusted for fixed navbar */}
       <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-4 sm:pt-6 pb-24 sm:pb-28">
+        {/* Validation Error Message */}
+        {validationError && (
+          <div className="mb-6 p-4 bg-error/10 border border-error rounded text-error text-sm font-inter font-normal">
+            {validationError}
+          </div>
+        )}
+
         {/* Step Content */}
         <div className="mb-8 sm:mb-12">
           <FormStepRenderer

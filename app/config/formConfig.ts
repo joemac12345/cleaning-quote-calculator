@@ -300,6 +300,7 @@ export const formSteps: FormStep[] = [
           { label: 'Fortnightly', value: 'fortnightly', price: 0 },
           { label: 'Monthly', value: 'monthly', price: 0 },
         ],
+        required: true,
       },
     ],
   },

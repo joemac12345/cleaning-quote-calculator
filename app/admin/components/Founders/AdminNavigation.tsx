@@ -7,10 +7,10 @@ export function AdminNavigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   const adminPages = [
-    { label: 'Estimates', href: '/admin' },
-    { label: 'Bookings', href: '/admin/bookings' },
-    { label: 'Feedback', href: '/admin/feedback' },
-    { label: 'Login', href: '/admin/login' },
+    { label: 'Estimates', href: '/admin', icon: '📋' },
+    { label: 'Bookings', href: '/admin/bookings', icon: '📅' },
+    { label: 'Feedback', href: '/admin/feedback', icon: '💬' },
+    { label: 'Login', href: '/admin/login', icon: '🔐' },
   ];
 
   return (
@@ -36,13 +36,13 @@ export function AdminNavigation() {
 
       {/* Navigation Modal */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 bg-white rounded-lg z-50 w-64 overflow-hidden border border-gray-300">
+        <div className="fixed bottom-24 right-6 bg-white rounded-lg z-50 w-72 overflow-hidden border border-gray-300 shadow-xl">
           {/* Header */}
           <div
             className="text-white px-6 py-4 flex justify-between items-center"
             style={{ backgroundColor: '#4B5368' }}
           >
-            <h2 className="text-lg font-poppins font-thin">Admin</h2>
+            <h2 className="text-lg font-semibold">Navigation</h2>
             <button
               onClick={() => setIsOpen(false)}
               className="text-white hover:opacity-80 transition text-2xl leading-none"
@@ -53,33 +53,30 @@ export function AdminNavigation() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="p-4 space-y-2">
+          <nav className="p-3 space-y-2">
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-3 rounded-lg hover:bg-gray-100 transition font-poppins font-thin text-gray-800"
+              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition font-medium text-gray-800"
               style={{ color: '#4B5368' }}
             >
-              ← Back to Home
+              <span className="text-lg">🏠</span>
+              <span>Back to Home</span>
             </Link>
-            <div className="border-t border-gray-300 my-2"></div>
+            <div className="border-t border-gray-200 my-2"></div>
             {adminPages.map((page) => (
               <Link
                 key={page.href}
                 href={page.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 rounded-lg hover:bg-gray-100 transition font-poppins font-thin text-gray-800"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition font-medium text-gray-800"
                 style={{ color: '#4B5368' }}
               >
-                {page.label}
+                <span className="text-lg">{page.icon}</span>
+                <span>{page.label}</span>
               </Link>
             ))}
           </nav>
-
-          {/* Footer */}
-          <div className="border-t border-gray-300 px-6 py-3 bg-gray-50">
-            <p className="text-xs text-gray-500">Admin Panel</p>
-          </div>
         </div>
       )}
     </>

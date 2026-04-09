@@ -45,6 +45,18 @@ export function extractRoomBreakdown(formData: Record<string, any>) {
 }
 
 /**
+ * Format service type for display
+ */
+export function formatServiceType(serviceType?: string): string {
+  const typeMap: Record<string, string> = {
+    deep: 'Deep Clean',
+    spring: 'Spring Clean',
+  };
+
+  return typeMap[serviceType?.toLowerCase() || ''] || serviceType || 'N/A';
+}
+
+/**
  * Format property type for display
  */
 export function formatPropertyType(propertyType?: string): string {

@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BookingCardHeader from './BookingCardHeader';
-import BookingContactInfo from './BookingContactInfo';
-import BookingPropertyDetails from './BookingPropertyDetails';
-import BookingJobDetails from './BookingJobDetails';
 import StatusBadge from './StatusBadge';
+import BookingDetailsModal from './BookingDetailsModal';
 
 interface EstimateData {
   rooms?: number;
@@ -45,35 +43,41 @@ export default function BookingCard({
   onStatusChange,
   formatDate,
 }: BookingCardProps) {
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+
   return (
-    <div className="bg-white rounded-lg border border-gray-300 hover:shadow-lg transition overflow-hidden">
-      <BookingCardHeader
-        customerName={booking.customer_name}
-        email={booking.email}
-        telephone={booking.telephone}
-        status={booking.status}
-        createdAt={booking.created_at}
-        onStatusChange={(newStatus) => onStatusChange(booking.id, newStatus)}
-        statusOptions={statusOptions}
-        formatDate={formatDate}
-      />
-
-      <div className="p-3 sm:p-4 space-y-3">
-        <BookingContactInfo
-          email={booking.email}
-          telephone={booking.telephone}
-          address={booking.address}
+    <>
+      <div className="bg-white rounded-lg border border-gray-300 hover:shadow-lg transition overflow-hidden">
+        <BookingCardHeader
+          customerName={booking.customer_name}
+          createdAt={booking.created_at}
+          formatDate={formatDate}
         />
 
-        <BookingPropertyDetails
-          propertyType={booking.property_type}
-          formData={booking.form_data}
-        />
-
-        <BookingJobDetails estimateData={booking.estimate_data || null} />
-
-        <StatusBadge status={booking.status} statusColors={statusColors} />
+        <div className="p-3 sm:p-4 space-y-3">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-lg sm:text-xl font-bold text-primary">
+                £{booking.estimate_data?.firstCleanPrice?.toFixed(2) || '0.00'}
+              </p>
+            </div>
+            <button
+              onClick={() => setShowDetailsModal(true)}
+              className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:opacity-90 transition"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <BookingDetailsModal
+        isOpen={showDetailsModal}
+        onClose={() => setShowDetailsModal(false)}
+        booking={booking}
+        statusOptions={statusOptions}
+        onStatusChange={onStatusChange}
+      />
+    </>
   );
 }
