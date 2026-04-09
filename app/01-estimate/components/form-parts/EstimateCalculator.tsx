@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { formSteps } from '@/app/config/formConfig';
 import { calculateEstimate } from '@/app/utils/estimateCalculation';
+import { saveEstimateToDatabase } from '@/app/utils/estimateService';
 import FormStepRenderer from './FormStepRenderer';
 import FormNavigation from './FormNavigation';
 
@@ -65,14 +66,35 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log('Form submitted:', {
       ...formData,
       estimate,
     });
-    // Store form data in sessionStorage and navigate to booking page
-    sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
-    router.push('/bookings');
+
+    try {
+      // Save estimate to database
+      const estimateResult = await saveEstimateToDatabase(formData);
+      
+      if (estimateResult.success && estimateResult.id) {
+        // Store both in sessionStorage for reference
+        sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
+        sessionStorage.setItem('estimateId', estimateResult.id);
+        
+        // Navigate to booking page with estimate ID as query param
+        router.push(`/bookings?estimateId=${estimateResult.id}`);
+      } else {
+        console.error('Failed to save estimate:', estimateResult.error);
+        // Still allow navigation even if save fails
+        sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
+        router.push('/bookings');
+      }
+    } catch (error) {
+      console.error('Error during form submission:', error);
+      // Still allow navigation as fallback
+      sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
+      router.push('/bookings');
+    }
   };
 
   if (!currentStepData) {
