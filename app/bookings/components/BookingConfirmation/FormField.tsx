@@ -13,7 +13,7 @@ export default function FormField({
   required = false,
 }: FormFieldProps) {
   const baseClasses =
-    'w-full px-4 py-2 border rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-primary transition text-small';
+    'w-full px-4 py-3 border rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-primary transition text-base font-inter font-normal';
   const errorClasses = error ? 'border-red-500' : 'border-gray-300';
 
   return (

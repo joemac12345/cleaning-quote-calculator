@@ -21,11 +21,11 @@ export default function ConfirmationCheckbox({
           id="confirmation"
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
-          className="mt-1 w-5 h-5 cursor-pointer accent-primary"
+          className="mt-1 w-5 h-5 cursor-pointer accent-primary flex-shrink-0"
           disabled={disabled}
         />
         <label htmlFor="confirmation" className="flex-1 cursor-pointer">
-          <p className="text-small text-primary">
+          <p className="text-base text-primary leading-relaxed">
             I confirm that the details above are correct. The cleaning team will contact me within 24 hours to confirm and schedule my booking.
           </p>
         </label>

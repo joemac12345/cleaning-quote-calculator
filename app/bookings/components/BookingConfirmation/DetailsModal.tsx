@@ -35,7 +35,7 @@ export default function DetailsModal({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
       <div className="bg-white w-full sm:max-w-lg h-screen sm:h-auto sm:max-h-[90vh] overflow-y-auto rounded-t-lg sm:rounded-lg shadow-2xl">
-        <div className="p-6 sm:p-8 space-y-6">
+        <div className="p-4 sm:p-8 space-y-6">
           {/* Close button */}
           <div className="flex justify-between items-center mb-4">
             <h3 className="heading-h3 font-bold text-primary">Your Details</h3>
@@ -48,7 +48,7 @@ export default function DetailsModal({
             </button>
           </div>
 
-          <p className="text-small text-gray-600 mb-6">
+          <p className="text-base text-gray-600 mb-6">
             Just double-check everything looks right. Feel free to edit anything that needs changing. Then confirm your booking.
           </p>
 

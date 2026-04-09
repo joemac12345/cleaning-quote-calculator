@@ -34,6 +34,9 @@ const poppins = Poppins({
 
 export const viewport: Viewport = {
   themeColor: "#48546A",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
