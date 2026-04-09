@@ -104,7 +104,7 @@ export default function AddressField({
               type="button"
               onClick={handleGeolocation}
               disabled={isLocating}
-              className="flex-1 btn-primary px-4 py-2 flex items-center justify-center gap-2 text-sm"
+              className="flex-1 btn-primary px-4 py-2 flex items-center justify-center gap-2 text-base"
             >
               {isLocating ? (
                 <>
@@ -144,7 +144,7 @@ export default function AddressField({
                 setShowManualEntry(true);
                 setLocationError(null);
               }}
-              className="flex-1 btn-secondary px-4 py-2 text-sm"
+              className="flex-1 btn-secondary px-4 py-2 text-base"
             >
               Manual Entry
             </button>
@@ -161,7 +161,7 @@ export default function AddressField({
               placeholder="Street Address"
               value={value.street || ''}
               onChange={(e) => onChange({ ...value, street: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm font-inter font-normal"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-base font-inter font-normal"
               required={field.required}
               autoComplete="street-address"
             />
@@ -175,7 +175,7 @@ export default function AddressField({
               placeholder="City"
               value={value.city || ''}
               onChange={(e) => onChange({ ...value, city: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm font-inter font-normal"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-base font-inter font-normal"
               required={field.required}
               autoComplete="address-level2"
             />
@@ -189,7 +189,7 @@ export default function AddressField({
               placeholder="County"
               value={value.county || ''}
               onChange={(e) => onChange({ ...value, county: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm font-inter font-normal"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-base font-inter font-normal"
               autoComplete="address-level1"
             />
           </div>
@@ -202,7 +202,7 @@ export default function AddressField({
               placeholder="Postcode"
               value={value.postcode || ''}
               onChange={(e) => onChange({ ...value, postcode: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm font-inter font-normal"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-base font-inter font-normal"
               required={field.required}
               autoComplete="postal-code"
             />
@@ -215,7 +215,7 @@ export default function AddressField({
               setShowManualEntry(false);
               setLocationError(null);
             }}
-            className="flex-1 btn-secondary px-4 py-2 text-sm"
+            className="flex-1 btn-secondary px-4 py-2 text-base"
           >
             Use My Location Instead
           </button>
