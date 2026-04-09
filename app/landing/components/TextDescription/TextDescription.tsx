@@ -12,7 +12,7 @@ export default function TextDescription() {
   const displayText = isExpanded ? description : description.slice(0, previewLength);
 
   return (
-    <section className="py-2 sm:py-3 px-3 sm:px-4 bg-white">
+    <section className="py-2 sm:py-3 px-3 sm:px-4">
       <div className="max-w-2xl mx-auto">
         <h2 className="heading-h2 mb-4 sm:mb-6">
           {title}
