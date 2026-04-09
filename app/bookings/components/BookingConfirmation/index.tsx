@@ -63,6 +63,7 @@ export default function BookingConfirmation({
         email: formData.email,
         telephone: formData.telephone,
         address: formData.address,
+        property_type: estimateData?.property_type,
         rooms: estimateData?.rooms,
         service_type: estimateData?.service_type,
         frequency: estimateData?.frequency,

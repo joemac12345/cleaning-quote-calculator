@@ -6,6 +6,7 @@ export interface BookingData {
   email: string;
   telephone: string;
   address: string;
+  property_type?: string;
   rooms?: number;
   service_type?: string;
   frequency?: string;

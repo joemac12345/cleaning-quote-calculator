@@ -1,6 +1,7 @@
 import React from 'react';
 import BookingCardHeader from './BookingCardHeader';
 import BookingContactInfo from './BookingContactInfo';
+import BookingPropertyDetails from './BookingPropertyDetails';
 import BookingJobDetails from './BookingJobDetails';
 import StatusBadge from './StatusBadge';
 
@@ -22,6 +23,8 @@ interface Booking {
   email: string;
   telephone: string;
   address: string;
+  property_type?: string;
+  form_data?: Record<string, any>;
   status: string;
   created_at: string;
   estimate_data?: EstimateData;
@@ -60,6 +63,11 @@ export default function BookingCard({
           email={booking.email}
           telephone={booking.telephone}
           address={booking.address}
+        />
+
+        <BookingPropertyDetails
+          propertyType={booking.property_type}
+          formData={booking.form_data}
         />
 
         <BookingJobDetails estimateData={booking.estimate_data || null} />

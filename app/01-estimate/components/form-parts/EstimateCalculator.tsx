@@ -72,6 +72,19 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
       estimate,
     });
 
+    // Calculate total rooms from all room types
+    const totalRooms = 
+      (formData.bedrooms || 0) +
+      (formData.bathrooms || 0) +
+      (formData.ensuite || 0) +
+      (formData.cloakroom || 0) +
+      (formData.kitchen || 0) +
+      (formData.utility || 0) +
+      (formData.living_rooms || 0) +
+      (formData.dining_rooms || 0) +
+      (formData.studies || 0) +
+      ((formData.other_spaces?.other_rooms) || 0);
+
     try {
       // Save estimate to database
       const estimateResult = await saveEstimateToDatabase(formData);
@@ -81,6 +94,7 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
         sessionStorage.setItem('estimateFormData', JSON.stringify({
           ...formData,
           // Include all calculated fields for booking page
+          rooms: totalRooms,
           first_clean_price: estimate?.firstCleanPrice,
           maintenance_price: estimate?.maintenancePrice,
           first_clean_hours: estimate?.firstCleanHours,
@@ -97,6 +111,7 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
         // Still allow navigation even if save fails
         sessionStorage.setItem('estimateFormData', JSON.stringify({
           ...formData,
+          rooms: totalRooms,
           first_clean_price: estimate?.firstCleanPrice,
           maintenance_price: estimate?.maintenancePrice,
           first_clean_hours: estimate?.firstCleanHours,
@@ -111,6 +126,7 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
       // Still allow navigation as fallback
       sessionStorage.setItem('estimateFormData', JSON.stringify({
         ...formData,
+        rooms: totalRooms,
         first_clean_price: estimate?.firstCleanPrice,
         maintenance_price: estimate?.maintenancePrice,
         first_clean_hours: estimate?.firstCleanHours,

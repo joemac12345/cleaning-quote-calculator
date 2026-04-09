@@ -13,6 +13,7 @@ interface Booking {
   email: string;
   telephone: string;
   address: string;
+  property_type?: string;
   status: string;
   created_at: string;
   confirmed_at: string | null;
