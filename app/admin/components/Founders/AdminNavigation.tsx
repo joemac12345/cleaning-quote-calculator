@@ -8,7 +8,9 @@ export function AdminNavigation() {
 
   const adminPages = [
     { label: 'Estimates', href: '/admin' },
+    { label: 'Bookings', href: '/admin/bookings' },
     { label: 'Feedback', href: '/admin/feedback' },
+    { label: 'Login', href: '/admin/login' },
   ];
 
   return (
