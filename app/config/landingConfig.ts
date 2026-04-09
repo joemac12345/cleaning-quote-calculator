@@ -16,7 +16,7 @@ export const landingConfig = {
   ctaButtons: {
     primaryText: 'Book Now',
     secondaryText: 'Contact Us',
-    primaryLink: '/booking',
+    primaryLink: '/bookings',
     secondaryLink: '/01-estimate'
   },
   services: {

@@ -18,6 +18,7 @@ export default function AddressField({
 }: AddressFieldProps) {
   const [isLocating, setIsLocating] = useState(false);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [showManualEntry, setShowManualEntry] = useState(false);
 
   const handleGeolocation = async () => {
     setIsLocating(true);
@@ -68,94 +69,113 @@ export default function AddressField({
   };
 
   return (
-    <div className="space-y-4">
-      <button
-        type="button"
-        onClick={handleGeolocation}
-        disabled={isLocating}
-        className="w-full btn-primary px-4 py-3 flex items-center justify-center gap-2 text-sm sm:text-base"
-      >
-        {isLocating ? (
-          <>
-            <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
-            Finding location...
-          </>
-        ) : (
-          <>
-            <svg
-              className="w-5 h-5 flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+    <div className="space-y-3">
+      {!showManualEntry ? (
+        // GEOLOCATION MODE
+        <>
+          {/* Error Message - Only show in geolocation mode */}
+          {locationError && (
+            <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-sm text-yellow-700 font-poppins font-light">Unable to access location</p>
+              <p className="text-xs text-yellow-600 mt-1">
+                {locationError === 'Location error: User denied Geolocation'
+                  ? 'Please enter your address manually below, or check your browser location permissions.'
+                  : locationError}
+              </p>
+            </div>
+          )}
+
+          {/* Display Current Address */}
+          {(value.street || value.city || value.postcode) && (
+            <div className="p-4 bg-gray-50 rounded-lg border border-gray-300">
+              <p className="text-sm font-poppins font-light text-gray-900">Your Address:</p>
+              <p className="text-sm text-gray-700 mt-1">
+                {value.street}
+                {value.city && `, ${value.city}`}
+                {value.postcode && ` ${value.postcode}`}
+              </p>
+            </div>
+          )}
+
+          {/* Buttons - Side by Side */}
+          <div className="flex gap-3">
+            {/* Use My Location Button */}
+            <button
+              type="button"
+              onClick={handleGeolocation}
+              disabled={isLocating}
+              className="flex-1 btn-primary px-4 py-2 flex items-center justify-center gap-2 text-sm"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            Use My Location
-          </>
-        )}
-      </button>
+              {isLocating ? (
+                <>
+                  <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+                  Finding...
+                </>
+              ) : (
+                <>
+                  <svg
+                    className="w-5 h-5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  My Location
+                </>
+              )}
+            </button>
 
-      {locationError && (
-        <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-          <p className="text-sm text-yellow-700 font-poppins font-light">Unable to access location</p>
-          <p className="text-xs text-yellow-600 mt-1">
-            {locationError === 'Location error: User denied Geolocation'
-              ? 'Please enter your address manually below, or check your browser location permissions.'
-              : locationError}
-          </p>
-        </div>
-      )}
-
-      {/* Display Current Address */}
-      {(value.street || value.city || value.postcode) && (
-        <div className="p-4 bg-gray-50 rounded-lg border border-gray-300">
-          <p className="text-sm font-poppins font-light text-gray-900">Your Address:</p>
-          <p className="text-sm text-gray-700 mt-1">
-            {value.street}
-            {value.city && `, ${value.city}`}
-            {value.postcode && ` ${value.postcode}`}
-          </p>
-        </div>
-      )}
-
-      {/* Manual Entry Fields - Always Available */}
-      <div className="space-y-4 pt-4 border-t border-gray-300">
-        <p className="text-sm text-gray-500 font-poppins font-light">Enter your address manually:</p>
-
-          {/* Street Address - with native device autocomplete */}
+            {/* Toggle to Manual Entry */}
+            <button
+              type="button"
+              onClick={() => {
+                setShowManualEntry(true);
+                setLocationError(null);
+              }}
+              className="flex-1 btn-secondary px-4 py-2 text-sm"
+            >
+              Manual Entry
+            </button>
+          </div>
+        </>
+      ) : (
+        // MANUAL ENTRY MODE
+        <>
+          {/* Street Address */}
           <div>
-            <label className="hidden block text-sm font-poppins text-gray-900 mb-2 font-medium">Street Address</label>
+            <label className="hidden">Street Address</label>
             <input
               type="text"
               placeholder="Street Address"
               value={value.street || ''}
               onChange={(e) => onChange({ ...value, street: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-base font-inter font-normal"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm font-inter font-normal"
               required={field.required}
               autoComplete="street-address"
             />
           </div>
 
-          {/* City - with native device autocomplete */}
+          {/* City */}
           <div>
-            <label className="hidden block text-sm font-poppins text-gray-900 mb-2 font-medium">City</label>
+            <label className="hidden">City</label>
             <input
               type="text"
               placeholder="City"
               value={value.city || ''}
               onChange={(e) => onChange({ ...value, city: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-base font-inter font-normal"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm font-inter font-normal"
               required={field.required}
               autoComplete="address-level2"
             />
@@ -163,31 +183,44 @@ export default function AddressField({
 
           {/* County */}
           <div>
-            <label className="hidden block text-sm font-poppins text-gray-900 mb-2 font-medium">County</label>
+            <label className="hidden">County</label>
             <input
               type="text"
               placeholder="County"
               value={value.county || ''}
               onChange={(e) => onChange({ ...value, county: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-base font-inter font-normal"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm font-inter font-normal"
               autoComplete="address-level1"
             />
           </div>
 
-          {/* Postcode - with native device autocomplete */}
+          {/* Postcode */}
           <div>
-            <label className="hidden block text-sm font-poppins text-gray-900 mb-2 font-medium">Postcode</label>
+            <label className="hidden">Postcode</label>
             <input
               type="text"
               placeholder="Postcode"
               value={value.postcode || ''}
               onChange={(e) => onChange({ ...value, postcode: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-base font-inter font-normal"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm font-inter font-normal"
               required={field.required}
               autoComplete="postal-code"
             />
           </div>
-        </div>
+
+          {/* Toggle Back to Geolocation */}
+          <button
+            type="button"
+            onClick={() => {
+              setShowManualEntry(false);
+              setLocationError(null);
+            }}
+            className="flex-1 btn-secondary px-4 py-2 text-sm"
+          >
+            Use My Location Instead
+          </button>
+        </>
+      )}
 
       {error && (
         <p className="text-red-500 text-sm font-poppins font-light">{error}</p>

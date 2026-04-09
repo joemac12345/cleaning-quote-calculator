@@ -16,7 +16,7 @@ export default function TextField({
 }: TextFieldProps) {
   return (
     <div className="w-full flex flex-col">
-      <label className="block text-sm font-poppins text-gray-900 mb-2 font-medium">
+      <label className="hidden">
         {label}
         {required && <span className="text-primary ml-1">*</span>}
       </label>

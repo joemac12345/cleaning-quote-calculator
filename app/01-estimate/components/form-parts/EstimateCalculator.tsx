@@ -72,7 +72,7 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
     });
     // Store form data in sessionStorage and navigate to booking page
     sessionStorage.setItem('estimateFormData', JSON.stringify(formData));
-    router.push('/booking');
+    router.push('/bookings');
   };
 
   if (!currentStepData) {
@@ -82,7 +82,7 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Main Content - Adjusted for fixed navbar */}
-      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-8 sm:pt-12 pb-24 sm:pb-28">
+      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-4 sm:pt-6 pb-24 sm:pb-28">
         {/* Step Content */}
         <div className="mb-8 sm:mb-12">
           <FormStepRenderer

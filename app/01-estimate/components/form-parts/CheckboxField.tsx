@@ -23,7 +23,7 @@ export default function CheckboxField({
 
   return (
     <fieldset className="w-full border-0">
-      <legend className="block text-sm font-poppins text-gray-900 mb-3 font-medium">{label}</legend>
+      <legend className="hidden">{label}</legend>
       <div className="space-y-3">
         {options.map((option) => (
           <label

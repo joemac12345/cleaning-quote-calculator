@@ -46,7 +46,7 @@ function BookingPageContent() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600 text-lg font-inter">Loading...</p>
+        <p className="body-text">Loading...</p>
       </div>
     );
   }
@@ -57,31 +57,32 @@ function BookingPageContent() {
       <div className="min-h-screen">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
           {/* Success Message */}
-          <div className="text-center mb-12">
-            <div className="flex justify-center mb-6">
+          <div className="text-left mb-12">
+            <div className="flex mb-6">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
                 <span className="text-3xl">✓</span>
               </div>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-green-700 font-poppins mb-4">
+            <h1 className="heading-h1 text-green-700 mb-4">
               Booking Confirmed!
             </h1>
-            <p className="text-gray-600 text-base sm:text-lg font-inter mb-8">
+            <p className="body-text text-gray-700 mb-8">
               Thank you for your booking. Our team will contact you within 24 hours to arrange a date and time.
             </p>
 
             {/* Booking Reference */}
             {bookingId && (
-              <div className="p-6 mb-8 inline-block">
-                <p className="text-sm text-gray-600 font-inter mb-2">Booking Reference</p>
-                <p className="text-2xl font-bold text-primary font-poppins">{bookingId}</p>
+              <div className="mb-8">
+                <p className="text-small text-gray-600">
+                  Booking Reference: <span className="font-bold text-primary">{bookingId}</span>
+                </p>
               </div>
             )}
 
             {/* Next Steps */}
-            <div className="p-6 mb-8 text-left max-w-2xl mx-auto">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4 font-poppins">What Happens Next?</h2>
-              <ol className="space-y-3 text-sm sm:text-base text-gray-700 font-inter">
+            <div className="mb-8 text-left">
+              <h2 className="heading-h3 text-gray-900 mb-4">What Happens Next?</h2>
+              <ol className="space-y-3 text-small text-gray-700">
                 <li className="flex gap-3">
                   <span className="font-bold">1.</span>
                   <span>Our team will review your booking</span>
@@ -98,7 +99,7 @@ function BookingPageContent() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => window.location.href = '/'}
                 className="btn-primary px-8 py-3 font-poppins font-semibold rounded-lg transition"
@@ -117,10 +118,10 @@ function BookingPageContent() {
     return (
       <div className="min-h-screen">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
-          <h1 className="text-3xl sm:text-4xl font-bold text-primary font-poppins mb-4">
+          <h1 className="heading-h1 text-primary mb-4">
             No Estimate Found
           </h1>
-          <p className="text-gray-600 text-base sm:text-lg font-inter mb-8">
+          <p className="body-text text-gray-700 mb-8">
             Please complete an estimate first before proceeding to book.
           </p>
           <button
@@ -157,7 +158,7 @@ export default function BookingPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <p className="text-gray-600 text-lg font-inter">Loading...</p>
+          <p className="body-text">Loading...</p>
         </div>
       }
     >

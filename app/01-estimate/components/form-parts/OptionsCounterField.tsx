@@ -49,7 +49,7 @@ export default function OptionsCounterField({
         }
       `}</style>
       <fieldset className="w-full border-0">
-        <legend className="block text-sm font-poppins text-gray-900 mb-4 font-medium">{label}</legend>
+        <legend className="hidden">{label}</legend>
         <div className="space-y-4">
           {options.map((option) => {
             const count = value[String(option.value)] || 0;

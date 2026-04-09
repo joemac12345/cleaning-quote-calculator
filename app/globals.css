@@ -135,12 +135,12 @@ input[type="radio"] {
   
   /* Primary color utility for buttons and interactive elements */
   .btn-primary {
-    @apply bg-primary text-white font-poppins font-semibold hover:opacity-90 focus:ring-2 focus:ring-primary focus:outline-none transition;
+    @apply bg-primary text-white font-poppins font-semibold hover:opacity-90 focus:ring-2 focus:ring-primary focus:outline-none transition rounded-lg;
   }
 
   /* Secondary button utility */
   .btn-secondary {
-    @apply bg-white border border-gray-300 text-gray-900 font-poppins font-light hover:bg-gray-50 focus:ring-2 focus:ring-primary focus:outline-none transition;
+    @apply bg-white border border-gray-300 text-gray-900 font-poppins font-light hover:bg-gray-50 focus:ring-2 focus:ring-primary focus:outline-none transition rounded-lg;
   }
 
   /* Section spacing utility */

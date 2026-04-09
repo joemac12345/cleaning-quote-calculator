@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { createBooking, sendBookingEmails } from '@/app/booking/utils/bookingService';
+import { createBooking, sendBookingEmails } from '@/app/bookings/utils/bookingService';
 import { BookingFormData, BookingConfirmationProps, FormErrors } from './types';
 import { validateForm, isFormValid } from './utils';
 import FormHeader from './FormHeader';

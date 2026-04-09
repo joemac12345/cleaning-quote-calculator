@@ -97,7 +97,7 @@ export const formSteps: FormStep[] = [
     id: 4,
     title: 'Bathrooms & Cloakroom',
     description: 'Add quantity required',
-    notificationText: 'Add if required Cleaning.',
+    notificationText: '',
     fields: [
       {
         id: 'bathrooms',
@@ -134,7 +134,7 @@ export const formSteps: FormStep[] = [
     id: 5,
     title: 'Staircases',
     description: 'How many sets of stairs does your property have?',
-    notificationText: 'If your property does not have any staircase, please leave the value as zero',
+    notificationText: '',
     fields: [
       {
         id: 'floors',
@@ -179,33 +179,12 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 7: Add-ons
+  // Step 7: Living Spaces
   {
     id: 7,
-    title: 'Do you require',
-    description: 'A deep clean of your appliances',
-    fields: [
-      {
-        id: 'extras',
-        name: 'Extra Services',
-        type: 'counter',
-        time: 0, // varies by option
-        showTime: false,
-        initialValue: { oven: 0, fridge: 0 },
-        options: [
-          { label: 'Oven Cleaning', value: 'oven', time: 70, icon: '/icons/DatSO.jpg',  helpText: 'Add if required', description: 'Professional oven cleaning service includes:\n\n• Deep cleaning of oven interior\n• Removal of grease and burnt-on food\n• Exterior cleaning of oven surfaces\n• Glass door cleaning (if applicable)\n• Thorough removal of stubborn stains\n\nThis is a specialist service that transforms your oven back to like-new condition.' },
-          { label: 'Fridge Cleaning', value: 'fridge', time: 70, icon: '/icons/EiW7c.jpg',  helpText: 'Add if required', description: 'This comprehensive service includes:\n\n• Exterior cleaning of the fridge down\n• Removing everything from inside\n• Deep cleaning of all shelves\n• Cleaning the interior thoroughly\n• Placing everything back safely\n\nThe outside is cleaned as part of the kitchen cleaning service. This add-on focuses on the deep interior work.' },
-        ],
-      },
-    ],
-  },
-
-  // Step 8: Living Spaces
-  {
-    id: 8,
     title: 'Other Rooms',
     description: 'Add the quantities of the rooms that require cleaning',
-    notificationText: 'Only select what you require cleaning.',
+    notificationText: '',
     fields: [
       {
         id: 'living_rooms',
@@ -237,11 +216,11 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 9: Any Other Rooms
+  // Step 8: Any Other Rooms
   {
-    id: 9,
-    title: 'Any Other Rooms',
-    description: 'Are there any other rooms that may need cleaning?',
+    id: 8,
+    title: 'Reception Rooms',
+    description: 'Are there any other rooms that haven\'t been included?',
     fields: [
       {
         id: 'other_spaces',
@@ -257,9 +236,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 10: Pet Friendly Setup
+  // Step 9: Pet Friendly Setup
   {
-    id: 10,
+    id: 9,
     title: 'Pet Friendly',
     description: 'Do you have any large pets in your home?',
     fields: [
@@ -278,9 +257,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 11: Cleaning Products
+  // Step 10: Cleaning Products
   {
-    id: 11,
+    id: 10,
     title: 'Cleaning Products',
     description: 'How would you like us to proceed with cleaning products?',
     fields: [
@@ -303,30 +282,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 12: Windows & Doors
+  // Step 11: Cleaning Frequency
   {
-    id: 12,
-    title: 'Window Cleaning',
-    description: 'Would you like to upgrade your window cleaning? Windows to be cleaned on the inside only.',
-    fields: [
-      {
-        id: 'windows',
-        name: 'Window Services',
-        type: 'counter',
-        time: 0,
-        showTime: false,
-        initialValue: { windows: 0, doors: 0 },
-        options: [
-          { label: 'Window Cleaning', value: 'windows', time: 5, icon: '/icons/IN0MN (1).jpg',  helpText: 'Add if required', description: 'Internal window cleaning service includes:\n\n• Cleaning of the inside surface of window glass\n• Framed glass cleaning (interior side)\n• Window sill cleaning (interior)\n• Removal of dust and grime from inside\n• Streak-free finish for crystal-clear transparency from inside\n\nPrice: £3 per window\n\nPlease note: This service covers the INSIDE/INTERIOR of windows only and does not include external/outside window cleaning.' },
-          { label: 'External Doors', value: 'doors', time: 7, icon: '/icons/IN0MN (1).jpg',  helpText: 'Add if required', description: 'External door cleaning service includes:\n\n• Cleaning of external door glass/panels\n• External door frame cleaning\n• Frame detailing\n• Removal of dust and weather marks\n• Streak-free finish\n\nPrice: £3 per external door\n\nPlease note: This service is for external doors only. Internal doors are included as part of your room cleaning price.' },
-        ],
-      },
-    ],
-  },
-
-  // Step 13: Cleaning Frequency
-  {
-    id: 13,
+    id: 11,
     title: 'Frequency',
     description: 'Keep it looking great! Regular maintenance cleaning helps preserve that pristine finish after your deep clean. How often would you like us to visit?',
     fields: [
@@ -346,9 +304,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 14: Review & Contact
+  // Step 12: Review & Contact
   {
-    id: 14,
+    id: 12,
     title: 'Can we customise your quote?',
     description: 'Add your name and contact details to finalise your quote',
     fields: [
@@ -379,9 +337,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 15: Address
+  // Step 13: Address
   {
-    id: 15,
+    id: 13,
     title: 'Where are we cleaning?',
     description: 'Would you like to add your address to customise your estimate? This is optional. If you do not want to share your address, you can just move on to the next step.',
     fields: [
@@ -401,9 +359,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 16: Contact Permission
+  // Step 14: Contact Permission
   {
-    id: 16,
+    id: 14,
     title: 'Stay in touch',
     description: 'Are you happy for us to send you an email with your estimate so you have a record?',
     fields: [

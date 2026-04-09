@@ -15,7 +15,7 @@ export default function SelectField({
 }: SelectFieldProps) {
   return (
     <div className="w-full">
-      <label className="block text-sm font-poppins text-gray-900 mb-2">{label}</label>
+      <label className="hidden">{label}</label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}

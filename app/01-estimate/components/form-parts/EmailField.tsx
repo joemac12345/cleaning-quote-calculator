@@ -28,7 +28,7 @@ export default function EmailField({
 }: EmailFieldProps) {
   return (
     <div className="w-full flex flex-col">
-      <label className="block text-sm font-poppins text-gray-900 mb-2 font-medium">
+      <label className="hidden">
         {label}
         {required && <span className="text-primary ml-1">*</span>}
       </label>
@@ -38,7 +38,7 @@ export default function EmailField({
         onChange={(e) => onChange(e.target.value)}
         required={required}
         className="w-full px-4 py-3 text-base font-inter font-normal border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
-        placeholder={`Enter ${label.toLowerCase()}`}
+        placeholder={label}
       />
     </div>
   );

@@ -19,7 +19,7 @@ export default function RadioField({
 }: RadioFieldProps) {
   return (
     <fieldset className="w-full">
-      <legend className="block text-sm font-poppins text-gray-900 mb-3 font-medium">{label}</legend>
+      <legend className="hidden">{label}</legend>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {options.map((option) => {
           const isSelected = String(value) === String(option.value);

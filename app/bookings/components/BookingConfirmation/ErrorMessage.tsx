@@ -12,10 +12,10 @@ export default function ErrorMessage({
   if (isSubmitError) {
     return (
       <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-        <p className="text-red-700 text-sm font-inter">{message}</p>
+        <p className="text-red-700 text-small">{message}</p>
       </div>
     );
   }
 
-  return <p className="text-red-500 text-sm mt-1 font-inter">{message}</p>;
+  return <p className="text-red-500 text-small mt-1">{message}</p>;
 }

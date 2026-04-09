@@ -38,7 +38,7 @@ export default function DetailsModal({
         <div className="p-6 sm:p-8 space-y-6">
           {/* Close button */}
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-bold text-primary font-poppins">Your Details</h3>
+            <h3 className="heading-h3 font-bold text-primary">Your Details</h3>
             <button
               type="button"
               onClick={onClose}
@@ -47,6 +47,10 @@ export default function DetailsModal({
               ✕
             </button>
           </div>
+
+          <p className="text-small text-gray-600 mb-6">
+            Just double-check everything looks right. Feel free to edit anything that needs changing. Then confirm your booking.
+          </p>
 
           <form onSubmit={onSubmit} className="space-y-6">
             <CustomerDetailsSection

@@ -22,7 +22,7 @@ export default function Navigation() {
 
   const pages = [
     { label: 'Estimate', href: '/01-estimate' },
-    { label: 'Booking', href: '/booking' },
+    { label: 'Booking', href: '/bookings' },
   ];
 
 
