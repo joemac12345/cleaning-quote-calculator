@@ -19,7 +19,7 @@ export default function ServiceSummary({ formData }: ServiceSummaryProps) {
 
   const extras = formData.extras || {};
   const selectedExtras = Object.entries(extras)
-    .filter(([, count]) => count > 0)
+    .filter(([, count]): count is number => typeof count === 'number' && count > 0)
     .map(([key]) => {
       const extraNames: Record<string, string> = {
         oven: 'Oven Cleaning',
