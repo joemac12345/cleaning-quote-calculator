@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/app/utils/supabase';
 import Link from 'next/link';
 import { AdminNavigation } from '@/app/admin/components/Founders';
+import BookingCard from './components/BookingCard';
 
 interface Booking {
   id: string;
@@ -252,133 +253,14 @@ export default function BookingsAdmin() {
           ) : (
             <div className="grid grid-cols-1 gap-4">
               {filteredBookings.map((booking) => (
-                <div key={booking.id} className="bg-white rounded-lg border border-gray-300 hover:shadow-lg transition overflow-hidden">
-                  {/* Card Header */}
-                  <div className="px-3 sm:px-4 py-3 border-b border-gray-200">
-                    <div className="flex justify-between items-start gap-4 mb-2">
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-base sm:text-lg font-semibold truncate" style={{color: '#4B5368'}}>
-                          {booking.customer_name}
-                        </h3>
-                      </div>
-                      <select
-                        value={booking.status}
-                        onChange={(e) => updateBookingStatus(booking.id, e.target.value)}
-                        className="text-xs px-3 py-1.5 rounded-md border border-gray-300 focus:outline-none flex-shrink-0"
-                        style={{ borderColor: '#4B5368' }}
-                      >
-                        {STATUS_OPTIONS.map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <p className="text-xs text-gray-600">{formatDate(booking.created_at)}</p>
-                      <div className="flex gap-2">
-                        <a
-                          href={`mailto:${booking.email}`}
-                          className="text-white w-8 h-8 sm:w-9 sm:h-9 rounded-full transition flex items-center justify-center hover:opacity-80"
-                          style={{backgroundColor: '#4B5368'}}
-                          title={booking.email}
-                        >
-                          <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                          </svg>
-                        </a>
-                        <a
-                          href={`tel:${booking.telephone}`}
-                          className="text-white w-8 h-8 sm:w-9 sm:h-9 rounded-full transition flex items-center justify-center hover:opacity-80"
-                          style={{backgroundColor: '#4B5368'}}
-                          title={booking.telephone}
-                        >
-                          <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card Body */}
-                  <div className="p-3 sm:p-4 space-y-3">
-                    {/* Email */}
-                    <div>
-                      <p className="text-xs font-semibold text-gray-500 uppercase">Email</p>
-                      <p className="text-xs sm:text-sm text-gray-700 break-all">{booking.email}</p>
-                    </div>
-
-                    {/* Phone */}
-                    <div>
-                      <p className="text-xs font-semibold text-gray-500 uppercase">Phone</p>
-                      <p className="text-xs sm:text-sm text-gray-700">{booking.telephone}</p>
-                    </div>
-
-                    {/* Address */}
-                    <div>
-                      <p className="text-xs font-semibold text-gray-500 uppercase">Address</p>
-                      <a
-                        href={`https://maps.google.com/?q=${encodeURIComponent(booking.address)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs sm:text-sm text-blue-500 hover:text-blue-600 underline break-words"
-                      >
-                        {booking.address}
-                      </a>
-                    </div>
-
-                    {/* Job Details */}
-                    {booking.estimate_data && (
-                      <div className="pt-3 border-t border-gray-200 space-y-2">
-                        <div className="grid grid-cols-2 gap-3">
-                          <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase">Rooms</p>
-                            <p className="text-xs sm:text-sm text-gray-700">{booking.estimate_data.rooms || 'N/A'}</p>
-                          </div>
-                          <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase">Service Type</p>
-                            <p className="text-xs sm:text-sm text-gray-700">{booking.estimate_data.serviceType || 'N/A'}</p>
-                          </div>
-                          <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase">Frequency</p>
-                            <p className="text-xs sm:text-sm text-gray-700">{booking.estimate_data.frequency || 'N/A'}</p>
-                          </div>
-                          <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase">Time Estimate</p>
-                            <p className="text-xs sm:text-sm text-gray-700">
-                              First: {booking.estimate_data.firstCleanHours}h {booking.estimate_data.firstCleanMinutes}m
-                            </p>
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-100">
-                          <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase">First Clean</p>
-                            <p className="text-xs sm:text-sm font-semibold" style={{color: '#4B5368'}}>
-                              £{booking.estimate_data.firstCleanPrice?.toFixed(2) || '0.00'}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase">Maintenance</p>
-                            <p className="text-xs sm:text-sm font-semibold" style={{color: '#4B5368'}}>
-                              £{booking.estimate_data.maintenancePrice?.toFixed(2) || '0.00'}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Status Badge */}
-                    {booking.status && (
-                      <div className="pt-2 border-t border-gray-200">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[booking.status] || 'bg-gray-100 text-gray-800'}`}>
-                          {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <BookingCard
+                  key={booking.id}
+                  booking={booking}
+                  statusOptions={STATUS_OPTIONS}
+                  statusColors={statusColors}
+                  onStatusChange={updateBookingStatus}
+                  formatDate={formatDate}
+                />
               ))}
             </div>
           )}
