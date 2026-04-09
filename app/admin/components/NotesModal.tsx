@@ -219,7 +219,7 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className=\"bg-white w-full max-w-2xl h-[90vh] flex flex-col overflow-hidden rounded-lg border border-gray-300\">
+      <div className="bg-white w-full max-w-2xl h-[90vh] flex flex-col overflow-hidden rounded-lg border border-gray-300">
         {/* Header */}
         <div className="text-white px-4 sm:px-6 py-4 flex justify-between items-start sm:items-center gap-2 bg-primary">
           <div className="flex-1 min-w-0">
