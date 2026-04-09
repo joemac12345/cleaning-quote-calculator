@@ -89,7 +89,7 @@ export default function RootLayout({
       <body className="bg-white text-gray-900 font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <NavigationProgress />
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto mt-[50px]">
             {children}
           </div>
         </ThemeProvider>
