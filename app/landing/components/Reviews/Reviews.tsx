@@ -1,9 +1,27 @@
 'use client';
-import { landingConfig } from '@/app/config/landingConfig';
 
 export default function Reviews() {
-  const reviewsConfig = (landingConfig as any).reviews || {};
-  const { title = '', reviewsList = [] } = reviewsConfig;
+  const title = 'Customer Reviews';
+  const reviewsList = [
+    {
+      text: 'Excellent service! The team was professional and thorough. My home has never looked better.',
+      author: 'Sarah Johnson',
+      title: 'Verified Customer',
+      rating: 5
+    },
+    {
+      text: 'Great value for money and reliable service. I\'ve been using them for over a year now.',
+      author: 'Michael Roberts',
+      title: 'Verified Customer',
+      rating: 5
+    },
+    {
+      text: 'Very impressed with the attention to detail. Highly recommended!',
+      author: 'Emma Wilson',
+      title: 'Verified Customer',
+      rating: 5
+    }
+  ];
 
   if (reviewsList.length === 0) return null;
 

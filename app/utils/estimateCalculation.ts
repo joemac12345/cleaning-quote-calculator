@@ -134,7 +134,16 @@ export function formatTime(totalMinutes: number): { hours: number; minutes: numb
 }
 
 /**
+ * Format hours and minutes as readable text
+ * Returns static text: "3hr+" for first clean, "2hr+" for maintenance
+ */
+export function formatTimeAsText(hours: number | undefined, minutes: number | undefined, type: 'first-clean' | 'maintenance' = 'first-clean'): string {
+  return type === 'maintenance' ? '2hr+' : '3hr+';
+}
+
+/**
  * Calculate full estimate based on time × hourly rate + option prices
+ * Includes property-type-based minimum hours
  */
 export function calculateEstimate(
   formData: Record<string, any>,
@@ -142,10 +151,33 @@ export function calculateEstimate(
 ): EstimateStats {
   try {
     const isRecurring = frequency !== 'one-off';
+    const propertyType = formData.property_type?.toLowerCase() || '';
+
+    // Determine minimum hours based on property type
+    let minFirstCleanHours = 2; // default for flat/other
+    let minMaintenanceHours = 1.5; // default for flat/other
+    
+    if (propertyType === 'house') {
+      minFirstCleanHours = 3;
+      minMaintenanceHours = 2;
+    }
 
     // Calculate times
-    const firstCleanMinutes = calculateTotalMinutes(formData, 'one-off') || 0;
+    let firstCleanMinutes = calculateTotalMinutes(formData, 'one-off') || 0;
     let maintenanceMinutes = calculateTotalMinutes(formData, frequency) || 0;
+
+    // Apply minimum hours based on property type
+    const minFirstCleanMinutes = minFirstCleanHours * 60;
+    const minMaintenanceMinutes = minMaintenanceHours * 60;
+
+    firstCleanMinutes = Math.max(firstCleanMinutes, minFirstCleanMinutes);
+    maintenanceMinutes = Math.max(maintenanceMinutes, minMaintenanceMinutes);
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`Property Type: ${propertyType}`);
+      console.log(`First clean minutes (with minimum): ${firstCleanMinutes}m (${minFirstCleanHours}h minimum)`);
+      console.log(`Maintenance minutes (with minimum): ${maintenanceMinutes}m (${minMaintenanceHours}h minimum)`);
+    }
 
     // Reduce maintenance hours based on frequency
     if (frequency === 'weekly') {

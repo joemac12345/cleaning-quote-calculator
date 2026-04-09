@@ -1,10 +1,8 @@
 'use client';
 
-import { landingConfig } from '@/app/config/landingConfig';
-
 export default function Testimonial() {
-  const testimonialConfig = (landingConfig as any).testimonial || {};
-  const { rating = 5, customers = 0 } = testimonialConfig;
+  const rating = 5;
+  const customers = 0;
 
   return (
     <section className="py-3 sm:py-4 px-3 sm:px-4 bg-white">

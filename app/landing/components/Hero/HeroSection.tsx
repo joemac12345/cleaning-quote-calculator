@@ -1,20 +1,21 @@
 'use client';
 
 import Image from 'next/image';
-import { landingConfig } from '@/app/config/landingConfig';
 
 export default function HeroSection() {
-  const heroConfig = (landingConfig as any).hero || {};
-  const { title = '', description = '', ctaText = 'Get Started', backgroundImage = '/og-image.png' } = heroConfig;
+  const title = '';
+  const description = '';
+  const backgroundImage = '/landing.svg';
 
   return (
-    <section className="relative w-full mt-6 sm:mt-8 overflow-hidden rounded-lg">
+    <section className="mx-auto overflow-hidden rounded-lg" style={{ width: '672px', height: '250px', maxWidth: '100%' }}>
       <Image 
         src={backgroundImage}
         alt="Cleaning Services" 
-        width={1920}
-        height={320}
-        className="w-full h-64 sm:h-80 object-cover"
+        width={672}
+        height={250}
+        className="w-full h-full object-cover object-center"
+        style={{ objectPosition: 'center top' }}
         priority
         sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 100vw"
       />

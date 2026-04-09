@@ -26,7 +26,7 @@ export default function ConfirmationCheckbox({
         />
         <label htmlFor="confirmation" className="flex-1 cursor-pointer">
           <p className="text-base text-primary leading-relaxed">
-            I confirm that the details above are correct. The cleaning team will contact me within 24 hours to confirm and schedule my booking.
+            I confirm that the details above are correct. The cleaning team will contact me within 24 hours to confirm Details
           </p>
         </label>
       </div>

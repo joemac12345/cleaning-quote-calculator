@@ -9,9 +9,9 @@
  * - Contains CTA buttons linking to /01-estimate (get estimate) and /booking (book now)
  * 
  * Data Source:
- * - Static content is pulled from app/config/landingConfig.ts
- * - Each section component (Hero, Testimonial, Services, Reviews, etc.) reads from the config
- * - To update landing page content, edit landingConfig.ts instead of modifying components
+ * - Static content is defined directly within each component
+ * - Each section component (Hero, Testimonial, Services, Reviews, etc.) contains its own data
+ * - To update landing page content, edit the relevant component file
  * 
  * Components Rendered:
  * - HeroSection: Hero image + headline

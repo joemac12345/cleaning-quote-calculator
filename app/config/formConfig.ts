@@ -28,23 +28,23 @@ export interface FormStep {
 }
 
 export const formSteps: FormStep[] = [
-  // Step 1: Service Selection
+  // Step 1: Cleaning Frequency
   {
     id: 1,
-    title: 'Cleaning Service',
-    description: 'What can we help you with?',
+    title: 'Frequency',
+    description: 'Keep it looking great! Regular maintenance cleaning helps preserve that pristine finish after your deep clean. How often would you like us to visit?',
     fields: [
       {
-        id: 'service_type',
-        name: 'Service Type',
+        id: 'frequency',
+        name: 'Cleaning Frequency',
         type: 'radio',
         time: 0,
-        initialValue: 'deep',
+        initialValue: '',
         options: [
-         
-          { label: 'Deep Cleaning', value: 'deep', price: 0, icon: '/icons/Q3AwX.jpg' },
-          { label: 'Spring Cleaning', value: 'spring', price: 0, icon: '/icons/lknSv.jpg' },
-          
+          { label: 'One-off', value: 'one-off', price: 25 },
+          { label: 'Weekly', value: 'weekly', price: 0 },
+          { label: 'Fortnightly', value: 'fortnightly', price: 0 },
+          { label: 'Monthly', value: 'monthly', price: 0 },
         ],
         required: true,
       },
@@ -149,7 +149,7 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 6: Other Rooms
+  // Step 6: Kitchens & Utility Rooms
   {
     id: 6,
     title: 'Kitchens & Utility Rooms',
@@ -216,29 +216,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 8: Any Other Rooms
+  // Step 8: Pet Friendly Setup
   {
     id: 8,
-    title: 'Reception Rooms',
-    description: 'Are there any other rooms that haven\'t been included?',
-    fields: [
-      {
-        id: 'other_spaces',
-        name: 'Other Spaces',
-        type: 'counter',
-        time: 0,
-        showTime: false,
-        initialValue: { other_rooms: 0 },
-        options: [
-          { label: 'Any Other Rooms', value: 'other_rooms', time: 30, icon: '/icons/wNAqS.jpg', helpText: 'Add if required', description: 'For example, if you have two other areas within your property that we have not listed, just add 2 to the quantity field. We will allocate some time to this for you.' },
-        ],
-      },
-    ],
-  },
-
-  // Step 9: Pet Friendly Setup
-  {
-    id: 9,
     title: 'Pet Friendly',
     description: 'Do you have any large pets in your home?',
     fields: [
@@ -257,9 +237,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 10: Cleaning Products
+  // Step 9: Cleaning Products
   {
-    id: 10,
+    id: 9,
     title: 'Cleaning Products',
     description: 'How would you like us to proceed with cleaning products?',
     fields: [
@@ -282,33 +262,10 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 11: Cleaning Frequency
+  // Step 10: Address
   {
-    id: 11,
-    title: 'Frequency',
-    description: 'Keep it looking great! Regular maintenance cleaning helps preserve that pristine finish after your deep clean. How often would you like us to visit?',
-    fields: [
-      {
-        id: 'frequency',
-        name: 'Cleaning Frequency',
-        type: 'radio',
-        time: 0,
-        initialValue: '',
-        options: [
-          { label: 'One-off', value: 'one-off', price: 25 },
-          { label: 'Weekly', value: 'weekly', price: 0 },
-          { label: 'Fortnightly', value: 'fortnightly', price: 0 },
-          { label: 'Monthly', value: 'monthly', price: 0 },
-        ],
-        required: true,
-      },
-    ],
-  },
-
-  // Step 12: Review & Contact
-  {
-    id: 12,
-    title: 'Can we customise your quote?',
+    id: 10,
+    title: 'Where are we cleaning?',
     description: 'Add your name and contact details to finalise your quote',
     fields: [
       {
@@ -338,9 +295,9 @@ export const formSteps: FormStep[] = [
     ],
   },
 
-  // Step 13: Address
+  // Step 11: Contact Permission
   {
-    id: 13,
+    id: 11,
     title: 'Where are we cleaning?',
     description: 'Would you like to add your address to customise your estimate? This is optional. If you do not want to share your address, you can just move on to the next step.',
     fields: [
@@ -355,14 +312,14 @@ export const formSteps: FormStep[] = [
           postcode: '',
           county: '',
         },
-        required: false,
+        required: true,
       },
     ],
   },
 
-  // Step 14: Contact Permission
+  // Step 12: Contact Permission
   {
-    id: 14,
+    id: 12,
     title: 'Stay in touch',
     description: 'Are you happy for us to send you an email with your estimate so you have a record?',
     fields: [

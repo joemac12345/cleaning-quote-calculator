@@ -7,7 +7,7 @@ interface StepHeaderProps {
 
 export default function StepHeader({ title, description }: StepHeaderProps) {
   return (
-    <div className="mb-8 sm:mb-10 mt-12" >
+    <div className="mb-8 sm:mb-10 mt-6">
       <h2 className="heading-h2 mb-1">{title}</h2>
       {description && (
         <p className="body-text mb-3 leading-relaxed">{description}</p>

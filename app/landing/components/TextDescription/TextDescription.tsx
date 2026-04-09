@@ -1,12 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { landingConfig } from '@/app/config/landingConfig';
 
 export default function TextDescription() {
   const [isExpanded, setIsExpanded] = useState(false);
-  const textConfig = (landingConfig as any).textDescription || {};
-  const { title = '', description = '' } = textConfig;
+  const title = 'Your Company Name';
+  const description = 'Professional cleaning services provider in London offering a wide range of high-quality cleaning services tailored to meet your needs.Professional cleaning services provider in London offering a wide range of high-quality cleaning services tailored to meet your needs';
   
   const previewLength = 150;
   const isLong = description.length > previewLength;

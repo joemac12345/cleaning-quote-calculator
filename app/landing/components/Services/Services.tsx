@@ -1,10 +1,36 @@
 'use client';
 import Image from 'next/image';
-import { landingConfig } from '@/app/config/landingConfig';
 
 export default function Services() {
-  const servicesConfig = (landingConfig as any).services || {};
-  const { title = '', description = '', servicesList = [] } = servicesConfig;
+  const title = 'Our Cleaning Services in London';
+  const description = 'Discover the full range of professional cleaning services we offer across London, tailored to meet your specific needs';
+  const servicesList = [
+    {
+      title: 'After Builders Cleaning',
+      description: 'Prices for our after builders cleaning start from £220',
+      icon: '/icons/BzpbP.jpg'
+    },
+    {
+      title: 'Moving Home Cleaning',
+      description: 'Prices for our moving home cleaning start from £190',
+      icon: '/icons/DatSO.jpg'
+    },
+    {
+      title: 'End Of Tenancy Cleaning',
+      description: 'Prices for our end of tenancy cleaning start from £170',
+      icon: '/icons/EiW7c.jpg'
+    },
+    {
+      title: 'Deep Cleaning',
+      description: 'Prices for our deep cleaning start from £190',
+      icon: '/icons/GhWMo.jpg'
+    },
+    {
+      title: 'Spring Cleaning',
+      description: 'Prices for our spring cleaning start from £190',
+      icon: '/icons/HKsqc.jpg'
+    }
+  ];
 
   return (
     <section className="py-8 sm:py-12 px-3 sm:px-4 bg-white">

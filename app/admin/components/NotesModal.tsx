@@ -219,23 +219,24 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="bg-white w-full max-w-2xl h-[90vh] flex flex-col overflow-hidden rounded-lg border border-gray-300">
+      <div className=\"bg-white w-full max-w-2xl h-[90vh] flex flex-col overflow-hidden rounded-lg border border-gray-300\">
         {/* Header */}
-        <div className="text-white px-6 py-4 flex justify-between items-center bg-primary">
-          <div className="flex-1">
-            <h2 className="text-xl font-poppins font-semibold">{customerName}</h2>
-            <p className="text-sm opacity-90 font-inter font-normal">Notes & Messages</p>
+        <div className="text-white px-4 sm:px-6 py-4 flex justify-between items-start sm:items-center gap-2 bg-primary">
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg sm:text-xl font-poppins font-semibold break-words">{customerName}</h2>
+            <p className="text-xs sm:text-sm opacity-90 font-inter font-normal">Notes & Messages</p>
           </div>
           <button
             onClick={onClose}
-            className="text-white hover:opacity-80 rounded-full w-10 h-10 flex items-center justify-center transition hover:bg-white hover:bg-opacity-20"
+            className="text-white hover:opacity-80 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transition hover:bg-white hover:bg-opacity-20 flex-shrink-0"
+            aria-label="Close"
           >
             ✕
           </button>
         </div>
 
         {/* Messages Container */}
-        <div className="flex-1 overflow-y-auto p-4 bg-gray-50 space-y-4">
+        <div className="flex-1 overflow-y-auto pt-6 px-4 pb-4 bg-gray-50 space-y-4">
           {notesList.length === 0 ? (
             <div className="h-full flex items-center justify-center">
               <div className="text-center text-gray-400">
@@ -321,7 +322,7 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
         </div>
 
         {/* Input Area */}
-        <div className="border-t border-gray-300 bg-white p-4">
+        <div className="border-t border-gray-300 bg-white p-3 sm:p-4">
           <div className="flex gap-2 items-flex-end">
             <textarea
               ref={inputTextareaRef}
@@ -336,14 +337,14 @@ export function NotesModal({ isOpen, estimateId, customerName, notes, onClose, o
                 }
               }}
               placeholder="Add a note... (Ctrl+Enter to send)"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none font-inter font-normal"
+              className="flex-1 px-3 sm:px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none font-inter font-normal"
               style={{ height: inputHeight, maxHeight: '200px', minHeight: '44px' }}
               disabled={isLoading}
             />
             <button
               onClick={handleAddNote}
               disabled={isLoading || !newNoteText.trim()}
-              className="btn-primary flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg text-white font-bold transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-primary flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg text-white font-bold transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
               title="Send note"
             >
               {isLoading ? '...' : '➤'}

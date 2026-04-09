@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Poppins, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import NavigationProgress from "@/app/components/shared/NavigationProgress";
 
 // Suppress Next.js 16.2.1 manifest script tag warning (known issue #92180)
 if (typeof window !== 'undefined') {
@@ -88,8 +87,7 @@ export default function RootLayout({
     >
       <body className="bg-white text-gray-900 font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <NavigationProgress />
-          <div className="max-w-2xl mx-auto mt-[50px]">
+          <div className="max-w-2xl mx-auto mt-4">
             {children}
           </div>
         </ThemeProvider>

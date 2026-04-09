@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatTimeAsText } from '@/app/utils/estimateCalculation';
 
 interface EstimateData {
   rooms?: number;
@@ -37,7 +38,7 @@ export default function BookingJobDetails({ estimateData }: BookingJobDetailsPro
         <div>
           <p className="text-xs font-semibold text-gray-500 uppercase">Time Estimate</p>
           <p className="text-xs sm:text-sm text-gray-700">
-            First: {estimateData.firstCleanHours}h {estimateData.firstCleanMinutes}m
+            First: {formatTimeAsText(estimateData.firstCleanHours, estimateData.firstCleanMinutes)}
           </p>
         </div>
       </div>

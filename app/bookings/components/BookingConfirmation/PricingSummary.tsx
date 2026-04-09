@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { calculateEstimate, EstimateStats } from '@/app/utils/estimateCalculation';
+import { calculateEstimate, EstimateStats, formatTimeAsText } from '@/app/utils/estimateCalculation';
 
 interface PricingSummaryProps {
   formData: Record<string, any>;
@@ -47,8 +47,8 @@ export default function PricingSummary({ formData }: PricingSummaryProps) {
         <p className="text-xs text-gray-600 mt-1 mb-2">
           Fixed cost
         </p>
-        <p className="text-xs text-warning font-semibold">
-          {estimateStats.firstCleanHours || 0}h {estimateStats.firstCleanMinutes || 0}m
+        <p className="text-xs text-pink-600 font-semibold mt-1 mb-2">
+          {formatTimeAsText(estimateStats.firstCleanHours || 0, estimateStats.firstCleanMinutes || 0)} Recommended
         </p>
       </div>
 
@@ -66,12 +66,15 @@ export default function PricingSummary({ formData }: PricingSummaryProps) {
             <p>•</p>
             <p>{frequencyLabel}</p>
           </div>
-          <p className="text-xs text-warning font-semibold">
-            {estimateStats.maintenanceHours || 0}h {estimateStats.maintenanceMinutes || 0}m
+          <p className="text-xs text-pink-600 font-semibold mt-1 mb-2">
+            {formatTimeAsText(estimateStats.maintenanceHours || 0, estimateStats.maintenanceMinutes || 0, 'maintenance')} Recommended
           </p>
         </div>
       )}
       </div>
+      <p className="text-xs text-gray-500 mt-4">
+        Estimated times. Actual times may vary from property to property.
+      </p>
     </div>
   );
 }

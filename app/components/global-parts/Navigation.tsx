@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +21,7 @@ export default function Navigation() {
 
   const pages = [
     { label: 'Estimate', href: '/01-estimate' },
-    { label: 'Booking', href: '/bookings' },
+    { label: 'Booking', href: '/booking' },
   ];
 
 
@@ -33,17 +32,7 @@ export default function Navigation() {
       <nav className="sticky top-0 z-40">
       <div className="max-w-2xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
         <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <Image 
-              src="/logo.svg" 
-              alt="Company Logo" 
-              width={180}
-              height={50}
-              className="w-32 sm:w-40 h-auto"
-              priority
-            />
-          </Link>
+          <div className="flex-shrink-0"></div>
 
           <div className="flex items-center gap-2">
             {/* Admin Icon */}
