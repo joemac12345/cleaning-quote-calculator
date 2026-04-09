@@ -9,7 +9,13 @@ export interface BookingData {
   rooms?: number;
   service_type?: string;
   frequency?: string;
-  estimated_price?: number;
+  first_clean_price?: number;
+  maintenance_price?: number;
+  first_clean_hours?: number;
+  first_clean_minutes?: number;
+  maintenance_hours?: number;
+  maintenance_minutes?: number;
+  form_data?: Record<string, any>;
 }
 
 export async function createBooking(bookingData: BookingData): Promise<{success: boolean; id?: string; error?: string}> {
@@ -24,7 +30,13 @@ export async function createBooking(bookingData: BookingData): Promise<{success:
       rooms: bookingData.rooms || null,
       service_type: bookingData.service_type || null,
       frequency: bookingData.frequency || null,
-      estimated_price: bookingData.estimated_price || null,
+      first_clean_price: bookingData.first_clean_price || null,
+      maintenance_price: bookingData.maintenance_price || null,
+      first_clean_hours: bookingData.first_clean_hours || null,
+      first_clean_minutes: bookingData.first_clean_minutes || null,
+      maintenance_hours: bookingData.maintenance_hours || null,
+      maintenance_minutes: bookingData.maintenance_minutes || null,
+      form_data: bookingData.form_data || null,
       status: 'pending',
       confirmed_at: null,
     };

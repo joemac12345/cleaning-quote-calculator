@@ -18,12 +18,23 @@ interface Booking {
   rooms?: number;
   service_type?: string;
   frequency?: string;
-  estimated_price?: number;
+  first_clean_price?: number;
+  maintenance_price?: number;
+  first_clean_hours?: number;
+  first_clean_minutes?: number;
+  maintenance_hours?: number;
+  maintenance_minutes?: number;
+  form_data?: Record<string, any>;
   estimate_data?: {
     rooms?: number;
     serviceType?: string;
     frequency?: string;
-    estimatedPrice?: number;
+    firstCleanPrice?: number;
+    maintenancePrice?: number;
+    firstCleanHours?: number;
+    firstCleanMinutes?: number;
+    maintenanceHours?: number;
+    maintenanceMinutes?: number;
   };
 }
 
@@ -87,7 +98,12 @@ export default function BookingsAdmin() {
           rooms: booking.rooms || 0,
           serviceType: booking.service_type || 'N/A',
           frequency: booking.frequency || 'N/A',
-          estimatedPrice: booking.estimated_price || 0,
+          firstCleanPrice: booking.first_clean_price || 0,
+          maintenancePrice: booking.maintenance_price || 0,
+          firstCleanHours: booking.first_clean_hours || 0,
+          firstCleanMinutes: booking.first_clean_minutes || 0,
+          maintenanceHours: booking.maintenance_hours || 0,
+          maintenanceMinutes: booking.maintenance_minutes || 0,
         },
       }));
       
@@ -330,9 +346,23 @@ export default function BookingsAdmin() {
                             <p className="text-xs sm:text-sm text-gray-700">{booking.estimate_data.frequency || 'N/A'}</p>
                           </div>
                           <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase">Quote Price</p>
+                            <p className="text-xs font-semibold text-gray-500 uppercase">Time Estimate</p>
+                            <p className="text-xs sm:text-sm text-gray-700">
+                              First: {booking.estimate_data.firstCleanHours}h {booking.estimate_data.firstCleanMinutes}m
+                            </p>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-100">
+                          <div>
+                            <p className="text-xs font-semibold text-gray-500 uppercase">First Clean</p>
                             <p className="text-xs sm:text-sm font-semibold" style={{color: '#4B5368'}}>
-                              £{booking.estimate_data.estimatedPrice?.toFixed(2) || '0.00'}
+                              £{booking.estimate_data.firstCleanPrice?.toFixed(2) || '0.00'}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold text-gray-500 uppercase">Maintenance</p>
+                            <p className="text-xs sm:text-sm font-semibold" style={{color: '#4B5368'}}>
+                              £{booking.estimate_data.maintenancePrice?.toFixed(2) || '0.00'}
                             </p>
                           </div>
                         </div>
