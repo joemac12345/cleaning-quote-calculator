@@ -2,8 +2,6 @@ import React from 'react';
 
 interface BookingCardHeaderProps {
   customerName: string;
-  email: string;
-  telephone: string;
   createdAt: string;
   formatDate: (date: string) => string;
 }
