@@ -152,77 +152,69 @@ export default function BookingsAdmin() {
           </div>
         </div>
 
-        {/* Bookings Table */}
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        {/* Bookings Grid - Card Based */}
+        <div>
           {loading ? (
-            <div className="p-6 text-center text-gray-500">
+            <div className="text-center py-12 text-gray-500">
               Loading bookings...
             </div>
           ) : filteredBookings.length === 0 ? (
-            <div className="p-6 text-center text-gray-500">
+            <div className="text-center py-12 text-gray-500">
               No bookings found
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-100 border-b border-gray-200">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                      Customer Name
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                      Email
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                      Phone
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                      Date
-                    </th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {filteredBookings.map((booking) => (
-                    <tr key={booking.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm text-gray-900">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredBookings.map((booking) => (
+                <div key={booking.id} className="bg-white rounded-lg border border-gray-300 p-6 hover:shadow-lg transition">
+                  {/* Header with Status */}
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex-1">
+                      <h3 className="heading-h3 text-gray-900 mb-1">
                         {booking.customer_name}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
-                        {booking.email}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
-                        {booking.telephone}
-                      </td>
-                      <td className="px-6 py-4 text-sm">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[booking.status] || 'bg-gray-100 text-gray-800'}`}>
-                          {booking.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
+                      </h3>
+                      <p className="text-small text-gray-500">
                         {formatDate(booking.created_at)}
-                      </td>
-                      <td className="px-6 py-4 text-sm">
-                        <select
-                          value={booking.status}
-                          onChange={(e) => updateBookingStatus(booking.id, e.target.value)}
-                          className="px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-primary focus:outline-none"
-                        >
-                          <option value="pending">Pending</option>
-                          <option value="confirmed">Confirmed</option>
-                          <option value="completed">Completed</option>
-                          <option value="cancelled">Cancelled</option>
-                        </select>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      </p>
+                    </div>
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ml-2 ${statusColors[booking.status] || 'bg-gray-100 text-gray-800'}`}>
+                      {booking.status}
+                    </span>
+                  </div>
+
+                  {/* Contact Details */}
+                  <div className="space-y-3 mb-6 pb-6 border-b border-gray-200">
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Email</p>
+                      <p className="text-small text-gray-900 break-all">{booking.email}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Phone</p>
+                      <p className="text-small text-gray-900">{booking.telephone}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Address</p>
+                      <p className="text-small text-gray-900">{booking.address}</p>
+                    </div>
+                  </div>
+
+                  {/* Status Selector */}
+                  <div>
+                    <label className="block text-xs text-gray-600 uppercase tracking-wide mb-2">
+                      Update Status
+                    </label>
+                    <select
+                      value={booking.status}
+                      onChange={(e) => updateBookingStatus(booking.id, e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:outline-none"
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="confirmed">Confirmed</option>
+                      <option value="completed">Completed</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
