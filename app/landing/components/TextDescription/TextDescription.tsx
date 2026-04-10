@@ -2,10 +2,16 @@
 
 import { useState } from 'react';
 
-export default function TextDescription() {
+interface TextDescriptionProps {
+  title?: string;
+  description?: string;
+}
+
+export default function TextDescription({ 
+  title = 'Your Company Name',
+  description = 'Professional cleaning services provider in London offering a wide range of high-quality cleaning services tailored to meet your needs.Professional cleaning services provider in London offering a wide range of high-quality cleaning services tailored to meet your needs'
+}: TextDescriptionProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const title = 'Your Company Name';
-  const description = 'Professional cleaning services provider in London offering a wide range of high-quality cleaning services tailored to meet your needs.Professional cleaning services provider in London offering a wide range of high-quality cleaning services tailored to meet your needs';
   
   const previewLength = 150;
   const isLong = description.length > previewLength;
