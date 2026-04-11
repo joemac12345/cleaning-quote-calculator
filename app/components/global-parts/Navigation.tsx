@@ -1,16 +1,23 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Hide navigation on bookings and admin pages
+  if (pathname.includes('/bookings') || pathname.includes('/admin')) {
+    return null;
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 mt-8 bg-white">
       <div className="max-w-[700px] mx-auto left-0 right-0 px-4 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-2">
           {/* Brand/Logo */}
           <div className="text-lg font-bold text-primary">
             Top to Bottom

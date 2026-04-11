@@ -18,8 +18,7 @@ export function AdminNavigation() {
       {/* Hamburger Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full text-white font-bold text-2xl hover:opacity-90 transition flex items-center justify-center z-40"
-        style={{ backgroundColor: '#4B5368' }}
+        className="fixed bottom-6 right-6 w-14 h-14 rounded-full text-white font-bold text-2xl hover:opacity-90 transition flex items-center justify-center z-40 bg-primary"
         title="Admin Navigation"
         aria-label="Open admin navigation"
       >
@@ -39,8 +38,7 @@ export function AdminNavigation() {
         <div className="fixed bottom-24 right-6 bg-white rounded-lg z-50 w-72 overflow-hidden border border-gray-300 shadow-xl">
           {/* Header */}
           <div
-            className="text-white px-6 py-4 flex justify-between items-center"
-            style={{ backgroundColor: '#4B5368' }}
+            className="text-white px-6 py-4 flex justify-between items-center bg-primary"
           >
             <h2 className="text-lg font-semibold">Navigation</h2>
             <button
@@ -57,8 +55,7 @@ export function AdminNavigation() {
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition font-medium text-gray-800"
-              style={{ color: '#4B5368' }}
+              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition font-medium text-primary"
             >
               <span className="text-lg">🏠</span>
               <span>Back to Home</span>
@@ -69,8 +66,7 @@ export function AdminNavigation() {
                 key={page.href}
                 href={page.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition font-medium text-gray-800"
-                style={{ color: '#4B5368' }}
+                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition font-medium text-primary"
               >
                 <span className="text-lg">{page.icon}</span>
                 <span>{page.label}</span>

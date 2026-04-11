@@ -26,8 +26,7 @@ export function StatusSelector({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none"
-        style={{ borderColor: '#4B5368' }}
+        className="w-full px-3 py-2 border-2 border-primary rounded-lg focus:outline-none"
       >
         {includeAllOption && <option value="">All</option>}
         {options.map((option) => (

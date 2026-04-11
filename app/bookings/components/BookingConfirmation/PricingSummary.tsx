@@ -47,7 +47,7 @@ export default function PricingSummary({ formData }: PricingSummaryProps) {
         <p className="text-xs text-gray-600 mt-1 mb-2">
           Fixed cost
         </p>
-        <p className="text-xs text-pink-600 font-semibold mt-1 mb-2">
+        <p className="text-xs text-pink-500 font-semibold mt-1 mb-2">
           {formatTimeAsText(estimateStats.firstCleanHours || 0, estimateStats.firstCleanMinutes || 0)} Recommended
         </p>
       </div>
@@ -66,7 +66,7 @@ export default function PricingSummary({ formData }: PricingSummaryProps) {
             <p>•</p>
             <p>{frequencyLabel}</p>
           </div>
-          <p className="text-xs text-pink-600 font-semibold mt-1 mb-2">
+          <p className="text-xs text-pink-500 font-semibold mt-1 mb-2">
             {formatTimeAsText(estimateStats.maintenanceHours || 0, estimateStats.maintenanceMinutes || 0, 'maintenance')} Recommended
           </p>
         </div>

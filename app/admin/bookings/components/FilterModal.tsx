@@ -26,7 +26,7 @@ export default function FilterModal({
       <div className="bg-white rounded-lg shadow-2xl w-full max-w-md">
         {/* Header */}
         <div className="pt-6 px-4 sm:px-6 pb-4 border-b border-gray-200 flex justify-between items-start sm:items-center gap-2">
-          <h2 className="text-lg sm:text-xl font-semibold break-words" style={{ color: '#4B5368' }}>
+          <h2 className="text-lg sm:text-xl font-semibold break-words text-primary">
             Filter Bookings
           </h2>
           <button
@@ -46,10 +46,9 @@ export default function FilterModal({
               onClick={() => onFilterChange('all')}
               className={`w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-left text-sm sm:text-base font-medium transition break-words ${
                 filter === 'all'
-                  ? 'text-white'
+                  ? 'text-white bg-primary'
                   : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
               }`}
-              style={filter === 'all' ? { backgroundColor: '#4B5368' } : {}}
             >
                 <div className="flex justify-between items-center gap-2">
                   <span className="break-words">All Bookings</span>
@@ -61,10 +60,9 @@ export default function FilterModal({
                 onClick={() => onFilterChange(status.value)}
                 className={`w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-left text-sm sm:text-base font-medium transition break-words ${
                   filter === status.value
-                    ? 'text-white'
+                    ? 'text-white bg-primary'
                     : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
                 }`}
-                style={filter === status.value ? { backgroundColor: '#4B5368' } : {}}
               >
                 <div className="flex justify-between items-center gap-2">
                   <span className="break-words">{status.label}</span>

@@ -73,8 +73,7 @@ export default function EstimateCard({
               <select
                 value={estimate.status || 'new'}
                 onChange={(e) => onStatusChange(estimate.id, e.target.value)}
-                className="px-3 py-1 border border-gray-300 rounded text-xs font-medium bg-white hover:bg-gray-50 focus:outline-none"
-                style={{ color: '#4B5368' }}
+                className="px-3 py-1 border border-gray-300 rounded text-xs font-medium bg-white hover:bg-gray-50 focus:outline-none text-primary"
               >
                 {statusOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>

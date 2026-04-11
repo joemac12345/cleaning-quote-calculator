@@ -178,7 +178,7 @@ export default function BookingsAdmin() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-2xl sm:text-4xl font-poppins font-thin mb-1 sm:mb-2" style={{color: '#4B5368'}}>
+              <h1 className="text-2xl sm:text-4xl font-poppins font-thin mb-1 sm:mb-2 text-primary">
                 Bookings
               </h1>
               <p className="text-xs sm:text-sm text-gray-600">Manage and track all customer bookings</p>
@@ -192,14 +192,13 @@ export default function BookingsAdmin() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm text-gray-600 font-medium">
-              Status: <span style={{ color: '#4B5368' }} className="font-semibold">
+              Status: <span className="font-semibold text-primary">
                 {filter === 'all' ? 'All' : STATUS_OPTIONS.find(s => s.value === filter)?.label || filter}
               </span>
             </p>
             <button
               onClick={() => setShowFilterModal(true)}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white transition hover:opacity-90"
-              style={{ backgroundColor: '#4B5368' }}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white transition hover:opacity-90 bg-primary"
             >
               Filter Bookings
             </button>

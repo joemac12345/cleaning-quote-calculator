@@ -151,7 +151,7 @@ export default function AdminPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-2xl sm:text-4xl font-poppins font-thin mb-1 sm:mb-2" style={{color: '#4B5368'}}>
+              <h1 className="text-2xl sm:text-4xl font-poppins font-thin mb-1 sm:mb-2 text-primary">
                 Incoming Estimates
               </h1>
               <p className="text-xs sm:text-sm text-gray-600">Manage and review all customer estimates</p>
@@ -168,10 +168,9 @@ export default function AdminPage() {
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-md text-sm whitespace-nowrap font-medium transition ${
                 filter === 'all'
-                  ? 'text-white'
+                  ? 'text-white bg-primary'
                   : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
               }`}
-              style={filter === 'all' ? { backgroundColor: '#4B5368' } : {}}
             >
               All
             </button>
@@ -181,10 +180,9 @@ export default function AdminPage() {
                 onClick={() => setFilter(status.value)}
                 className={`px-4 py-2 rounded-md text-sm whitespace-nowrap font-medium transition ${
                   filter === status.value
-                    ? 'text-white'
+                    ? 'text-white bg-primary'
                     : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
                 }`}
-                style={filter === status.value ? { backgroundColor: '#4B5368' } : {}}
               >
                 {status.label} ({statusCounts[status.value] || 0})
               </button>
