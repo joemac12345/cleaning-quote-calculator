@@ -27,7 +27,7 @@ export default function Navigation() {
           {/* Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center justify-center flex-shrink-0 h-28"
+            className="flex items-center justify-center flex-shrink-0 h-16"
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
           >
@@ -39,11 +39,11 @@ export default function Navigation() {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center justify-center flex-shrink-0 h-28 mt-[20px]">
+          <Link href="/" className="flex items-center justify-center flex-shrink-0">
             <img 
               src="/Logo/2.svg" 
               alt="Top to Bottom Logo" 
-              className="h-28 w-auto object-contain" 
+              className="h-16 w-auto object-contain" 
             />
           </Link>
         </div>
