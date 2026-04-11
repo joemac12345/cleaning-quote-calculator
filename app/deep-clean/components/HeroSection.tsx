@@ -4,12 +4,14 @@ interface HeroSectionProps {
   backgroundImage?: string;
   title?: string;
   subtitle?: string;
+  buttonText?: string;
 }
 
 export default function HeroSection({
   backgroundImage,
   title = "Deep Clean Services",
-  subtitle = "deep cleaning for your home"
+  subtitle = "deep cleaning for your home",
+  buttonText
 }: HeroSectionProps) {
   return (
     <section 
@@ -39,6 +41,13 @@ export default function HeroSection({
             </li>
           ))}
         </ul>
+
+        {/* Button */}
+        {buttonText && (
+          <button className="mt-8 px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+            {buttonText}
+          </button>
+        )}
       </div>
     </section>
   );
