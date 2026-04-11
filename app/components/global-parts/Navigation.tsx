@@ -2,133 +2,74 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Home, FileText, Sparkles, Calendar, Settings, X, Menu } from 'lucide-react';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const slideDownStyle = `
-    @keyframes slideDown {
-      from {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-  `;
-
   const pages = [
-    { label: 'Estimate', href: '/01-estimate' },
-    { label: 'Booking', href: '/booking' },
+    { label: 'Home', href: '/', Icon: Home },
+    { label: 'Estimate', href: '/01-estimate', Icon: FileText },
+    { label: 'Deep Clean', href: '/deep-clean', Icon: Sparkles },
+    { label: 'Bookings', href: '/bookings', Icon: Calendar },
+    { label: 'Admin', href: '/admin', Icon: Settings },
   ];
-
-
 
   return (
     <>
-      <style>{slideDownStyle}</style>
-      <nav className="sticky top-0 z-40">
-      <div className="max-w-2xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
-        <div className="flex justify-between items-center">
-          <div className="flex-shrink-0"></div>
+      {/* Menu Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-4 left-0 sm:left-[calc(50%-300px)] z-50 p-3 rounded-lg text-primary hover:opacity-80 transition"
+        aria-label="Toggle menu"
+      >
+        <Menu className="w-6 h-6" strokeWidth={1.5} />
+      </button>
 
-          <div className="flex items-center gap-2">
-            {/* Admin Icon */}
-            <Link
-              href="/admin"
-              className="p-2 rounded-full hover:bg-gray-100 transition bg-gray-50"
-              aria-label="Admin"
-            >
-              <svg
-                className="w-8 h-8 text-[#48546A]"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 12a4 4 0 100-8 4 4 0 000 8z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M20 21v-2a6 6 0 00-6-6H10a6 6 0 00-6 6v2"
-                />
-              </svg>
-            </Link>
-
-            {/* Hamburger Icon */}
-            <button
-              onClick={() => setIsOpen(true)}
-              className="p-2 rounded-lg hover:bg-gray-100 transition"
-              aria-label="Toggle menu"
-            >
-              <svg
-                className="w-8 h-8 text-[#48546A]"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Modal Overlay */}
+      {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 transition"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      {/* Navigation Modal */}
-      {isOpen && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-gray-50 z-50 max-w-2xl w-11/12 sm:w-full overflow-hidden max-h-[80vh] overflow-y-auto shadow-lg" style={{ animation: 'slideDown 0.3s ease-out' }}>
-          {/* Header */}
-          <div
-            className="text-white px-6 py-4 flex justify-between items-center sticky top-0"
-            style={{ backgroundColor: '#4B5368' }}
-          >
-            <h2 className="text-lg font-poppins font-thin">Navigation</h2>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white hover:opacity-80 transition text-2xl leading-none"
-              aria-label="Close navigation"
-            >
-              ✕
-            </button>
-          </div>
+      {/* Slide-down Popover */}
+      <div
+        className={`fixed top-0 left-1/2 -translate-x-1/2 max-w-[600px] w-full bg-white shadow-2xl z-50 transition-transform duration-300 ease-in-out overflow-y-auto ${
+          isOpen ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
+        {/* Close Button */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-50 transition text-gray-900"
+          aria-label="Close menu"
+        >
+          <X className="w-6 h-6" strokeWidth={1.5} />
+        </button>
 
-          {/* Main Pages */}
-          <nav className="p-4 space-y-2">
+        {/* Content */}
+        <div className="p-8 pt-16">
+          <h2 className="heading-h2 mb-2">Navigation</h2>
+          <p className="text-gray-600 text-sm mb-8">Choose what you'd like to explore</p>
+          
+          {/* Grid of Link Squares */}
+          <div className="grid grid-cols-2 gap-4">
             {pages.map((page) => (
               <Link
                 key={page.href}
                 href={page.href}
-                prefetch={true}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 rounded-lg hover:bg-gray-100 transition font-poppins font-thin text-gray-900"
+                className="p-6 bg-primary-light rounded-lg hover:bg-primary transition text-center font-semibold flex flex-col items-center gap-3 text-white"
               >
+                <page.Icon className="w-8 h-8" strokeWidth={1.5} />
                 {page.label}
               </Link>
             ))}
-          </nav>
+          </div>
         </div>
-      )}
-      </nav>
+      </div>
     </>
   );
 }

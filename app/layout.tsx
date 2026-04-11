@@ -2,6 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Poppins, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import Navigation from "./components/global-parts/Navigation";
+
+// === CACHING CONFIG ===
+export const revalidate = 3600; // Revalidate every hour
+export const dynamicParams = true;
+export const maxDuration = 30;
 
 // Suppress Next.js 16.2.1 manifest script tag warning (known issue #92180)
 if (typeof window !== 'undefined') {
@@ -87,7 +93,8 @@ export default function RootLayout({
     >
       <body className="bg-white text-gray-900 font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <div className="max-w-7xl mx-auto mt-4">
+          <Navigation />
+          <div className="max-w-[700px] mx-auto mt-4">
             {children}
           </div>
         </ThemeProvider>

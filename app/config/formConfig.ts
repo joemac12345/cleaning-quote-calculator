@@ -32,7 +32,7 @@ export const formSteps: FormStep[] = [
   {
     id: 1,
     title: 'Frequency',
-    description: 'Keep it looking great! Regular maintenance cleaning helps preserve that pristine finish after your deep clean. How often would you like us to visit?',
+    description: 'how How would you like us to Visit ',
     fields: [
       {
         id: 'frequency',
