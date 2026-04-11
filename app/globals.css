@@ -60,26 +60,31 @@ body {
 /* Headings */
 h1 {
   font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
-  font-weight: 400;
-  color: var(--color-text-primary);
+  font-weight: 450;
+  color: #4B5368;
 }
 
 h2 {
   font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
-  font-weight: 300;
-  color: var(--color-text-primary);
+  font-weight: 450;
+  color: #4B5368;
 }
 
 h3 {
   font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
-  font-weight: 400;
-  color: var(--color-text-primary);
+  font-weight: 450;
+  color: #4B5368;
 }
 
 h4, h5, h6 {
   font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
   font-weight: 300;
   color: var(--color-text-primary);
+}
+
+p {
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  color: #8E8E93;
 }
 
 /* Buttons and labels */
@@ -150,19 +155,19 @@ input[type="radio"] {
 
   /* Heading styles */
   .heading-h1 {
-    @apply text-4xl sm:text-5xl font-poppins font-light text-gray-900;
+    @apply text-4xl sm:text-5xl font-poppins font-bold text-gray-900;
   }
 
   .heading-h1-hero {
-    @apply text-4xl sm:text-5xl md:text-6xl font-poppins font-light text-white;
+    @apply text-4xl sm:text-5xl md:text-6xl font-poppins font-bold text-white;
   }
 
   .heading-h2 {
-    @apply text-2xl sm:text-3xl font-poppins font-light text-gray-900;
+    @apply text-2xl sm:text-3xl font-poppins font-semibold text-gray-900;
   }
 
   .heading-h3 {
-    @apply text-lg sm:text-lg font-poppins font-light text-gray-900;
+    @apply text-lg sm:text-lg font-poppins font-semibold text-gray-900;
   }
 
   /* Body text utility */
