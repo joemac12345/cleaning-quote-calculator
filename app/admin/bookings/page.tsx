@@ -192,13 +192,14 @@ export default function BookingsAdmin() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm text-gray-600 font-medium">
-              Status: <span className="font-semibold text-primary">
+              Status: <span style={{ color: '#4B5368' }} className="font-semibold">
                 {filter === 'all' ? 'All' : STATUS_OPTIONS.find(s => s.value === filter)?.label || filter}
               </span>
             </p>
             <button
               onClick={() => setShowFilterModal(true)}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white transition hover:opacity-90 bg-primary"
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white transition hover:opacity-90"
+              style={{ backgroundColor: '#4B5368' }}
             >
               Filter Bookings
             </button>
