@@ -8,8 +8,8 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="relative z-50 mt-8">
-      <div className="max-w-[700px] mx-auto px-4 py-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 mt-8">
+      <div className="max-w-[700px] mx-auto left-0 right-0 px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Brand/Logo */}
           <div className="text-lg font-bold text-primary">

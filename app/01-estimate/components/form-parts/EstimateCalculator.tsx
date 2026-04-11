@@ -17,13 +17,11 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
   const [currentStep, setCurrentStep] = useState(1);
   const [validationError, setValidationError] = useState('');
 
-  // Disable body scroll on mount, re-enable on unmount
+  // Scroll management (don't disable body scroll)
   useEffect(() => {
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    
+    // Body scroll is enabled - no lock needed
     return () => {
-      document.body.style.overflow = originalOverflow;
+      // Cleanup if needed
     };
   }, []);
 
