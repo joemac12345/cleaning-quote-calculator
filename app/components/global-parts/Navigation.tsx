@@ -29,8 +29,8 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200">
-      <div className="max-w-[700px] mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -86,7 +86,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-2 -mr-2"
             aria-label="Toggle navigation menu"
           >
             {isOpen ? (
@@ -97,48 +97,50 @@ export default function Navigation() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Dropdown positioned absolutely to not push content */}
         {isOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4 space-y-4">
-            {/* Main Links */}
-            <div className="space-y-2">
-              <p className="text-xs font-semibold text-gray-500 uppercase">Pages</p>
-              {MAIN_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-2 rounded-lg transition-colors ${
-                    isActive(link.href)
-                      ? 'bg-primary/10 text-primary font-medium'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+          <div className="md:hidden absolute left-0 right-0 top-16 bg-white border-b border-gray-200 shadow-lg">
+            <div className="px-4 py-4 space-y-4 max-w-[700px] mx-auto">
+              {/* Main Links */}
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-gray-500 uppercase">Pages</p>
+                {MAIN_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-4 py-2 rounded-lg transition-colors ${
+                      isActive(link.href)
+                        ? 'bg-primary/10 text-primary font-medium'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
 
-            {/* Divider */}
-            <div className="h-px bg-gray-200"></div>
+              {/* Divider */}
+              <div className="h-px bg-gray-200"></div>
 
-            {/* Admin Links */}
-            <div className="space-y-2">
-              <p className="text-xs font-semibold text-gray-500 uppercase">Admin</p>
-              {ADMIN_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-2 rounded-lg transition-colors ${
-                    isActive(link.href)
-                      ? 'bg-primary/10 text-primary font-medium'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {/* Admin Links */}
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-gray-500 uppercase">Admin</p>
+                {ADMIN_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-4 py-2 rounded-lg transition-colors ${
+                      isActive(link.href)
+                        ? 'bg-primary/10 text-primary font-medium'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         )}
