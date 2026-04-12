@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Poppins, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import Navigation from "./components/global-parts/Navigation";
 
 // === CACHING CONFIG ===
 export const revalidate = 3600; // Revalidate every hour
@@ -92,7 +93,8 @@ export default function RootLayout({
     >
       <body className="bg-white text-gray-900 font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <div className="max-w-[700px] mx-auto mt-2">
+          <Navigation />
+          <div className="max-w-[700px] mx-auto">
             {children}
           </div>
         </ThemeProvider>
