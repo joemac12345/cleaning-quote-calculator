@@ -41,7 +41,7 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center justify-center flex-shrink-0">
             <img 
-              src="/Logo/2.svg" 
+              src="/Logo/logo.svg" 
               alt="Top to Bottom Logo" 
               className="h-16 w-auto object-contain" 
             />
