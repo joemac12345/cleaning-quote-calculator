@@ -43,7 +43,7 @@ export default function Navigation() {
             <img 
               src="/Logo/logo.svg" 
               alt="Top to Bottom Logo" 
-              className="h-14 w-auto object-contain" 
+              className="h-12 w-auto object-contain" 
             />
           </Link>
         </div>
