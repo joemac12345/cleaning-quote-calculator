@@ -26,7 +26,7 @@ export default function HeroSection({
       />
 
       {/* Content Container */}
-      <div className="relative z-10 w-full flex flex-col items-start justify-center max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="relative z-10 w-full flex flex-col items-start justify-center py-6 sm:py-8">
         {/* Title */}
         <h1 
           className="text-2xl sm:text-4xl font-poppins font-semibold tracking-tight text-white mb-0"

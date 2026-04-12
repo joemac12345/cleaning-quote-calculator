@@ -165,35 +165,32 @@ export default function EstimateCalculator({ onFormDataChange }: EstimateCalcula
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      {/* Main Content - Adjusted for fixed navbar */}
-      <div className="max-w-2xl mx-auto px-3 sm:px-4 pt-4 sm:pt-6 pb-24 sm:pb-28">
-        {/* Validation Error Message */}
-        {validationError && (
-          <div className="mb-6 p-4 bg-error/10 border border-error rounded text-error text-sm font-inter font-normal">
-            {validationError}
-          </div>
-        )}
-
-        {/* Step Content */}
-        <div className="mb-8 sm:mb-12">
-          <FormStepRenderer
-            step={currentStepData}
-            formData={formData}
-            onFieldChange={handleFieldChange}
-          />
+    <div className="w-full bg-white text-gray-900 pb-28 sm:pb-32">
+      {/* Validation Error Message */}
+      {validationError && (
+        <div className="mb-6 p-4 bg-error/10 border border-error rounded text-error text-sm font-inter font-normal">
+          {validationError}
         </div>
+      )}
 
-        {/* Navigation */}
-        <FormNavigation
-          currentStep={currentStep}
-          totalSteps={formSteps.length}
-          onPrevious={handlePrevious}
-          onNext={handleNext}
-          isLastStep={currentStep === formSteps.length}
-          onSubmit={handleSubmit}
+      {/* Step Content */}
+      <div className="mb-8 sm:mb-12">
+        <FormStepRenderer
+          step={currentStepData}
+          formData={formData}
+          onFieldChange={handleFieldChange}
         />
       </div>
+
+      {/* Navigation */}
+      <FormNavigation
+        currentStep={currentStep}
+        totalSteps={formSteps.length}
+        onPrevious={handlePrevious}
+        onNext={handleNext}
+        isLastStep={currentStep === formSteps.length}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 }
