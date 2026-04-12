@@ -20,7 +20,7 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="bg-white mt-6">
+    <nav className="bg-white mt-10">
       <div className="mx-auto max-w-[700px] px-4 py-2">
         {/* Header */}
         <div className="flex items-center gap-3">
