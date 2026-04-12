@@ -29,7 +29,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm pt-16 sm:pt-0">
+    <nav className="sticky top-0 z-50 bg-white pt-16 sm:pt-0">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -53,7 +53,7 @@ export default function Navigation() {
                   href={link.href}
                   className={`text-sm font-medium transition-colors ${
                     isActive(link.href)
-                      ? 'text-primary border-b-2 border-primary'
+                      ? 'text-primary'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -63,7 +63,7 @@ export default function Navigation() {
             </div>
 
             {/* Divider */}
-            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="h-6 w-px bg-transparent"></div>
 
             {/* Admin Links */}
             <div className="flex gap-6">
@@ -73,7 +73,7 @@ export default function Navigation() {
                   href={link.href}
                   className={`text-sm font-medium transition-colors ${
                     isActive(link.href)
-                      ? 'text-primary border-b-2 border-primary'
+                      ? 'text-primary'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -99,7 +99,7 @@ export default function Navigation() {
 
         {/* Mobile Menu - Dropdown positioned absolutely to not push content */}
         {isOpen && (
-          <div className="md:hidden absolute left-0 right-0 top-28 bg-white border-b border-gray-200 shadow-lg">
+          <div className="md:hidden absolute left-0 right-0 top-28 bg-white">
             <div className="px-4 py-4 space-y-4 max-w-[700px] mx-auto">
               {/* Main Links */}
               <div className="space-y-2">
@@ -121,7 +121,7 @@ export default function Navigation() {
               </div>
 
               {/* Divider */}
-              <div className="h-px bg-gray-200"></div>
+              <div className="h-px bg-transparent"></div>
 
               {/* Admin Links */}
               <div className="space-y-2">
