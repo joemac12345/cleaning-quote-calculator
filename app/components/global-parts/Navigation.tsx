@@ -99,7 +99,7 @@ export default function Navigation() {
 
         {/* Mobile Menu - Dropdown positioned absolutely to not push content */}
         {isOpen && (
-          <div className="md:hidden absolute left-0 right-0 top-16 bg-white border-b border-gray-200 shadow-lg">
+          <div className="md:hidden absolute left-0 right-0 top-28 bg-white border-b border-gray-200 shadow-lg">
             <div className="px-4 py-4 space-y-4 max-w-[700px] mx-auto">
               {/* Main Links */}
               <div className="space-y-2">
