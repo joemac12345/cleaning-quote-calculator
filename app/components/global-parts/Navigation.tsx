@@ -27,14 +27,14 @@ export default function Navigation() {
           {/* Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center justify-center flex-shrink-0 h-16"
+            className="flex items-center justify-center flex-shrink-0 h-12"
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
           >
             {isOpen ? (
-              <X className="w-6 h-6 text-[#707175]" strokeWidth={1.5} />
+              <X className="w-8 h-8 text-[#707175]" strokeWidth={1.5} />
             ) : (
-              <Menu className="w-6 h-6 text-[#707175]" strokeWidth={1.5} />
+              <Menu className="w-8 h-8 text-[#707175]" strokeWidth={1.5} />
             )}
           </button>
 
