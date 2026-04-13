@@ -4,17 +4,17 @@ import ProductCard from '../components/shared/ProductCard';
 
 export default function DeepCleanPage() {
   return (
-    <>
-      <div className="space-y-6">
+    <div className="ml-[calc(-50vw+50%)] mr-[calc(-50vw+50%)] bg-gray-50 py-8 sm:py-12">
+      <div className="max-w-[700px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
       <ProductCard
         title="Deep Cleaning Service Package"
         price="£299.99"
         rating={4.5}
         reviewCount={12}
-        badge="Professional Cleaning"
-        description="Our professional deep cleaning service transforms your home with meticulous attention to every detail. We use premium eco-friendly products and advanced equipment to ensure a thorough, spotless clean throughout all rooms.Our professional deep cleaning service transforms your home with meticulous attention to every detail. We use premium eco-friendly products and advanced equipment to ensure a thorough, spotless clean throughout all rooms.Our professional deep cleaning service transforms your home with meticulous attention to every detail. We use premium eco-friendly products and advanced equipment to ensure a thorough, spotless clean throughout all rooms."
+        badges={["Professional Cleaning", "Eco-Friendly", "Premium Service", "Trade Rated"]}
+        description="Our professional deep \n\n cleaning service transforms your home with meticulous attention to every detail.\n\n• Premium eco-friendly products\n• Advanced equipment\n• Thorough spotless clean throughout all rooms"
         image="/1.png"
-        imageHeight="100px"
+        imageHeight="200px"
         imageColumnWidth="30%"
         featuresColumnWidth="50%"
         features={[
@@ -22,8 +22,6 @@ export default function DeepCleanPage() {
           'Windows & glass interior',
           'Inside & outside all appliances',
           'Cabinet & shelf interiors',
-         
-          
         ]}
         onAddToBasket={() => console.log('Added to basket')}
       />
@@ -34,8 +32,8 @@ export default function DeepCleanPage() {
         price="£149.99"
         rating={4.3}
         reviewCount={8}
-        badge="Value Cleaning"
-        description="Our standard cleaning service provides a reliable, thorough clean for regular maintenance. Perfect for keeping your home fresh and tidy between deeper cleans."
+        badges={["Value Cleaning"]}
+        description="Our standard\n\n cleaning service provides a reliable, thorough \n\nclean for regular maintenance. Perfect for keeping your home \n\nfresh and tidy between deeper cleans."
         image="/1.png"
         imageHeight="160px"
         imageColumnWidth="30%"
@@ -55,8 +53,8 @@ export default function DeepCleanPage() {
         price="£399.99"
         rating={4.7}
         reviewCount={15}
-        badge="Premium Cleaning"
-        description="Comprehensive cleaning service for moving days. We ensure your new space is pristine or your previous home is move-ready with our detailed deep clean."
+        badges={["Premium Cleaning", "Eco-Friendly"]}
+        description="Comprehensive cleaning service for moving \n days. We ensure your new space is pristine or your previous home is move-ready with our detailed deep clean."
         image="/1.png"
         imageHeight="400px"
         imageColumnWidth="100%"
@@ -73,7 +71,7 @@ export default function DeepCleanPage() {
         price="£249.99"
         rating={4.6}
         reviewCount={11}
-        badge="Specialist Service"
+        badges={["Specialist Service", "Deep Cleaning"]}
         description="Professional carpet and upholstery cleaning using specialized equipment and eco-friendly solutions to remove deep-set dirt and stains."
         image="/1.png"
         imageHeight="200px"
@@ -88,6 +86,6 @@ export default function DeepCleanPage() {
         onAddToBasket={() => console.log('Added to basket')}
       />
       </div>
-    </>
+    </div>
   );
 }

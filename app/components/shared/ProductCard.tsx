@@ -8,6 +8,7 @@ interface ProductCardProps {
   rating?: number;
   reviewCount?: number;
   badge?: string;
+  badges?: string[];
   description?: string;
   features?: string[];
   image?: string;
@@ -24,6 +25,7 @@ export default function ProductCard({
   rating = 4.5,
   reviewCount = 12,
   badge,
+  badges = [],
   description,
   features = [],
   image,
@@ -40,10 +42,16 @@ export default function ProductCard({
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 relative">
-      {/* Badge */}
-      <div className="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full mb-3 sm:mb-4">
-        Most popular
-      </div>
+      {/* Badges */}
+      {badges.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
+          {badges.map((badgeText, idx) => (
+            <div key={idx} className="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">
+              {badgeText}
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Title */}
       <h3 className="heading-h3 text-primary mb-2 sm:mb-4 text-lg sm:text-xl">{title}</h3>
@@ -90,7 +98,7 @@ export default function ProductCard({
       {/* Description */}
       {description && (
         <div className="mb-4">
-          <p className="text-sm sm:text-base text-gray-600 mb-2">{displayText}</p>
+          <p className="text-sm sm:text-base text-gray-600 mb-2" style={{ whiteSpace: 'pre-wrap' }}>{displayText}</p>
           {shouldTruncate && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
