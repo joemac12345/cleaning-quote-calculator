@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface ProductCardProps {
   title: string;
@@ -17,6 +18,7 @@ interface ProductCardProps {
   imageColumnWidth?: string;
   featuresColumnWidth?: string;
   onAddToBasket?: () => void;
+  buttonLink?: string;
 }
 
 export default function ProductCard({
@@ -34,6 +36,7 @@ export default function ProductCard({
   imageColumnWidth = '50%',
   featuresColumnWidth = '50%',
   onAddToBasket,
+  buttonLink,
 }: ProductCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const charLimit = 120;
@@ -111,12 +114,21 @@ export default function ProductCard({
       )}
 
       {/* Button */}
-      <button
-        onClick={onAddToBasket}
-        className="w-full bg-primary hover:bg-opacity-90 text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base"
-      >
-        Get your estimate
-      </button>
+      {buttonLink ? (
+        <Link
+          href={buttonLink}
+          className="block w-full bg-primary hover:bg-opacity-90 text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base text-center"
+        >
+          Get your estimate
+        </Link>
+      ) : (
+        <button
+          onClick={onAddToBasket}
+          className="w-full bg-primary hover:bg-opacity-90 text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base"
+        >
+          Get your estimate
+        </button>
+      )}
     </div>
   );
 }
