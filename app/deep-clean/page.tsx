@@ -14,6 +14,9 @@ export default function DeepCleanPage() {
         badge="Professional Cleaning"
         description="Our professional deep cleaning service transforms your home with meticulous attention to every detail. We use premium eco-friendly products and advanced equipment to ensure a thorough, spotless clean throughout all rooms.Our professional deep cleaning service transforms your home with meticulous attention to every detail. We use premium eco-friendly products and advanced equipment to ensure a thorough, spotless clean throughout all rooms.Our professional deep cleaning service transforms your home with meticulous attention to every detail. We use premium eco-friendly products and advanced equipment to ensure a thorough, spotless clean throughout all rooms."
         image="/1.png"
+        imageHeight="100px"
+        imageColumnWidth="30%"
+        featuresColumnWidth="50%"
         features={[
           'Skirting boards cleaned',
           'Windows & glass interior',
@@ -34,6 +37,9 @@ export default function DeepCleanPage() {
         badge="Value Cleaning"
         description="Our standard cleaning service provides a reliable, thorough clean for regular maintenance. Perfect for keeping your home fresh and tidy between deeper cleans."
         image="/1.png"
+        imageHeight="160px"
+        imageColumnWidth="30%"
+        featuresColumnWidth="70%"
         features={[
           'All rooms vacuumed and dusted',
           'Bathrooms and kitchen cleaned',
@@ -52,11 +58,11 @@ export default function DeepCleanPage() {
         badge="Premium Cleaning"
         description="Comprehensive cleaning service for moving days. We ensure your new space is pristine or your previous home is move-ready with our detailed deep clean."
         image="/1.png"
+        imageHeight="400px"
+        imageColumnWidth="100%"
+        featuresColumnWidth="0%"
         features={[
-          'Deep clean all rooms',
-          'Appliances inside and out',
-          'Windows and blinds cleaned',
-          'Carpet and floor care included',
+          
         ]}
         onAddToBasket={() => console.log('Added to basket')}
       />
@@ -70,6 +76,9 @@ export default function DeepCleanPage() {
         badge="Specialist Service"
         description="Professional carpet and upholstery cleaning using specialized equipment and eco-friendly solutions to remove deep-set dirt and stains."
         image="/1.png"
+        imageHeight="200px"
+        imageColumnWidth="80%"
+        featuresColumnWidth="20%"
         features={[
           'Hot water extraction cleaning',
           'Stain removal treatment',

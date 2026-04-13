@@ -12,6 +12,9 @@ interface ProductCardProps {
   features?: string[];
   image?: string;
   imagePosition?: string;
+  imageHeight?: string;
+  imageColumnWidth?: string;
+  featuresColumnWidth?: string;
   onAddToBasket?: () => void;
 }
 
@@ -25,6 +28,9 @@ export default function ProductCard({
   features = [],
   image,
   imagePosition = '50% 20%',
+  imageHeight = '200px',
+  imageColumnWidth = '50%',
+  featuresColumnWidth = '50%',
   onAddToBasket,
 }: ProductCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -55,11 +61,11 @@ export default function ProductCard({
       </div>
 
       {/* Image and Features - Responsive Grid */}
-      <div className="grid gap-0 mb-4 sm:mb-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))' }}>
+      <div className="mb-4 sm:mb-6" style={{ display: 'grid', gridTemplateColumns: `${imageColumnWidth} ${featuresColumnWidth}`, gap: '10px' }}>
         {/* Left - Image */}
         {image && (
           <div>
-            <div className="bg-gray-100 rounded overflow-hidden w-16 sm:w-24 h-20 sm:h-32">
+            <div className="bg-gray-100 rounded overflow-hidden w-full" style={{ height: imageHeight }}>
               <img src={image} alt={title} className="w-full h-full object-cover object-center" style={{ objectPosition: imagePosition }} />
             </div>
           </div>
@@ -84,7 +90,7 @@ export default function ProductCard({
       {/* Description */}
       {description && (
         <div className="mb-4">
-          <p className="text-xs sm:text-sm text-gray-600 mb-2">{displayText}</p>
+          <p className="text-sm sm:text-base text-gray-600 mb-2">{displayText}</p>
           {shouldTruncate && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
