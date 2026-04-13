@@ -33,33 +33,33 @@ export default function ProductCard({
   const displayText = isExpanded || !shouldTruncate ? description : description?.substring(0, charLimit) + '...';
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-6 relative">
+    <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 relative">
       {/* Badge */}
-      <div className="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
+      <div className="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full mb-3 sm:mb-4">
         Most popular
       </div>
 
       {/* Title */}
-      <h3 className="heading-h3 text-primary mb-4">{title}</h3>
+      <h3 className="heading-h3 text-primary mb-2 sm:mb-4 text-lg sm:text-xl">{title}</h3>
 
       {/* Rating */}
-      <div className="flex items-center gap-2 mb-6">
-        <div className="flex text-yellow-400">
+      <div className="flex items-center gap-2 mb-4 sm:mb-6">
+        <div className="flex text-yellow-400 text-sm">
           {[...Array(5)].map((_, i) => (
             <span key={i} className={i < Math.floor(rating) ? '★' : i < rating ? '★' : '☆'}>
               ★
             </span>
           ))}
         </div>
-        <span className="text-sm text-blue-600 font-medium">({reviewCount})</span>
+        <span className="text-xs sm:text-sm text-blue-600 font-medium">({reviewCount})</span>
       </div>
 
-      {/* Image and Features - Two Column */}
-      <div className="grid gap-6 mb-6" style={{ gridTemplateColumns: '100px 1fr' }}>
+      {/* Image and Features - Responsive Grid */}
+      <div className="grid gap-0 mb-4 sm:mb-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))' }}>
         {/* Left - Image */}
         {image && (
           <div>
-            <div className="bg-gray-100 rounded overflow-hidden w-full h-32">
+            <div className="bg-gray-100 rounded overflow-hidden w-16 sm:w-24 h-20 sm:h-32">
               <img src={image} alt={title} className="w-full h-full object-cover object-center" style={{ objectPosition: imagePosition }} />
             </div>
           </div>
@@ -68,11 +68,11 @@ export default function ProductCard({
         {/* Right - Features */}
         {features.length > 0 && (
           <div>
-            <h4 className="text-sm font-extrabold text-pink-500 mb-3">What's Included:</h4>
-            <ul className="text-sm text-gray-700 space-y-2">
+            <h4 className="text-xs sm:text-sm font-extrabold text-pink-500 mb-2 sm:mb-3">What's Included:</h4>
+            <ul className="text-xs sm:text-sm text-gray-700 space-y-1 sm:space-y-2">
               {features.map((feature, idx) => (
                 <li key={idx} className="flex gap-2">
-                  <span className="text-pink-500">•</span>
+                  <span className="text-pink-500 flex-shrink-0">•</span>
                   <span className="font-semibold">{feature}</span>
                 </li>
               ))}
@@ -81,23 +81,25 @@ export default function ProductCard({
         )}
       </div>
 
-      {/* Full Width Button */}
+      {/* Description */}
       {description && (
         <div className="mb-4">
-          <p className="text-sm text-gray-600 mb-2">{displayText}</p>
+          <p className="text-xs sm:text-sm text-gray-600 mb-2">{displayText}</p>
           {shouldTruncate && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-sm text-primary font-semibold hover:underline"
+              className="text-xs sm:text-sm text-primary font-semibold hover:underline"
             >
               {isExpanded ? 'Read less' : 'Read more'}
             </button>
           )}
         </div>
       )}
+
+      {/* Button */}
       <button
         onClick={onAddToBasket}
-        className="w-full bg-primary hover:bg-opacity-90 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+        className="w-full bg-primary hover:bg-opacity-90 text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base"
       >
         Get your estimate
       </button>
