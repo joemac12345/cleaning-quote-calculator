@@ -56,7 +56,7 @@ Perfect for special occasions, seasonal cleaning, or when you need a comprehensi
           'Cabinet & shelf interiors',
         ]}
         image="/grok-image-9877ac3f-6149-4956-b9ec-2fc6b827f20f.png"
-        imageHeight="200px"
+        imageHeight="100px"
         imageColumnWidth="30%"
         featuresColumnWidth="50%"
         buttonLink="/01-estimate"
@@ -111,8 +111,8 @@ Our detailed deep clean gives you peace of mind during your moving transition.`}
           
         ]}
         image="/grok-image-9877ac3f-6149-4956-b9ec-2fc6b827f20f.png"
-        imageHeight="400px"
-        imageColumnWidth="100%"
+        imageHeight="100px"
+        imageColumnWidth="30%"
         featuresColumnWidth="0%"
         buttonLink="/01-estimate"
       />
@@ -140,9 +140,9 @@ We restore your carpets and furniture to like-new condition while protecting you
           'Pet-friendly treatments available',
         ]}
         image="/landing.svg"
-        imageHeight="200px"
-        imageColumnWidth="45%"
-        featuresColumnWidth="55%"
+        imageHeight="100px"
+        imageColumnWidth="30%"
+        featuresColumnWidth="70%"
         buttonLink="/01-estimate"
       />
       </div>
