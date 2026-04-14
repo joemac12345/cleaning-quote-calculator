@@ -94,7 +94,7 @@ export default function RootLayout({
       <body className="bg-white text-gray-900 font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Navigation />
-          <main className="max-w-[700px] mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+          <main className="max-w-[700px] mx-auto px-4 sm:px-6 lg:px-8 mt-4 sm:mt-12">
             {children}
           </main>
         </ThemeProvider>

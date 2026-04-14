@@ -36,7 +36,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white pt-3 sm:pt-3">
+    <nav className="sticky top-0 z-50 bg-white pt-6 sm:pt-3">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -123,7 +123,7 @@ export default function Navigation() {
 
         {/* Mobile Menu - Dropdown positioned absolutely to not push content */}
         {isOpen && (
-          <div className="md:hidden absolute left-0 right-0 top-20 bg-white">
+          <div className="md:hidden absolute left-0 right-0 top-24 bg-white">
             <div className="px-4 py-4 space-y-4 max-w-[700px] mx-auto">
               {/* Main Links */}
               <div className="space-y-2">
