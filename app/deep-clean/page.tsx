@@ -59,7 +59,7 @@ Perfect for special occasions, seasonal cleaning, or when you need a comprehensi
         imageHeight="100px"
         imageColumnWidth="30%"
         featuresColumnWidth="50%"
-        buttonLink="/01-estimate"
+        buttonLink="/deep-clean/professional"
       />
 
       {/* CARD 2: Standard Cleaning Service */}
@@ -88,7 +88,7 @@ Perfect for keeping your home fresh and tidy between deeper cleans. Weekly or bi
         imageHeight="120px"
         imageColumnWidth="30%"
         featuresColumnWidth="70%"
-        buttonLink="/01-estimate"
+        buttonLink="/deep-clean/standard"
       />
 
       {/* CARD 3: Move-In / Move-Out Cleaning */}
@@ -114,7 +114,7 @@ Our detailed deep clean gives you peace of mind during your moving transition.`}
         imageHeight="100px"
         imageColumnWidth="30%"
         featuresColumnWidth="0%"
-        buttonLink="/01-estimate"
+        buttonLink="/deep-clean/move-in"
       />
 
       {/* CARD 4: Carpet & Upholstery Cleaning */}
@@ -143,7 +143,7 @@ We restore your carpets and furniture to like-new condition while protecting you
         imageHeight="100px"
         imageColumnWidth="30%"
         featuresColumnWidth="70%"
-        buttonLink="/01-estimate"
+        buttonLink="/deep-clean/carpet"
       />
       </div>
     </div>

@@ -12,6 +12,13 @@ const MAIN_LINKS = [
   { href: '/bookings', label: 'Bookings' },
 ];
 
+const SERVICE_LINKS = [
+  { href: '/deep-clean/professional', label: 'Professional Deep Cleaning' },
+  { href: '/deep-clean/standard', label: 'Standard Cleaning' },
+  { href: '/deep-clean/move-in', label: 'Move-In / Move-Out' },
+  { href: '/deep-clean/carpet', label: 'Carpet & Upholstery' },
+];
+
 const ADMIN_LINKS = [
   { href: '/admin/login', label: 'Login' },
   { href: '/admin/Main-admin', label: 'Dashboard' },
@@ -29,7 +36,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white pt-16 sm:pt-0">
+    <nav className="sticky top-0 z-50 bg-white pt-3 sm:pt-3">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -48,6 +55,23 @@ export default function Navigation() {
             {/* Main Links */}
             <div className="flex gap-6">
               {MAIN_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors ${
+                    isActive(link.href)
+                      ? 'text-primary'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Service Links */}
+            <div className="flex gap-6">
+              {SERVICE_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -99,12 +123,31 @@ export default function Navigation() {
 
         {/* Mobile Menu - Dropdown positioned absolutely to not push content */}
         {isOpen && (
-          <div className="md:hidden absolute left-0 right-0 top-28 bg-white">
+          <div className="md:hidden absolute left-0 right-0 top-20 bg-white">
             <div className="px-4 py-4 space-y-4 max-w-[700px] mx-auto">
               {/* Main Links */}
               <div className="space-y-2">
                 <p className="text-xs font-semibold text-gray-500 uppercase">Pages</p>
                 {MAIN_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-4 py-2 rounded-lg transition-colors ${
+                      isActive(link.href)
+                        ? 'bg-primary/10 text-primary font-medium'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Service Links */}
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-gray-500 uppercase">Services</p>
+                {SERVICE_LINKS.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
