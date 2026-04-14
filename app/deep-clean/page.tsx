@@ -30,8 +30,8 @@ import ProductCard from '../components/shared/ProductCard';
 
 export default function DeepCleanPage() {
   return (
-    <div className="ml-[calc(-50vw+50%)] mr-[calc(-50vw+50%)] bg-gray-50 py-8 sm:py-12">
-      <div className="max-w-[700px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div className="ml-[calc(-50vw+50%)] mr-[calc(-50vw+50%)] bg-gray-50 md:py-8 lg:py-12">
+      <div className="max-w-[700px] mx-auto md:px-4 lg:px-6 space-y-6">
       
       {/* CARD 1: Deep Cleaning Service Package */}
       <ProductCard
