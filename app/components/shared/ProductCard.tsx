@@ -44,7 +44,7 @@ export default function ProductCard({
   const displayText = isExpanded || !shouldTruncate ? description : description?.substring(0, charLimit) + '...';
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 relative">
+    <div className="bg-white rounded-lg p-4 sm:p-6 relative">
       {/* Badges */}
       {badges.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
