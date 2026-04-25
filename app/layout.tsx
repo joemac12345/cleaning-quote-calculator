@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Poppins, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import Navigation from "./components/global-parts/Navigation";
+import NavigationWrapper from "./components/global-parts/NavigationWrapper";
 
 // === CACHING CONFIG ===
 export const revalidate = 3600; // Revalidate every hour
@@ -93,7 +93,7 @@ export default function RootLayout({
     >
       <body className="bg-white text-gray-900 font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <Navigation />
+          <NavigationWrapper />
           <main className="max-w-[700px] mx-auto px-4 sm:px-6 lg:px-8 mt-3 sm:mt-12">
             {children}
           </main>
