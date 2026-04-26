@@ -45,7 +45,7 @@ function BookingPageContent() {
   // Loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="mt-[50px] min-h-screen flex items-center justify-center">
         <p className="body-text">Loading...</p>
       </div>
     );
@@ -54,7 +54,7 @@ function BookingPageContent() {
   // Success state
   if (bookingSuccess) {
     return (
-      <>
+      <div className="mt-[50px]">
         {/* Success Message */}
         <div className="text-left mb-12">
           <div className="flex mb-6">
@@ -107,14 +107,14 @@ function BookingPageContent() {
             </button>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
   // Booking form state - no estimate data
   if (!estimateData) {
     return (
-      <>
+      <div className="mt-[50px]">
         <h1 className="heading-h1 text-primary mb-4">
           No Estimate Found
         </h1>
@@ -127,13 +127,13 @@ function BookingPageContent() {
         >
           Start Estimate
         </button>
-      </>
+      </div>
     );
   }
 
   // Booking form state - with estimate data
   return (
-    <>
+    <div className="mt-[50px]">
       {/* Booking Confirmation Form */}
       <div>
         <BookingConfirmation
@@ -143,7 +143,7 @@ function BookingPageContent() {
           onError={(error) => console.error('Booking error:', error)}
         />
       </div>
-    </>
+    </div>
   );
 }
 
@@ -151,7 +151,7 @@ export default function BookingPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="mt-[50px] min-h-screen flex items-center justify-center">
           <p className="body-text">Loading...</p>
         </div>
       }

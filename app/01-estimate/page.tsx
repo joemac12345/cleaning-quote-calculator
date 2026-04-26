@@ -12,6 +12,8 @@ export default function EstimatePage() {
   };
 
   return (
-    <EstimateCalculator onFormDataChange={handleFormDataChange} />
+    <div className="mt-[50px]">
+      <EstimateCalculator onFormDataChange={handleFormDataChange} />
+    </div>
   );
 }
