@@ -88,7 +88,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} ${poppins.variable}`}
+      className={`${inter.variable} ${outfit.variable} ${poppins.variable} bg-white`}
       suppressHydrationWarning
     >
       <body className="bg-white text-gray-900 font-sans">
